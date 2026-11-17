@@ -530,7 +530,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
     const old=utterance;utterance=null;if(old)window.speechSynthesis?.cancel();speechPlaying=false;speechPaused=false;lastAudioTime=null;paintPlayer();
   }
   function resetPlayer() {
-    clearTimeout(audioTimer);audioTimer=null;
+    clearTimeout(audioTimer);audioTimer=null;stopLoopWatch();
     const audio=bundledPlayer;bundledPlayer=null;
     if(audio){for(const name of ['onloadedmetadata','onplaying','onpause','ontimeupdate','onseeking','onseeked','onended','onerror','onwaiting'])audio[name]=null;audio.pause();audio.removeAttribute?.('src');audio.load?.();audio.remove?.();}
     audioId='';audioSource='';playerRanges=[];lastAudioTime=null;playerSeeking=false;playerError='';speechPlaying=false;speechPaused=false;
@@ -546,9 +546,9 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
     bundledPlayer=audio;audioId=l.id;audioSource=source;playerRanges=source==='bundled'&&matchingRevision?p.audioRanges.map(r=>[...r]):[];playerError='';
     let counted=false;
     audio.onloadedmetadata=()=>{if(audio!==bundledPlayer)return;if(source==='bundled'&&matchingRevision&&p.audioPosition>0&&Number.isFinite(audio.duration))audio.currentTime=Math.min(p.audioPosition,audio.duration);paintPlayer();};
-    audio.onplaying=()=>{if(audio!==bundledPlayer)return;clearTimeout(audioTimer);audioTimer=null;speechPlaying=true;speechPaused=false;playerError='';lastAudioTime=audio.currentTime;lastAudioWall=Date.now();if(!counted||audio.currentTime<0.15){counted=true;progress(l.id,true).replays=Math.min(100000,progress(l.id).replays+1);save();}paintPlayer();};
+    audio.onplaying=()=>{if(audio!==bundledPlayer)return;clearTimeout(audioTimer);audioTimer=null;speechPlaying=true;speechPaused=false;playerError='';ensureLoopWatch();lastAudioTime=audio.currentTime;lastAudioWall=Date.now();if(!counted||audio.currentTime<0.15){counted=true;progress(l.id,true).replays=Math.min(100000,progress(l.id).replays+1);save();}paintPlayer();};
     audio.ontimeupdate=()=>{tickSentence(audio);recordPlayed(audio);};
-    audio.onpause=()=>{if(audio!==bundledPlayer)return;recordPlayed(audio,true);speechPlaying=false;speechPaused=audio.currentTime>0&&!audio.ended;lastAudioTime=null;paintPlayer();};
+    audio.onpause=()=>{if(audio!==bundledPlayer)return;recordPlayed(audio,true);speechPlaying=false;speechPaused=audio.currentTime>0&&!audio.ended;lastAudioTime=null;stopLoopWatch();paintPlayer();};
     audio.onseeking=()=>{if(audio!==bundledPlayer)return;playerSeeking=true;lastAudioTime=null;};
     audio.onseeked=()=>{if(audio!==bundledPlayer)return;playerSeeking=false;lastAudioTime=audio.currentTime;lastAudioWall=Date.now();persistPlayer(true);paintPlayer();};
     audio.onended=()=>{if(audio!==bundledPlayer)return;recordPlayed(audio,true);clearTimeout(audioTimer);audioTimer=null;speechPlaying=false;speechPaused=false;lastAudioTime=null;loopTurn=-1;persistPlayer(true);paintPlayer();toast(fullyHeard(playerRanges,audio.duration)?'整段音频已听完。检查意思后继续阅读。':'播放结束；尚有未听过的区间，可回听补齐或只练阅读。');if(state.preferences.autoNext)setTimeout(()=>{if(audio===bundledPlayer||!bundledPlayer)playNextLesson();},1400);};
@@ -689,7 +689,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
   // ---- 逐句精听：点原文任意一句单独重听或循环，播放时同步高亮 ----------------
   // Turn boundaries come from audio/<pack>/timings.json, measured off the rendered
   // file, so a lesson whose timings are absent simply keeps whole-file playback.
-  let timingsCache={},timingsLoading='',activeTurn=-1,loopTurn=-1,packFallbackUsed=false,hiddenWhilePlaying=false;
+  let timingsCache={},timingsLoading='',activeTurn=-1,loopTurn=-1,packFallbackUsed=false,hiddenWhilePlaying=false,loopRaf=null;
   function audioHost(){
     let host=document.getElementById('audio-host');
     if(!host){host=document.createElement('div');host.id='audio-host';host.setAttribute('aria-hidden','true');document.body.appendChild(host);}
@@ -828,6 +828,38 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
     let index=t.timing.findIndex(r=>now>=r[0]-0.05&&now<r[1]+0.15);
     if(index<0)index=direction>0?-1:t.timing.length;
     playTurn(Math.max(0,Math.min(t.timing.length-1,index+direction)));
+  }
+  // timeupdate only fires about four times a second, which let a looped
+  // sentence run past its end and into the next line. In the foreground we
+  // check every frame (sub-20ms); when the tab is hidden the browser throttles
+  // rAF, so tickSentence's timeupdate check stays as the background fallback.
+  function stopLoopWatch(){if(loopRaf!==null){cancelAnimationFrame(loopRaf);loopRaf=null;}}
+  function ensureLoopWatch(){
+    if(loopRaf!==null||loopTurn<0||!bundledPlayer)return;
+    const step=()=>{
+      loopRaf=null;
+      const audio=bundledPlayer,t=lessonTimings();
+      if(loopTurn<0||!audio||audio.paused||audio.ended||!t){return;}
+      const range=t.timing[loopTurn];
+      if(range&&audio.currentTime>=range[1]-0.02){
+        // Seeking while the element keeps playing let a sliver of the next
+        // line leak out before the seek landed. Pause first, rewind, resume on
+        // `seeked`, with a timer fallback in case the position did not change.
+        playerSeeking=true;audio.pause();audio.currentTime=range[0];highlightTurn(loopTurn);
+        let resumed=false;
+        const resume=()=>{
+          if(resumed)return;resumed=true;
+          audio.removeEventListener('seeked',resume);
+          playerSeeking=false;
+          if(loopTurn>=0&&audio===bundledPlayer&&!audio.ended){audio.play().then(ensureLoopWatch).catch(()=>{});}
+        };
+        audio.addEventListener('seeked',resume,{once:true});
+        setTimeout(resume,140);
+        return;
+      }
+      loopRaf=requestAnimationFrame(step);
+    };
+    loopRaf=requestAnimationFrame(step);
   }
   function tickSentence(audio){
     if(audio!==bundledPlayer)return;
@@ -1051,9 +1083,14 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
     if(a==='play-turn'){playTurn(Number(el.dataset.index));return;}
     if(a==='loop-turn'){
       if(!lessonTimings()){toast('这一课还没有逐句时间轴，可整段播放。');return;}
-      if(loopTurn>=0){loopTurn=-1;toast('已取消单句循环。');}
+      if(loopTurn>=0){loopTurn=-1;stopLoopWatch();toast('已取消单句循环。');}
       else if(activeTurn<0){toast('先在英文原文里点一句，再开启单句循环。');return;}
-      else{loopTurn=activeTurn;toast('已开启单句循环，再点一次取消。');}
+      else{
+        loopTurn=activeTurn;
+        const a=bundledPlayer,t=lessonTimings();
+        if(a&&t&&t.timing[activeTurn]){seekTo(a,t.timing[activeTurn][0]);a.play().then(ensureLoopWatch).catch(()=>{});}
+        toast('已开启单句循环，再点一次取消。');
+      }
       render();return;
     }
     if(a==='review-now'){reviewKey=el.dataset.key;reviewTab='due';reviewRevealed.delete(reviewKey);render({focusTarget:'#recall-draft'});return;}
