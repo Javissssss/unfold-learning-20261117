@@ -1,82 +1,2027 @@
 [
-  {
-    "id":"L10","level":1,"theme":"daily","title":"The parcel next door","subtitle":"包裹送错时，礼貌核实并商量解决办法。","readingTitle":"A small delivery mix-up",
-    "script":"Mia: Hi. I think a parcel for me may have been left at your door. Did you happen to see one?\nBen: There was a box outside this morning. I brought it inside because it was raining.\nMia: That might be it. Does the label have my name on it?\nBen: Let me check. Yes, it does. Sorry, I assumed it was for my apartment.\nMia: No problem. Thanks for keeping it dry.\nBen: Here you go. I will check the name next time.",
-    "reading":"Mia is looking for a parcel. The delivery notice says it has arrived, but there is nothing outside her door. She decides to ask her neighbor instead of assuming the box is lost.\n\nBen found a box outside and took it inside to keep it dry. Neither person knows whether it is Mia's until Ben checks the label. Once he sees her name, he gives her the box.\n\nMia's question leaves room for a simple mistake. She thanks Ben for protecting the parcel, and Ben says he will check names next time. The problem is solved without turning a small mix-up into an argument.",
-    "easy":"Mia asks her neighbor about a missing parcel. Ben checks the label and gives it to her. He had brought it inside to keep it dry.","zh":"Mia先询问而不是指责；核对标签后发现邻居是为了避雨才收进包裹。",
-    "phrases":[{"text":"Did you happen to see one?","meaning":"A gentle way to ask whether someone saw it.","cue":"Ask a neighbor without assuming they made a mistake."},{"text":"Let me check the label.","meaning":"I will look at the name or address on it.","cue":"Verify who a parcel belongs to."},{"text":"Thanks for keeping it dry.","meaning":"I appreciate that you protected it from rain.","cue":"Acknowledge someone's helpful intention."}],
-    "listenQuestions":[{"question":"Why did Ben bring the box inside?","options":["To keep it out of the rain.","To return it to a store.","To open it for Mia."],"answer":0,"explanation":"Ben says it was raining, so he brought the box inside."},{"question":"How do they confirm the box is Mia's?","options":["They call the driver.","They check the name on the label.","They look inside the box."],"answer":1,"explanation":"Ben checks the label and sees Mia's name."}],
-    "readingQuestions":[{"question":"What does Mia do before deciding the parcel is lost?","options":["She asks her neighbor.","She buys another item.","She complains to the building manager."],"answer":0,"explanation":"She asks her neighbor instead of assuming the parcel is lost."},{"question":"What keeps the exchange friendly?","options":["Mia ignores the missing box.","Mia avoids blame and thanks Ben for protecting it.","Ben promises to deliver every parcel."],"answer":1,"explanation":"She leaves room for a mistake and acknowledges his helpful intention."}],
-    "speakingPrompt":"Explain the mix-up and how Mia and Ben solve it.","writingPrompt":"Write a polite note asking a neighbor about a fictional misplaced item."
-  },
-  {
-    "id":"L11","level":1,"theme":"social","title":"A different kind of invitation","subtitle":"婉拒邀约，也给出可行的替代时间。","readingTitle":"An invitation is not an obligation",
-    "script":"Ana: A few of us are going to the outdoor film on Friday. Would you like to join us?\nLeo: That sounds fun, but I have plans that evening.\nAna: No worries. We might get coffee before the film if you are free earlier.\nLeo: I cannot make it on Friday at all. How about a walk on Sunday instead?\nAna: Sunday works for me. Shall we meet by the river at ten?\nLeo: Perfect. I will see you there.",
-    "reading":"Ana invites Leo to an outdoor film. Leo likes the idea, but he already has plans. His answer is friendly and clear: he cannot come on Friday.\n\nAna suggests coffee before the film, but Leo is unavailable that day. Rather than agreeing when he cannot attend, he proposes a walk on Sunday. Ana accepts and suggests a place and time.\n\nA warm refusal does not have to include a long excuse. If someone genuinely wants to meet another time, a specific alternative can keep the connection open. The other person remains free to accept or decline.",
-    "easy":"Leo cannot meet on Friday. He suggests a Sunday walk, and Ana agrees to meet by the river.","zh":"Leo明确说明周五不方便，同时提出周日散步，避免含糊答应。",
-    "phrases":[{"text":"That sounds fun, but I have plans.","meaning":"I like the invitation, but I am already busy.","cue":"Decline an invitation warmly and clearly."},{"text":"I cannot make it on Friday.","meaning":"I am unable to attend on Friday.","cue":"Clarify that neither Friday option works."},{"text":"How about a walk on Sunday instead?","meaning":"Would you like to take a walk on Sunday as another option?","cue":"Offer a specific alternative."}],
-    "listenQuestions":[{"question":"Why does Leo decline the film?","options":["He has plans that evening.","He dislikes Ana.","The film has been cancelled."],"answer":0,"explanation":"Leo says he already has plans."},{"question":"What do they agree to do?","options":["Get coffee on Friday.","Walk by the river on Sunday.","Watch a film at ten on Friday."],"answer":1,"explanation":"They agree to meet by the river on Sunday at ten."}],
-    "readingQuestions":[{"question":"Why does Leo suggest Sunday?","options":["He cannot attend on Friday.","Ana insists that he explain his plans.","The film is on Sunday."],"answer":0,"explanation":"He is unavailable all Friday and offers another time."},{"question":"What does the reading say about a warm refusal?","options":["It always needs a detailed excuse.","It must include an alternative.","It can be clear without a long excuse."],"answer":2,"explanation":"The reading says a long excuse is not required."}],
-    "speakingPrompt":"Retell the invitation and explain how Leo declines without closing the door.","writingPrompt":"Decline a fictional invitation and, if you want to meet, suggest another time."
-  },
-  {
-    "id":"L12","level":2,"theme":"travel","title":"A change of plans","subtitle":"旅途中确认交通变化，并为不确定性留余地。","readingTitle":"Finding another route",
-    "script":"Nora: The board says our train is delayed, but it does not say for how long.\nEli: The staff member said the next update will be at eleven. We could wait, or take the bus.\nNora: Does the bus go all the way to the museum?\nEli: Not quite. It stops near the park, and then we would walk for about fifteen minutes.\nNora: I do not mind walking. Is there a bus soon?\nEli: One leaves in ten minutes. I cannot promise we will arrive on time, but it looks more predictable than waiting for an update.\nNora: Then let us take the bus and message the others that we may be late.",
-    "reading":"Nora and Eli are heading to a museum when their train is delayed. The departure board gives no estimate. A staff member can only tell them when the next update is expected.\n\nThey consider a bus. It does not stop at the museum, so the final part of the trip would be a walk. Nora is comfortable with that, and Eli finds a bus leaving soon.\n\nTaking the bus may reduce uncertainty, but Eli does not claim it guarantees an on-time arrival. They choose the available route and tell the others they may be late. Their message manages expectations without pretending to know the exact arrival time.",
-    "easy":"The train is delayed without an estimate. They choose a bus and a short walk, then tell the others they may be late.","zh":"列车没有明确恢复时间；公交加步行更可预期，但不能保证准时，因此提前告知可能迟到。",
-    "phrases":[{"text":"The next update will be at eleven.","meaning":"More information is expected at eleven, not necessarily a departure.","cue":"Separate an update time from a departure time."},{"text":"It does not go all the way there.","meaning":"The route ends before the final destination.","cue":"Explain that another part of the journey is needed."},{"text":"I cannot promise we will arrive on time.","meaning":"An on-time arrival is possible but not certain.","cue":"Set a realistic expectation about a trip."}],
-    "listenQuestions":[{"question":"What happens at eleven?","options":["A train is guaranteed to leave.","The next update is expected.","The museum closes."],"answer":1,"explanation":"The staff member gives a time for an update, not a guaranteed departure."},{"question":"What will they do after taking the bus?","options":["Walk from the park toward the museum.","Return to the station.","Wait for a second train."],"answer":0,"explanation":"The bus stops near the park, about fifteen minutes on foot from the museum."}],
-    "readingQuestions":[{"question":"Why might the bus be useful?","options":["It guarantees they will be on time.","It provides a more predictable immediate option.","It goes directly to the museum entrance."],"answer":1,"explanation":"A bus leaves soon, while the train's departure time is uncertain."},{"question":"Why do they message the others?","options":["To announce a guaranteed arrival time.","To cancel the museum visit.","To warn that they might arrive late."],"answer":2,"explanation":"They communicate the possibility of being late without claiming certainty."}],
-    "speakingPrompt":"Explain the transport options and what is still uncertain.","writingPrompt":"Write a short fictional travel update that explains a change and avoids promising an uncertain arrival time."
-  },
-  {
-    "id":"L13","level":2,"theme":"food","title":"Something less familiar","subtitle":"点餐时说明偏好，并在推荐中做自己的选择。","readingTitle":"Choosing without guessing",
-    "script":"Server: Are you ready to order, or would you like another minute?\nSam: Almost. I am curious about the lentil soup. Is it spicy?\nServer: It has a little pepper, but it is not very hot. The flavor is more smoky than spicy.\nSam: That sounds good. I am avoiding meat today. Is it made with vegetable stock?\nServer: Let me check with the kitchen rather than guess.\nServer: Yes, the soup uses vegetable stock. Would you like bread with it?\nSam: Yes, please. I will try the soup.",
-    "reading":"Sam is interested in a lentil soup but wants to know what it tastes like and whether it contains meat. The server describes its flavor as smoky rather than very hot.\n\nThe server does not guess about the stock. After checking with the kitchen, the server confirms that the soup uses vegetable stock. Sam then chooses the soup with bread.\n\nThe useful distinction is between a recommendation and information needed to make a choice. Asking a specific question helps Sam decide. For a serious allergy or medical concern, a learner should seek reliable, current information from the restaurant and a qualified professional; this fictional dialogue is not medical guidance.",
-    "easy":"Sam asks about flavor and ingredients. The server checks with the kitchen. Sam chooses the soup and bread.","zh":"Sam分别询问味道与食材；服务员不猜测，先向厨房确认。严重过敏须进一步核实。",
-    "phrases":[{"text":"I am curious about the soup.","meaning":"I am interested in learning more about it.","cue":"Ask about a dish before deciding."},{"text":"It is more smoky than spicy.","meaning":"Smokiness is more noticeable than heat in its flavor.","cue":"Compare two aspects of taste."},{"text":"Let me check rather than guess.","meaning":"I will verify the information instead of assuming.","cue":"Respond responsibly when you do not know."}],
-    "listenQuestions":[{"question":"How does the server describe the soup?","options":["Very hot and sweet.","More smoky than spicy.","Cold and sour."],"answer":1,"explanation":"The server says its flavor is more smoky than spicy."},{"question":"Why does the server check with the kitchen?","options":["To avoid guessing about the stock.","To see whether the table is ready.","To ask when the restaurant closes."],"answer":0,"explanation":"The server checks whether the stock is vegetable-based."}],
-    "readingQuestions":[{"question":"What information does Sam want?","options":["The soup's flavor and ingredients.","The chef's home address.","The restaurant's monthly sales."],"answer":0,"explanation":"Sam asks about heat and whether the stock contains meat."},{"question":"What does the server do when uncertain?","options":["Invents an answer.","Asks the kitchen.","Tells Sam not to order."],"answer":1,"explanation":"The server checks before confirming the ingredient."}],
-    "speakingPrompt":"Describe Sam's questions and why checking mattered.","writingPrompt":"Ask a server two clear questions about a fictional dish before choosing it."
-  },
-  {
-    "id":"L14","level":2,"theme":"culture","title":"Two readings of a film","subtitle":"讨论作品时区分个人感受与唯一答案。","readingTitle":"Disagreeing about a story",
-    "script":"June: I thought the ending was hopeful. She goes back to the town and begins again.\nOmar: I read it differently. To me, she returns because she has nowhere else to go.\nJune: That makes sense. The last scene is quiet enough to support both readings.\nOmar: Exactly. I noticed that she smiles when she sees the old house, but we do not know what happens next.\nJune: Maybe that is why I liked it. The film lets us sit with the uncertainty.\nOmar: I am still not sure I liked the ending, but I enjoyed talking about it.",
-    "reading":"June and Omar leave the same fictional film with different impressions. June sees hope in the main character's return. Omar thinks the return may reflect a lack of alternatives.\n\nNeither explanation is presented as a fact established by the film. Omar points to a smile, while acknowledging that the story does not show what happens next. June values that openness.\n\nDiscussing art does not always require a single correct interpretation. A useful conversation can name what a person noticed, explain the feeling it created, and remain open to another reading. Enjoying the discussion does not require both people to like the ending.",
-    "easy":"June sees the film's ending as hopeful. Omar reads it differently. They discuss details without claiming to know what happens next.","zh":"两人对结尾有不同解读；他们引用细节，但承认故事没有给出后续。",
-    "phrases":[{"text":"I read it differently.","meaning":"My interpretation is different from yours.","cue":"Offer another interpretation without calling the other person wrong."},{"text":"The scene supports both readings.","meaning":"Details in the scene are compatible with both interpretations.","cue":"Recognize ambiguity in a story."},{"text":"We do not know what happens next.","meaning":"The story leaves the later outcome uncertain.","cue":"Distinguish visible evidence from an imagined outcome."}],
-    "listenQuestions":[{"question":"Why does Omar think she returns?","options":["She has nowhere else to go.","She wins a prize.","She is following a map."],"answer":0,"explanation":"Omar suggests she returns because she has no other place to go."},{"question":"What do they know about what happens after the final scene?","options":["She leaves town immediately.","They do not know.","The film gives a detailed answer."],"answer":1,"explanation":"Omar explicitly says they do not know what happens next."}],
-    "readingQuestions":[{"question":"How does the reading treat their interpretations?","options":["Both are interpretations, not established future facts.","Only June's view is allowed.","Omar's view proves the ending is sad."],"answer":0,"explanation":"The reading presents both as possible interpretations."},{"question":"Can Omar enjoy the discussion without liking the ending?","options":["No, agreement is required.","Yes, the two are separate.","Only if June changes her mind."],"answer":1,"explanation":"He can enjoy talking while remaining unsure about the ending."}],
-    "speakingPrompt":"Compare June's and Omar's readings and identify what remains unknown.","writingPrompt":"Describe two possible interpretations of a fictional story and one detail that supports each."
-  },
-  {
-    "id":"L15","level":3,"theme":"science","title":"A headline and a hypothesis","subtitle":"区分观察结果、可能解释与因果结论。","readingTitle":"What the observation can tell us",
-    "script":"Iris: This article says people who sleep longer reported better concentration. So sleeping longer must improve concentration.\nNoah: It is an interesting observation, but the headline does not establish cause.\nIris: What else could explain the pattern?\nNoah: Several things. For example, stress could affect both sleep and concentration. We would need the study details to see what was measured and controlled.\nIris: So the result is useless?\nNoah: Not at all. It may give researchers a useful question. It just does not settle that question by itself.\nIris: I should read the method before turning the headline into advice.",
-    "reading":"A fictional headline describes a relationship between reported sleep duration and reported concentration. A relationship can be worth investigating without proving that one variable caused the other.\n\nNoah offers stress as one possible explanation, not as an established cause in this particular case. Other factors may matter, and the details of the study are not available in the dialogue. Reading the method would help reveal what was measured and which alternatives were considered.\n\nThe appropriate conclusion is therefore limited: the observation raises a question. It is not proof that increasing sleep will improve concentration for every person, and it is not proof that the study has no value. This case is invented for language practice and is not health advice.",
-    "easy":"A reported link between sleep and concentration does not by itself prove cause. Stress is one possible explanation, and the study method matters.","zh":"观察到相关性不等于证明因果；压力只是可能的解释之一，需查看研究方法。本案例虚构，不构成健康建议。",
-    "phrases":[{"text":"The headline does not establish cause.","meaning":"The headline alone does not prove that one thing caused the other.","cue":"Separate a reported association from a causal claim."},{"text":"What else could explain the pattern?","meaning":"Are there other possible reasons for the observed relationship?","cue":"Invite alternative explanations."},{"text":"It raises a question; it does not settle it.","meaning":"The finding suggests an issue to investigate but does not resolve it.","cue":"Describe useful but incomplete evidence."}],
-    "listenQuestions":[{"question":"What does Noah say about stress?","options":["It is one possible factor affecting both.","It has definitely caused the result.","It was not measured by the fictional study."],"answer":0,"explanation":"Stress is offered as a possible alternative, not a proven cause."},{"question":"What does Iris decide to do?","options":["Ignore all studies.","Read the method before giving advice.","Assume the headline is a medical recommendation."],"answer":1,"explanation":"She wants to read the method before turning the headline into advice."}],
-    "readingQuestions":[{"question":"Is the study method available in the dialogue?","options":["Yes, it proves the cause.","No, the details are not given.","Yes, it rules out stress."],"answer":1,"explanation":"The reading says the study details are not available."},{"question":"Which conclusion is supported?","options":["The result is worthless.","Longer sleep causes better concentration in everyone.","The observation raises a question for further investigation."],"answer":2,"explanation":"The reading frames the observation as a question rather than proof or uselessness."}],
-    "speakingPrompt":"Explain the difference between the observation and a causal claim.","writingPrompt":"Describe a fictional association and two reasons to avoid making a causal claim from it alone."
-  },
-  {
-    "id":"L16","level":2,"theme":"relationships","title":"Listening without fixing","subtitle":"回应朋友的烦恼，先确认对方需要倾听还是建议。","readingTitle":"A useful question before advice",
-    "script":"Tara: I have had a difficult week, and I am not sure what to do about it.\nWill: That sounds exhausting. Would you like me to listen, or would it help to think through some options together?\nTara: Could you just listen for a bit? I have not even worked out what is bothering me most.\nWill: Of course. Take your time.\nTara: I keep saying yes to things, and then I feel frustrated when I have no time left.\nWill: It sounds as if you want more room to choose. Did I get that right?\nTara: Yes. Later I may want advice, but it helps to say it out loud first.",
-    "reading":"Tara tells Will that her week has been difficult. Will does not assume that advice is the first thing she needs. He asks whether she wants someone to listen or help her consider options.\n\nTara chooses listening for now. As she talks, she notices a pattern: she agrees to requests and then feels frustrated about having no time left. Will checks his understanding rather than telling her what she must do.\n\nThe exchange does not solve every problem. It gives Tara space to clarify her own experience and leaves advice as a possibility for later. Asking what kind of support someone wants can be more useful than treating every conversation as a problem to fix immediately.",
-    "easy":"Tara wants Will to listen first. She realizes she often says yes and has too little time. Will checks that he understood.","zh":"Will先询问朋友想要倾听还是建议；Tara暂时选择倾听，之后才可能需要建议。",
-    "phrases":[{"text":"Would you like me to listen?","meaning":"Do you want me to hear you without immediately giving advice?","cue":"Ask what kind of support someone wants."},{"text":"It sounds as if you want more room to choose.","meaning":"My understanding is that you want more freedom over your time.","cue":"Reflect a person's concern in your own words."},{"text":"Did I get that right?","meaning":"Is my understanding accurate?","cue":"Check an interpretation instead of assuming."}],
-    "listenQuestions":[{"question":"What does Tara ask Will to do first?","options":["Make a decision for her.","Listen for a while.","Call her colleagues."],"answer":1,"explanation":"She asks him to listen while she works out what bothers her."},{"question":"What pattern does Tara describe?","options":["She refuses every request.","She has too much free time.","She often says yes and then lacks time."],"answer":2,"explanation":"She says yes to things and becomes frustrated when her time is gone."}],
-    "readingQuestions":[{"question":"Why does Will check his understanding?","options":["To reflect her concern without assuming.","To end the conversation quickly.","To prove he knows what she must do."],"answer":0,"explanation":"He restates what he heard and asks if it is accurate."},{"question":"Does this conversation settle all Tara's problems?","options":["Yes, immediately.","No; it creates space to clarify them.","Yes, because she receives detailed advice."],"answer":1,"explanation":"The exchange creates space without pretending to solve everything."}],
-    "speakingPrompt":"Explain what kind of support Tara wants and how Will responds.","writingPrompt":"Write a supportive response to a fictional friend that checks whether they want listening or suggestions."
-  },
-  {
-    "id":"L17","level":3,"theme":"ideas","title":"Convenient for whom?","subtitle":"讨论公共选择时，把便利与公平放在同一个框架中。","readingTitle":"A trade-off with more than one side",
-    "script":"Kai: The library could close its front desk and make every service digital. That would be faster for most visitors.\nRae: It might be faster for people who are comfortable online. What about visitors who need help with a form or do not have a device?\nKai: Good point. Keeping the desk open all day would use resources we could spend on books.\nRae: Maybe the question is not desk or no desk. Could we offer digital services and keep staffed hours when people need help?\nKai: We would need to find out when those hours are most useful.\nRae: And ask visitors who might be left out before deciding what counts as convenient.\nKai: Let us test a schedule and review who can actually use the service.",
-    "reading":"Kai proposes moving every library service online. The possible benefit is speed for visitors who can use digital tools. Rae asks about visitors who lack a device or need help with forms.\n\nThe conversation also recognizes a resource constraint: a staffed desk takes time and money that could be used elsewhere. Neither person establishes the precise costs or the needs of every visitor. Those details would need investigation.\n\nRather than choosing between two absolute options, they consider digital service alongside selected staffed hours. A trial could show how people use that arrangement, although a poorly designed trial could still miss people who are unable to participate. The key question is not simply whether a service is convenient, but for whom and under what conditions.",
-    "easy":"Online services may be faster for some visitors but exclude others. They consider combining digital access with staffed hours and testing the arrangement.","zh":"数字化可能提升部分人的便利，却也可能排除其他人；同时存在资源取舍，需要听取用户意见并检验方案。",
-    "phrases":[{"text":"Convenient for whom?","meaning":"Which people benefit, and who might be excluded?","cue":"Question an average benefit that may not be shared equally."},{"text":"The question is not desk or no desk.","meaning":"There may be alternatives beyond the two extreme choices.","cue":"Open up a false either-or choice."},{"text":"We need to find out when it is most useful.","meaning":"We need evidence before choosing the timing.","cue":"Name what remains unknown before a decision."}],
-    "listenQuestions":[{"question":"What concern does Rae raise?","options":["Some visitors may need help or lack a device.","No one likes books.","The library has already closed."],"answer":0,"explanation":"Rae asks about people who need assistance or lack a device."},{"question":"What do Kai and Rae decide to explore?","options":["Closing the entire library.","A test combining digital services with staffed hours.","Removing every online service."],"answer":1,"explanation":"They consider a mixed arrangement and a test schedule."}],
-    "readingQuestions":[{"question":"What remains unknown?","options":["Whether people use libraries at all.","The exact costs and every visitor's needs.","Whether the conversation is fictional."],"answer":1,"explanation":"The reading says precise costs and the needs of every visitor are not established."},{"question":"What is one limitation of a trial?","options":["It automatically proves everyone can participate.","It can miss people unable to participate.","It cannot provide any information."],"answer":1,"explanation":"The reading notes a poorly designed trial could exclude people."}],
-    "speakingPrompt":"Explain the competing benefits, constraints, and one uncertainty in the proposal.","writingPrompt":"Discuss a fictional service change: identify who benefits, who may be excluded, and what evidence you would seek."
-  }
+ {
+  "id": "L10",
+  "level": 1,
+  "theme": "daily",
+  "title": "The parcel next door.",
+  "subtitle": "替邻居收快递这件小事，怎么开口才自然。",
+  "readingTitle": "Small favours between neighbours",
+  "script": "Sam: Hi — sorry to bother you. A parcel was delivered to my flat by mistake this morning, and I think it's yours.\nNadia: Oh! That'll be the lamp I ordered. I've been watching the door all day.\nSam: It's just here in the hall. I didn't want to leave it outside in case it went missing.\nNadia: That was kind of you. I'd have been annoyed with the driver, not with you.\nSam: Well, the label's tiny. I only checked because the name looked familiar.\nNadia: Do you want a hand carrying it? It says fragile.\nSam: Actually, yes — it's heavier than it looks.\nNadia: Right, one, two… there we go. Thanks again. If a parcel of yours ever lands here, I'll bring it round straight away.\nSam: Much appreciated. And if you ever need anything collected while you're away, just knock.",
+  "reading": "A small favour between neighbours is mostly about signalling. Sam opens with an apology for the interruption and explains why he checked the label, so the visit doesn't feel like nosiness.\n\nHe also says what he didn't do: he kept the parcel inside rather than leaving it outside. Naming that choice is what turns an ordinary handover into a reason to trust the person next door.\n\nNadia responds by redirecting any annoyance at the delivery, not at Sam, and by offering help with a heavy box. Both of them then offer a future favour, which is how a one-off becomes a relationship.\n\nNone of this needs formal language. It needs a reason, a small piece of information, and a reciprocal offer.",
+  "easy": "A parcel was delivered to Sam's flat by mistake. He checked the label because the name looked familiar and kept the parcel inside so it wouldn't go missing. Nadia helps him carry it and offers to return any parcels of his in future.",
+  "zh": "邻里小事的要点是说明动机（为什么看标签）、说明自己做了什么（没有放在门外）、并回赠一个未来的帮忙。语气自然即可，不必客套过度。",
+  "phrases": [
+   {
+    "text": "Sorry to bother you.",
+    "meaning": "I'm interrupting, and I know it.",
+    "cue": "Open a request to someone who isn't expecting you."
+   },
+   {
+    "text": "I didn't want to leave it outside in case it went missing.",
+    "meaning": "I kept it safe rather than risking loss.",
+    "cue": "Explain the reason behind a small action."
+   },
+   {
+    "text": "If a parcel of yours ever lands here, I'll bring it round.",
+    "meaning": "I'll return the favour in the same situation.",
+    "cue": "Offer a future favour to make it reciprocal."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Why did Sam check the label?",
+    "options": [
+     "He expected a delivery.",
+     "The parcel was leaking.",
+     "The name looked familiar."
+    ],
+    "answer": 2,
+    "explanation": "Sam says he only checked because the name looked familiar."
+   },
+   {
+    "question": "Why did Sam keep the parcel inside?",
+    "options": [
+     "Nadia had asked him to.",
+     "It was too heavy.",
+     "To stop it going missing."
+    ],
+    "answer": 2,
+    "explanation": "He explains he didn't want to leave it outside in case it went missing."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "What does explaining the label achieve?",
+    "options": [
+     "It proves the driver wrong.",
+     "It ends the conversation.",
+     "It shows he wasn't nosy."
+    ],
+    "answer": 2,
+    "explanation": "Giving a reason makes an unannounced visit feel reasonable rather than intrusive."
+   },
+   {
+    "question": "How does the exchange become more than a one-off?",
+    "options": [
+     "Both offer future help.",
+     "Nadia pays for delivery.",
+     "They swap spare keys."
+    ],
+    "answer": 0,
+    "explanation": "Nadia offers to bring his parcels round and Sam offers to collect things while she's away."
+   }
+  ],
+  "speakingPrompt": "Retell what Sam did and why, in three sentences, as if telling another neighbour.",
+  "writingPrompt": "Write a short note to a fictional neighbour returning something of theirs. Include why you have it and one offer of future help."
+ },
+ {
+  "id": "L11",
+  "level": 1,
+  "theme": "social",
+  "title": "A different kind of invitation.",
+  "subtitle": "被邀请去做自己不熟悉的事，怎么回应得体面。",
+  "readingTitle": "Saying yes to something unfamiliar",
+  "script": "Jon: So, a few of us are doing a climbing session on Saturday morning. You should come.\nAisha: Climbing? Like, up a wall?\nJon: Indoor wall, big mats, ropes everywhere. Nobody's going anywhere near a cliff.\nAisha: I'll be honest — I'm not sure I'd be any good at it.\nJon: Nobody is on their first time. That's kind of the point.\nAisha: What do people wear?\nJon: Whatever you can move in. Shoes are at the place. There's a café too, so if you hate it after twenty minutes, you can sit and judge the rest of us.\nAisha: That's a very good offer. Okay, I'll come.\nJon: Brilliant. I'll send you the time and where to meet.\nAisha: Thanks for asking, actually. I'd never have suggested it myself.\nJon: That's usually how these things start.",
+  "reading": "Invitations to unfamiliar activities carry a small social risk: the person being asked may worry about competence, clothing or looking out of place.\n\nJon reduces each of those worries with a concrete detail. The wall is indoors, mats and ropes are involved, nobody performs well the first time, and shoes are provided.\n\nHe also builds in an exit. Offering the café as an option after twenty minutes means saying yes doesn't require committing to the whole morning, which makes the yes much easier to give.\n\nAisha's closing remark names something worth noticing: she wouldn't have proposed the activity herself. Being invited into someone else's interest is a common way friendships expand beyond the usual plans.",
+  "easy": "Jon invites Aisha indoor climbing on Saturday morning. She worries she won't be good at it, so he explains that nobody is on the first try, shoes are provided and there's a café if she wants to stop after twenty minutes. She accepts and says she would never have suggested it herself.",
+  "zh": "邀请别人做不熟悉的事时，具体信息比鼓励更有用：安全吗、穿什么、能不能中途退出。给对方一个“随时可以停”的出口，答应就容易多了。",
+  "phrases": [
+   {
+    "text": "I'll be honest — I'm not sure I'd be any good at it.",
+    "meaning": "Let me admit my worry about ability.",
+    "cue": "Voice a hesitation without refusing."
+   },
+   {
+    "text": "Nobody is on their first time.",
+    "meaning": "Everyone performs badly at the start.",
+    "cue": "Normalise being a beginner."
+   },
+   {
+    "text": "Thanks for asking, actually.",
+    "meaning": "I'm genuinely glad you invited me.",
+    "cue": "Acknowledge the invitation itself, not just the plan."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What is Aisha's main worry?",
+    "options": [
+     "Being bad at climbing.",
+     "The weather that day.",
+     "The cost of entry."
+    ],
+    "answer": 0,
+    "explanation": "She says she's not sure she'd be any good at climbing."
+   },
+   {
+    "question": "What exit does Jon offer?",
+    "options": [
+     "A refund on the ticket.",
+     "The café after twenty minutes.",
+     "A video of the wall."
+    ],
+    "answer": 1,
+    "explanation": "He mentions a café where she can sit and judge everyone after twenty minutes."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why does the exit make yes easier?",
+    "options": [
+     "No full-morning commitment.",
+     "It proves climbing is safe.",
+     "It lets her avoid Jon."
+    ],
+    "answer": 0,
+    "explanation": "Knowing she can stop after twenty minutes lowers the cost of accepting."
+   },
+   {
+    "question": "What does Aisha's last remark suggest?",
+    "options": [
+     "She dislikes invitations.",
+     "Climbing is her favourite.",
+     "People join what they'd never propose."
+    ],
+    "answer": 2,
+    "explanation": "She says she'd never have suggested it herself, and Jon says that's how these things start."
+   }
+  ],
+  "speakingPrompt": "Describe the invitation and what made it easy to accept, in three sentences.",
+  "writingPrompt": "Invite a fictional friend to something they've never tried. Include one practical detail, one reassurance and one easy way for them to stop."
+ },
+ {
+  "id": "L12",
+  "level": 2,
+  "theme": "travel",
+  "title": "A change of plans.",
+  "subtitle": "行程出问题时，先处理事实，再处理情绪。",
+  "readingTitle": "Rebooking without panic",
+  "script": "Ellis: The fourteen twenty to York is cancelled. The board says replacement bus, but no platform.\nMarta: How long do we have before the wedding starts?\nEllis: Ceremony's at five. Bus is three hours if traffic's kind.\nMarta: Then we'd arrive at five-ish, which is not really an option.\nEllis: There's a train at fifteen ten from the next station. Two stops by tram, about eighteen minutes.\nMarta: Do our tickets cover that?\nEllis: Not automatically. But this cancellation's the operator's fault, so I'll ask for an endorsement rather than buying new ones.\nMarta: And if they say no?\nEllis: Then we buy two new singles and claim the original back later — I'll photograph the board first, because that's the evidence.\nMarta: Sensible. What do I do?\nEllis: You get the tram times and keep the bags moving. I'll do the queue. If I'm not back in twelve minutes, leave without me and I'll get the next one.\nMarta: I'd rather we both make the ceremony, but fine — twelve minutes.",
+  "reading": "A disrupted journey rewards a specific order of operations: establish the facts, list the alternatives, protect your rights, then divide the work.\n\nEllis starts from the board rather than from frustration, and immediately compares travel times against a fixed deadline. The bus isn't rejected on principle but because it arrives too late.\n\nHe also separates entitlement from convenience. Asking for an endorsement is the correct first move; buying new tickets is the fallback, and photographing the cancellation board preserves the evidence needed to recover the cost.\n\nThe plan includes a failure condition — twelve minutes, then leave without me. Deciding that in advance prevents the group from losing the whole objective while negotiating over part of it.",
+  "easy": "The 14:20 train to York is cancelled and the replacement bus takes three hours, which is too late for a five o'clock wedding. Ellis finds a 15:10 train from the next station, reachable by tram. He will ask for an endorsement and photograph the board as evidence. If he isn't back in twelve minutes, Marta leaves without him.",
+  "zh": "先读事实（班次取消、替代耗时），再对齐硬约束（婚礼五点）。首选维护权益（改签背书），备选先买票后申诉并留证据。事先约定失败条件，避免为小事丢掉整个目标。",
+  "phrases": [
+   {
+    "text": "How long do we have before it starts?",
+    "meaning": "What's our real deadline?",
+    "cue": "Anchor a plan to the fixed time that matters."
+   },
+   {
+    "text": "I'll ask for an endorsement rather than buying new ones.",
+    "meaning": "I'll request official permission to use another service.",
+    "cue": "Protect your entitlement before spending money."
+   },
+   {
+    "text": "If I'm not back in twelve minutes, leave without me.",
+    "meaning": "Here's the point at which you proceed without me.",
+    "cue": "Agree a failure condition in advance."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Why is the replacement bus rejected?",
+    "options": [
+     "It goes to Leeds.",
+     "It arrives too late.",
+     "It costs too much."
+    ],
+    "answer": 1,
+    "explanation": "The bus takes three hours and would arrive around five, which isn't an option for the ceremony."
+   },
+   {
+    "question": "What does Ellis photograph, and why?",
+    "options": [
+     "The tram, for the route.",
+     "Tickets, to prove purchase.",
+     "The board, as evidence."
+    ],
+    "answer": 2,
+    "explanation": "He photographs the cancellation board first because it's the evidence for a later claim."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "What order of operations does the reading recommend?",
+    "options": [
+     "Facts, options, rights, roles.",
+     "Complain, refund, then taxi.",
+     "Panic, then improvise fast."
+    ],
+    "answer": 0,
+    "explanation": "The reading lists establishing facts, listing alternatives, protecting rights and dividing the work."
+   },
+   {
+    "question": "Why agree a twelve-minute limit?",
+    "options": [
+     "To shorten the queue.",
+     "To save the main goal.",
+     "To punish the operator."
+    ],
+    "answer": 1,
+    "explanation": "Deciding the failure condition in advance stops the group losing the ceremony while negotiating."
+   }
+  ],
+  "speakingPrompt": "Explain the plan and the fallback in four sentences, as if reporting back to the wedding host.",
+  "writingPrompt": "Write a short message to a fictional travel companion after a cancellation: the facts, the alternative, and the point at which they should proceed without you."
+ },
+ {
+  "id": "L13",
+  "level": 2,
+  "theme": "food",
+  "title": "Something less familiar.",
+  "subtitle": "点不熟的菜，怎么问才不问得像怀疑厨师。",
+  "readingTitle": "Ordering without offending",
+  "script": "Waiter: Evening. Have you eaten with us before?\nLena: Not yet. A friend recommended the lamb, but I can't tell what the sauce is from the menu.\nWaiter: It's a pomegranate and walnut sauce — sour, a bit sweet, quite rich. It's not spicy.\nLena: That sounds good. Is it a large portion? I don't want to overorder.\nWaiter: It's generous. Two people often share it with bread and one side.\nLena: Then I'll have the lamb and the aubergine. Could I ask for the sauce on the side, just so I can taste it first?\nWaiter: Of course. That's a sensible way to try something new.\nLena: And what do you drink with it?\nWaiter: The house red stands up to it well. If you'd rather not, the mint and lime is refreshing against the richness.\nLena: Mint and lime, please. Thank you for explaining rather than just saying it's nice.\nWaiter: Anytime. Describing it is my job; deciding is yours.",
+  "reading": "Asking about unfamiliar food works best when the question is about the thing, not about the kitchen. Lena asks what the sauce is and how large the portion is, which are neutral requests for information.\n\nThe waiter answers with specifics — flavour profile, richness, heat, portion size, and how others order it. That's the kind of detail that lets a customer decide without pretending to knowledge they don't have.\n\nRequesting the sauce on the side is a practical compromise: it allows tasting first without rejecting the dish. Framing it as a way to try something new keeps it friendly.\n\nThe closing exchange names the division of labour. Describing accurately is the server's responsibility; choosing, and living with the choice, belongs to the guest.",
+  "easy": "Lena hasn't eaten at the restaurant before and asks what the lamb sauce is. The waiter describes it as sour, slightly sweet and rich, not spicy, and says portions are generous. Lena orders the lamb with sauce on the side so she can taste it first, plus a mint and lime drink.",
+  "zh": "问菜要问“是什么、多大份、辣不辣、别人怎么点”，不要评价厨房。酱汁单放是先尝后决定的体面办法。描述准确是服务员的责任，选择是客人的责任。",
+  "phrases": [
+   {
+    "text": "I can't tell what the sauce is from the menu.",
+    "meaning": "The menu doesn't explain this to me.",
+    "cue": "Ask for information without criticising the kitchen."
+   },
+   {
+    "text": "Is it a large portion? I don't want to overorder.",
+    "meaning": "How much food comes with it?",
+    "cue": "Check quantity so the order stays sensible."
+   },
+   {
+    "text": "Could I ask for the sauce on the side, just so I can taste it first?",
+    "meaning": "Please serve the sauce separately so I can try it.",
+    "cue": "Request an adjustment as a way of trying something new."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "How does the waiter describe the sauce?",
+    "options": [
+     "Creamy and very mild.",
+     "Hot and peppery.",
+     "Sour, sweet and rich."
+    ],
+    "answer": 2,
+    "explanation": "He says it's pomegranate and walnut — sour, a bit sweet, quite rich, and not spicy."
+   },
+   {
+    "question": "Why does Lena ask for sauce on the side?",
+    "options": [
+     "She dislikes walnuts.",
+     "The portion is too small.",
+     "To taste it first."
+    ],
+    "answer": 2,
+    "explanation": "She wants to try something new by tasting the sauce before committing to it."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "What makes Lena's questions neutral?",
+    "options": [
+     "They are written down.",
+     "They avoid the topic.",
+     "They ask about the dish."
+    ],
+    "answer": 2,
+    "explanation": "Asking what something is and how large the portion is requests information rather than passing judgement."
+   },
+   {
+    "question": "Who decides what to order?",
+    "options": [
+     "The waiter chooses.",
+     "The menu decides.",
+     "The guest chooses."
+    ],
+    "answer": 2,
+    "explanation": "The waiter says describing it is his job and deciding is hers."
+   }
+  ],
+  "speakingPrompt": "Describe the lamb dish and how Lena ordered it, in three sentences, to a friend who's never been.",
+  "writingPrompt": "Write a short conversation in which you order something unfamiliar. Ask two information questions and request one adjustment politely."
+ },
+ {
+  "id": "L14",
+  "level": 2,
+  "theme": "culture",
+  "title": "Two readings of a film.",
+  "subtitle": "谈作品时，可以既不同意又不否定对方。",
+  "readingTitle": "Disagreeing about a story",
+  "script": "June: I thought the ending was hopeful, actually. She goes back to the town and starts over.\nOmar: See, I read it the other way. I think she goes back because there's nowhere else to go.\nJune: That makes sense. The last scene is quiet enough to hold both of those.\nOmar: Right. And she smiles when she sees the house — but we never see what happens on Tuesday.\nJune: Maybe that's why I liked it. It lets you sit with the not-knowing.\nOmar: I'm still not convinced I liked the ending. But I enjoyed arguing about it.\nJune: That's the bit I always forget — you don't have to like a thing to have a good conversation about it.\nOmar: Exactly. Though if they'd shown one more scene, I'd probably have changed my mind.\nJune: Or found a new reason to disagree.\nOmar: Almost certainly that.",
+  "reading": "Two people can watch the same film and leave with different impressions, and neither is making a factual error about a story that deliberately withholds information.\n\nOmar points to a detail — the smile — while admitting the film doesn't show what happens next. That honesty is what keeps the disagreement about interpretation rather than about who paid attention.\n\nJune values the ambiguity itself. For her the open ending is the point, which explains why she liked a film Omar isn't sure he liked.\n\nThe conversation ends on a distinction worth keeping: enjoying a discussion doesn't require agreeing, and it doesn't require liking the thing being discussed.",
+  "easy": "June thinks the ending is hopeful; Omar thinks the character returns because she has no other choice. Both agree the last scene supports either reading and that the film never shows what happens next. They enjoy the discussion without agreeing, and without liking the ending equally.",
+  "zh": "谈作品时区分“我看到了什么”和“我因此感到什么”。承认作品没有给出答案，分歧就不会变成谁更懂。喜欢讨论不等于喜欢作品。",
+  "phrases": [
+   {
+    "text": "I read it the other way.",
+    "meaning": "My interpretation is different.",
+    "cue": "Offer a different reading without calling the other person wrong."
+   },
+   {
+    "text": "The last scene is quiet enough to hold both of those.",
+    "meaning": "The scene is compatible with both readings.",
+    "cue": "Acknowledge genuine ambiguity in a story."
+   },
+   {
+    "text": "We never see what happens on Tuesday.",
+    "meaning": "The story doesn't show the later outcome.",
+    "cue": "Separate what the work shows from what you imagine after it."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Why does Omar think she goes back?",
+    "options": [
+     "She has nowhere else.",
+     "She is following a map.",
+     "She wins an award."
+    ],
+    "answer": 0,
+    "explanation": "Omar says he thinks she returns because there's nowhere else to go."
+   },
+   {
+    "question": "What do they agree the film omits?",
+    "options": [
+     "Why she first left.",
+     "The house exterior.",
+     "What happens afterwards."
+    ],
+    "answer": 2,
+    "explanation": "Omar notes she smiles at the house but they never see what happens on Tuesday."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "How does the reading treat the two interpretations?",
+    "options": [
+     "Both prove the film bad.",
+     "Both are possible readings.",
+     "One is a factual error."
+    ],
+    "answer": 1,
+    "explanation": "The film withholds information, so neither reading is a mistake about facts."
+   },
+   {
+    "question": "What distinction ends the conversation?",
+    "options": [
+     "Liking the talk isn't liking the film.",
+     "Films must be finished first.",
+     "Enjoying talk needs agreement."
+    ],
+    "answer": 0,
+    "explanation": "June says you don't have to like a thing to have a good conversation about it."
+   }
+  ],
+  "speakingPrompt": "Compare June's and Omar's readings, and say what the film leaves unknown.",
+  "writingPrompt": "Describe two possible interpretations of a fictional story and one detail that supports each, in four sentences."
+ },
+ {
+  "id": "L15",
+  "level": 3,
+  "theme": "science",
+  "title": "A headline and a hypothesis.",
+  "subtitle": "新闻标题里的“导致”，常常不是研究里的“相关”。",
+  "readingTitle": "Reading a health headline carefully",
+  "script": "Ade: Did you see this? Coffee protects against memory loss. Should I be drinking four a day?\nRuth: What does the article actually say they did?\nAde: Hmm. They followed thirty thousand people for ten years and asked how much coffee they drank.\nRuth: So they observed people, they didn't assign coffee. That's a cohort study, not a trial.\nAde: Does that matter?\nRuth: It matters a lot. People who drink coffee differ from people who don't — in sleep, in income, in whether they have a job with fixed breaks. Any of those could carry the effect.\nAde: So the honest headline would be…\nRuth: Coffee drinkers in this study showed slower decline. Which might mean coffee helps, or might mean something about coffee drinkers helps.\nAde: And four a day?\nRuth: Nothing here supports four a day. The study doesn't test doses, and more of a thing that's merely associated isn't a prescription.\nAde: What would change your mind?\nRuth: A randomised trial with a real control group, or several cohorts in different countries showing the same size of effect. One headline isn't either.",
+  "reading": "Observational research can describe a pattern; it cannot by itself establish that one thing produced another. Following thirty thousand people and recording their habits produces an association.\n\nThe mechanism at work is confounding: coffee drinkers differ from non-drinkers in sleep, income and work routines, and any of those differences could account for the pattern.\n\nDose is a separate question from association. A study that never assigned amounts cannot tell anyone how much is beneficial, so four cups a day isn't supported by the design at all.\n\nNotice what would count as better evidence: randomisation with a control group, or consistent effect sizes across independent cohorts. Specifying that in advance is what separates scepticism from cynicism.",
+  "easy": "A headline says coffee protects against memory loss. The study followed thirty thousand people for ten years and recorded how much coffee they drank; it did not assign coffee, so it shows an association. Coffee drinkers differ in sleep, income and work routines, and the study says nothing about how much to drink.",
+  "zh": "队列研究给的是相关，不是因果。混淆因素（睡眠、收入、作息）可能解释结果。剂量与关联是两件事。要改结论，需要随机对照试验或多个独立队列的一致效应。",
+  "phrases": [
+   {
+    "text": "What does the article actually say they did?",
+    "meaning": "What was the study design?",
+    "cue": "Ask about method before accepting a conclusion."
+   },
+   {
+    "text": "They observed people, they didn't assign coffee.",
+    "meaning": "This is observation, not an experiment.",
+    "cue": "Distinguish a cohort study from a trial."
+   },
+   {
+    "text": "What would change your mind?",
+    "meaning": "What evidence would convince you otherwise?",
+    "cue": "State your own standard for updating a belief."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What kind of study was it?",
+    "options": [
+     "A ten-year cohort study.",
+     "A lab test of caffeine.",
+     "A randomised controlled trial."
+    ],
+    "answer": 0,
+    "explanation": "Ruth says they followed thirty thousand people and recorded habits, so it's observational."
+   },
+   {
+    "question": "Why isn't four a day supported?",
+    "options": [
+     "The headline forbids it.",
+     "Coffee is too expensive.",
+     "Doses were never tested."
+    ],
+    "answer": 2,
+    "explanation": "Ruth says the study doesn't test doses, so an association can't become a prescription."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "What is confounding here?",
+    "options": [
+     "Journalists inventing numbers.",
+     "Coffee causing memory loss.",
+     "Drinkers differing in routines."
+    ],
+    "answer": 2,
+    "explanation": "The reading lists sleep, income and work routines as alternative explanations."
+   },
+   {
+    "question": "Why name better evidence in advance?",
+    "options": [
+     "It separates doubt from cynicism.",
+     "It guarantees research funding.",
+     "It proves headlines wrong."
+    ],
+    "answer": 0,
+    "explanation": "Specifying what would change your mind makes doubt a standard rather than a reflex."
+   }
+  ],
+  "speakingPrompt": "Explain to a friend why the headline overstates the study, in four sentences.",
+  "writingPrompt": "Take a fictional health headline and write four sentences: what the study likely did, one confounder, and what evidence would settle it."
+ },
+ {
+  "id": "L16",
+  "level": 2,
+  "theme": "relationships",
+  "title": "Listening without fixing.",
+  "subtitle": "对方要的是被听见，不是被解决。",
+  "readingTitle": "Support that isn't advice",
+  "script": "Theo: Can I just tell you about my week without you solving it?\nIris: Yes. I'll shut up and listen. Go on.\nTheo: I got passed over for the lead role on the migration. Again. And the worst part is I saw it coming and said nothing.\nIris: That's a horrible feeling — seeing it and not saying anything.\nTheo: Right. And then Mum rang and asked when I'd be promoted, like it's a timetable.\nIris: So it's not only the decision, it's having to explain it to her too.\nTheo: Exactly. …Actually, that's the part that got me.\nIris: Do you want me to keep listening, or do you want thoughts?\nTheo: Thoughts, but small ones.\nIris: Okay. One thought: asking at the start like you did — that worked. It told me what you needed instead of leaving me to guess.\nTheo: I've been practising that.\nIris: It shows. And for what it's worth, I'd have said something clumsy about updating your CV, which wasn't the point at all.",
+  "reading": "Theo begins by stating what kind of support he wants. That single request prevents the most common failure in these conversations: one person describing a feeling while the other offers a solution to a different problem.\n\nIris's responses do two things. She names the feeling behind the facts, and she reflects the structure of the situation back — not only the decision, but the extra burden of explaining it to his mother.\n\nShe also checks whether listening is still what's wanted. Support needs change during a conversation, and asking costs almost nothing.\n\nTheo's improvement is visible in the mechanic, not in the mood: he announced the terms at the start. Iris notices that, and admits what she would have said otherwise, which is a more useful confession than advice.",
+  "easy": "Theo asks Iris to listen without solving. He describes being passed over for a role and then being questioned by his mother. Iris reflects his feelings, asks whether he still wants listening or thoughts, and later says that announcing what he needed at the start worked well.",
+  "zh": "先约定支持类型（听还是建议），再说感受而不只是报事实，中途确认需求是否变化。把对方的处境结构反射回去，比立刻给方案更能让人觉得被听见。",
+  "phrases": [
+   {
+    "text": "Can I just tell you about my week without you solving it?",
+    "meaning": "I want to be heard, not advised.",
+    "cue": "Set the terms of a conversation at the start."
+   },
+   {
+    "text": "So it's not only the decision, it's having to explain it to her too.",
+    "meaning": "There are two burdens here, not one.",
+    "cue": "Reflect the structure of what someone is carrying."
+   },
+   {
+    "text": "Do you want me to keep listening, or do you want thoughts?",
+    "meaning": "Should I listen more, or offer ideas?",
+    "cue": "Check what kind of support is needed now."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What does Theo ask for first?",
+    "options": [
+     "Listening, not solving.",
+     "Help phoning his mother.",
+     "Career advice."
+    ],
+    "answer": 0,
+    "explanation": "He asks whether he can tell her about his week without her solving it."
+   },
+   {
+    "question": "What does Theo say got to him?",
+    "options": [
+     "Explaining it to his mother.",
+     "The migration project.",
+     "Iris's clumsy advice."
+    ],
+    "answer": 0,
+    "explanation": "After Iris names the second burden, he says that's the part that got him."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why is Iris's check-in nearly free?",
+    "options": [
+     "It ends the talk quickly.",
+     "It avoids all feelings.",
+     "It costs little, prevents mismatch."
+    ],
+    "answer": 2,
+    "explanation": "Asking whether he wants listening or thoughts costs little and prevents mismatched support."
+   },
+   {
+    "question": "What is Theo's real improvement?",
+    "options": [
+     "He got the promotion.",
+     "He set terms at the start.",
+     "He avoided his mother."
+    ],
+    "answer": 1,
+    "explanation": "The reading says the improvement is visible in the mechanic: he announced the terms upfront."
+   }
+  ],
+  "speakingPrompt": "Summarise what Theo needed and how Iris provided it, in three sentences.",
+  "writingPrompt": "Write four sentences in which you tell a friend about a bad week and state clearly what kind of support you want first."
+ },
+ {
+  "id": "L17",
+  "level": 3,
+  "theme": "ideas",
+  "title": "Convenient for whom?",
+  "subtitle": "便利的成本没有消失，只是换了人承担。",
+  "readingTitle": "Who pays for convenience",
+  "script": "Wes: I ordered it at eleven at night and it was on my doorstep by seven. That's remarkable, whatever else you say.\nIko: It is remarkable. It's also not magic — somebody drove it at four in the morning.\nWes: Sure, and they're paid for that.\nIko: Are they paid for the waiting? The shift that ends whenever the last drop finishes? That's the part that doesn't show up in the price.\nWes: So your argument is we should be less convenient?\nIko: No — my argument is that convenience is a transfer, not a creation. The time saved has to come from somewhere, and usually it comes from whoever has least power to refuse.\nWes: That's harder to dismiss than I expected. Though I'd say the customer gains too. A parent who can't shop at three in the afternoon genuinely benefits.\nIko: Agreed, and that's a real benefit — I'm not proposing we go back. I'm asking whether we know the full cost, because a price that hides part of itself gets chosen too often.\nWes: What would make the cost visible?\nIko: Delivery windows that don't run overnight, and honest labelling about shift length. Then people can still choose speed — but they'd be choosing it, not inheriting it.",
+  "reading": "Convenience rarely disappears; it is usually moved. The question “convenient for whom?” is followed by “at whose expense, and does that person appear in the price?”\n\nIko's distinction between transfer and creation is the analytical core. Time saved by one party is time taken from another, and the party least able to refuse tends to supply it — including the unpaid waiting inside a paid shift.\n\nWes contributes the strongest counterpoint rather than the weakest: a parent who cannot shop at three in the afternoon receives a genuine benefit. A good argument keeps that on the table.\n\nThe conclusion is not abstinence but visibility. Delivery windows and honest shift labelling don't remove the choice; they make the cost part of the choice, so speed is selected knowingly rather than inherited by default.",
+  "easy": "Wes is impressed by an overnight delivery. Iko argues convenience is transferred rather than created, and that the cost falls on people least able to refuse, including unpaid waiting time. Wes points out that some customers genuinely benefit. They agree the aim is to make the cost visible through delivery windows and honest shift labelling.",
+  "zh": "便利是转移而非凭空创造：省下的时间来自某处，通常是最难拒绝的人。承认受益方是真实受益，再用可见性（时段限制、班次披露）让成本进入选择本身，而不是主张回到不便。",
+  "phrases": [
+   {
+    "text": "Convenience is a transfer, not a creation.",
+    "meaning": "Time saved is taken from somewhere else.",
+    "cue": "Reframe a benefit as a redistribution."
+   },
+   {
+    "text": "That's harder to dismiss than I expected.",
+    "meaning": "Your argument is stronger than I assumed.",
+    "cue": "Concede ground honestly in a debate."
+   },
+   {
+    "text": "I'm not proposing we go back.",
+    "meaning": "I'm not arguing for the old arrangement.",
+    "cue": "Clarify that criticism isn't a demand to abandon a benefit."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What does a transfer, not a creation, mean?",
+    "options": [
+     "Convenience is free.",
+     "Saved time comes from someone.",
+     "Delivery is always late."
+    ],
+    "answer": 1,
+    "explanation": "Iko argues the time saved has to come from somewhere, usually from those least able to refuse."
+   },
+   {
+    "question": "What does Wes add to the argument?",
+    "options": [
+     "Delivery should be banned.",
+     "Some customers genuinely gain.",
+     "Prices are simply too high."
+    ],
+    "answer": 1,
+    "explanation": "Wes gives the strongest counterpoint: a parent who can't shop in the afternoon benefits."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "What is Iko's proposed conclusion?",
+    "options": [
+     "Raise all delivery prices.",
+     "Stop ordering deliveries.",
+     "Make the cost visible."
+    ],
+    "answer": 2,
+    "explanation": "The aim is visibility so speed is chosen knowingly rather than inherited by default."
+   },
+   {
+    "question": "Why praise Wes's counterpoint?",
+    "options": [
+     "It disproves the labour claim.",
+     "It's the strongest objection.",
+     "It ends the debate."
+    ],
+    "answer": 1,
+    "explanation": "A good argument keeps the genuine benefit on the table rather than dismissing it."
+   }
+  ],
+  "speakingPrompt": "Present both positions fairly and state what they agree on, in four sentences.",
+  "writingPrompt": "Choose a fictional everyday convenience and write four sentences: who benefits, who supplies the saving, and one way to make the cost visible."
+ },
+ {
+  "id": "L18",
+  "level": 2,
+  "theme": "daily",
+  "title": "The repair that keeps slipping.",
+  "subtitle": "第三次催修的时候，语气要稳，记录要全。",
+  "readingTitle": "Chasing a landlord without a fight",
+  "script": "Cara: Hi — this is the third time I've written about the boiler. It cut out again last night, around two.\nDerek: I'm sorry, I had it marked as done after the engineer visited on the fourth.\nCara: He came, looked at it and said the part would be ordered. Nothing's happened since, and I've got the message log if that helps.\nDerek: Send it over. Can I ask what it's doing exactly?\nCara: It fires up, runs about ten minutes, then stops and shows an error light. The heating comes back if I reset it, but not overnight.\nDerek: That sounds like the part he ordered. It should have been fitted last week.\nCara: I understand that. What I need is a date, because I've got a baby in the flat and the nights are getting cold.\nDerek: Fair. I'll call the supplier now and come back to you before five with a fitted date — not another visit date.\nCara: Thank you. If it slips again, I'll write to the housing officer. Not as a threat, just so there's a record either way.\nDerek: That's reasonable. You should have had this fixed on the first call.",
+  "reading": "A repeated failure needs a different approach from the first report. Cara opens with the count — third time — and with a specific observation rather than a general complaint.\n\nShe brings evidence and offers it rather than wielding it, and she describes the fault in operational terms: it runs ten minutes, stops, shows an error light, resets but not overnight. That detail lets Derek match it to a part.\n\nHer request is precise and time-bound. She asks for a fitted date, not another appointment to look, which is the distinction that has already cost her two weeks.\n\nFinally she names her next step calmly. Saying what she'll do if it slips, and why, converts a frustrated exchange into a documented process — and Derek's closing admission shows the record mattered.",
+  "easy": "Cara has written three times about a boiler that runs for ten minutes, then stops with an error light. The engineer ordered a part on the fourth but nothing happened. She asks Derek for a fitted date before five o'clock, and says she will write to the housing officer if it slips again, so that there is a record.",
+  "zh": "催第三次要换方法：报次数、给可复现的现象描述、附记录、要求“装好的日期”而不是“再来看一次”。平静说明下一步和原因，让事情变成有记录的过程。",
+  "phrases": [
+   {
+    "text": "This is the third time I've written about the boiler.",
+    "meaning": "I've reported this repeatedly.",
+    "cue": "Establish the history at the start of a chase."
+   },
+   {
+    "text": "What I need is a date.",
+    "meaning": "I'm asking for one specific commitment.",
+    "cue": "Turn a complaint into a concrete request."
+   },
+   {
+    "text": "Not as a threat, just so there's a record either way.",
+    "meaning": "I'm documenting the process, not starting a conflict.",
+    "cue": "Name your next step calmly and explain why."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What exactly does the boiler do?",
+    "options": [
+     "It stops after ten minutes.",
+     "It never fires up.",
+     "It leaks water nightly."
+    ],
+    "answer": 0,
+    "explanation": "Cara describes it firing up, running ten minutes, stopping with an error light and needing a reset."
+   },
+   {
+    "question": "What does Cara ask Derek for?",
+    "options": [
+     "A brand new boiler.",
+     "A full refund.",
+     "A fitted date by five."
+    ],
+    "answer": 2,
+    "explanation": "She asks him to come back before five with the date the part is fitted, not another visit."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why is her fault description valuable?",
+    "options": [
+     "It proves the engineer lied.",
+     "It shortens the message.",
+     "It matches the ordered part."
+    ],
+    "answer": 2,
+    "explanation": "Operational detail — ten minutes, error light, reset behaviour — points at a cause."
+   },
+   {
+    "question": "What does naming her next step achieve?",
+    "options": [
+     "It documents the process.",
+     "It frightens him silent.",
+     "It ends the tenancy."
+    ],
+    "answer": 0,
+    "explanation": "The reading says stating the next step calmly converts the exchange into a process."
+   }
+  ],
+  "speakingPrompt": "Report the fault and your request in four sentences, as if leaving a voice message for the agent.",
+  "writingPrompt": "Write a short follow-up about a fictional repair that has slipped twice: the history, the observable symptom, and one specific request with a deadline."
+ },
+ {
+  "id": "L19",
+  "level": 2,
+  "theme": "social",
+  "title": "No, and still friends.",
+  "subtitle": "拒绝一个集体安排，又不显得在拒绝这些人。",
+  "readingTitle": "Declining without disappearing",
+  "script": "Bo: So the whole group's doing a weekend in the mountains — leaving Friday night, back Sunday. You in?\nTessa: I want to be, and I'm going to say no this time.\nBo: Oh? Everything okay?\nTessa: Yeah, nothing's wrong. It's just that I've done three weekends in a row and I'm running on empty. If I come, I'll be the person sitting in the corner at nine.\nBo: That's fair. Honestly, half of them will be in bed by ten.\nTessa: What I don't want is for this to turn into me not being invited.\nBo: That won't happen. Though you should know Priya's already organising something in two weeks, and it's the quiet kind — dinner, one long table.\nTessa: That one I'd genuinely like. Can I say yes to that now and skip this one without it being weird?\nBo: Completely normal. People come to some things and not others.\nTessa: Then that's what I'll do. Tell them I'm sorry to miss it, and that I want photos.\nBo: You'll get four hundred photos and a running commentary whether you want them or not.",
+  "reading": "Declining an invitation is easier when the refusal is about capacity rather than about the people. Tessa gives a reason that is true and specific — three weekends in a row — and describes the version of herself she'd be if she came anyway.\n\nShe also names the risk she actually cares about: not this weekend, but being left off future lists. Raising it directly is what allows Bo to answer it directly.\n\nThe conversation then does something useful. Bo offers an alternative that fits Tessa's stated capacity, and Tessa accepts it immediately, which shows the no was about this event rather than the group.\n\nClosing with a request for photos keeps her present in the weekend she isn't attending. Declining well isn't disappearing politely.",
+  "easy": "Tessa declines the mountain weekend because she has had three in a row and would be exhausted. She says she doesn't want to stop being invited. Bo offers a quieter dinner in two weeks, which Tessa accepts, and she asks for photos of the trip she is missing.",
+  "zh": "拒绝要落在“我现在的容量”上，而不是这些人身上。说出你真正担心的（以后不被邀请），并当场接受一个更合适的替代安排，让对方看到拒绝的是这件事。",
+  "phrases": [
+   {
+    "text": "I want to be, and I'm going to say no this time.",
+    "meaning": "I'd like to, but not on this occasion.",
+    "cue": "Decline while showing you value the invitation."
+   },
+   {
+    "text": "What I don't want is for this to turn into me not being invited.",
+    "meaning": "I'm worried about being left off future plans.",
+    "cue": "Name the real risk behind a refusal."
+   },
+   {
+    "text": "Can I say yes to that now and skip this one without it being weird?",
+    "meaning": "May I accept the alternative and decline this event?",
+    "cue": "Offer a replacement commitment in the same conversation."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Why is Tessa saying no?",
+    "options": [
+     "She is away for work.",
+     "She dislikes mountains.",
+     "Three weekends in a row."
+    ],
+    "answer": 2,
+    "explanation": "She says she's done three weekends in a row and is running on empty."
+   },
+   {
+    "question": "What does Tessa not want?",
+    "options": [
+     "To miss the photos.",
+     "To stop being invited.",
+     "To pay for the trip."
+    ],
+    "answer": 1,
+    "explanation": "She says she doesn't want this to turn into her not being invited."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why is her reason effective?",
+    "options": [
+     "It blames the planning.",
+     "It gives no reason.",
+     "It's about capacity."
+    ],
+    "answer": 2,
+    "explanation": "A capacity-based reason doesn't imply rejection of the group."
+   },
+   {
+    "question": "What does accepting the dinner show?",
+    "options": [
+     "She prefers eating out.",
+     "She wants to lead.",
+     "The no was event-specific."
+    ],
+    "answer": 2,
+    "explanation": "Saying yes immediately to an alternative shows the refusal was about this event."
+   }
+  ],
+  "speakingPrompt": "Decline a fictional group plan in four sentences: the reason, what you don't want to happen, and an alternative you'd accept.",
+  "writingPrompt": "Write a short message declining an invitation: one honest reason, one reassurance about the relationship, and one alternative you'd genuinely accept."
+ },
+ {
+  "id": "L20",
+  "level": 1,
+  "theme": "travel",
+  "title": "At the desk, with a problem.",
+  "subtitle": "柜台前把情况说清楚，比着急更有用。",
+  "readingTitle": "Solving a problem at a counter",
+  "script": "Agent: Good afternoon. What can I help you with?\nPip: Hi. My flight to Lisbon was cancelled and I've been told to come here. I'm not sure what happens to my bag.\nAgent: Let me look. Can I see the boarding pass and the bag tag?\nPip: Here you go. The tag's on the back of the pass.\nAgent: Thanks. Right — the bag went on the earlier flight, so it's already in Lisbon. It'll be held at the desk there.\nPip: Oh, that's easier than I thought. And me?\nAgent: There's one seat on the eighteen forty, or three on the morning flight. Neither costs anything, since this is our cancellation.\nPip: The eighteen forty, please. I'd rather get there tonight.\nAgent: Done. Here's your new pass, and this sheet has the bag desk location and the number to call if it isn't there.\nPip: One more thing — is the hotel near the airport? I get in late.\nAgent: It's the one at the terminal, about four minutes on foot. I've put the reference on the same sheet.\nPip: Perfect. That's much clearer than I expected.",
+  "reading": "A counter conversation works when the traveller states the situation, the uncertainty and the documents in a compact form. Pip names the cancellation, the specific worry about the bag, and hands over both the pass and the tag without being asked twice.\n\nThe agent's answers are concrete: where the bag physically is, who will hold it, and what the two rebooking options cost. Offering options with their prices removes the need to negotiate.\n\nPip decides immediately and gives the reason — arriving tonight — which lets the agent complete the change in one step instead of a round of questions.\n\nAsking one further practical question at the end, about the hotel's location, is efficient. It bundles everything the traveller needs before leaving the desk.",
+  "easy": "Pip's flight to Lisbon was cancelled. The agent checks the boarding pass and bag tag and explains that the bag is already in Lisbon and will be held at the desk there. Pip chooses the 18:40 flight rather than the morning one, and asks about the hotel before leaving.",
+  "zh": "柜台沟通的顺序：说明情况→说明自己不确定什么→递交证件→听选项和价格→当场决定并给出理由→离开前把剩下的实际问题一次问完。",
+  "phrases": [
+   {
+    "text": "My flight was cancelled and I've been told to come here.",
+    "meaning": "I was sent to you about a cancellation.",
+    "cue": "Open with the situation and why you're at this desk."
+   },
+   {
+    "text": "That's easier than I thought.",
+    "meaning": "That's better news than I expected.",
+    "cue": "Acknowledge good news without over-apologising for asking."
+   },
+   {
+    "text": "One more thing — is the hotel near the airport?",
+    "meaning": "Before I go, one practical question.",
+    "cue": "Bundle your remaining question before leaving the desk."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Where is Pip's bag?",
+    "options": [
+     "Held at the desk in Lisbon.",
+     "On the evening flight.",
+     "At the departure airport."
+    ],
+    "answer": 0,
+    "explanation": "The agent says the bag went on the earlier flight and will be held at the desk in Lisbon."
+   },
+   {
+    "question": "Why choose the evening flight?",
+    "options": [
+     "To arrive tonight.",
+     "It costs less.",
+     "It has more seats."
+    ],
+    "answer": 0,
+    "explanation": "Pip says they'd rather get there tonight; neither option costs anything."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "What makes Pip's opening effective?",
+    "options": [
+     "A complaint about the airline.",
+     "A demand for a refund.",
+     "Situation, worry, documents."
+    ],
+    "answer": 2,
+    "explanation": "Pip names the cancellation and the bag worry, and hands over the pass and tag."
+   },
+   {
+    "question": "Why give a reason for the choice?",
+    "options": [
+     "It completes the change once.",
+     "It avoids the bag issue.",
+     "It earns a discount."
+    ],
+    "answer": 0,
+    "explanation": "Stating the reason removes a round of questions and finishes the rebooking immediately."
+   }
+  ],
+  "speakingPrompt": "Describe what happened at the desk and what Pip arranged, in three sentences.",
+  "writingPrompt": "Write what you would say at an airline desk about a fictional cancellation: the situation, one specific worry, and the option you'd choose with a reason."
+ },
+ {
+  "id": "L21",
+  "level": 1,
+  "theme": "food",
+  "title": "Not for me, unfortunately.",
+  "subtitle": "说清忌口，又不让一顿饭变成谈判。",
+  "readingTitle": "Ordering around a restriction",
+  "script": "Host: Table for two? Right this way. Have you eaten here before?\nNils: First time. I should mention — I can't have shellfish. Not a preference, it's an allergy.\nHost: Thank you for saying so. Let me flag that to the kitchen now, before you order.\nNils: I appreciate that. Is it a kitchen where things share surfaces?\nHost: It's a small kitchen, so I'll ask them to note cross-contact. The grilled sea bass is safe, and so are the two pastas made without seafood stock.\nNils: That's helpful. I'll take the sea bass. And could I check — does the bread come with anything on it?\nHost: Salted butter, no shellfish. I'll ask for it plain if you'd prefer.\nNils: Butter's fine. One more thing: if there's any doubt about a dish later, I'd rather it came back than I guessed.\nHost: Understood. I'll tell the server directly, and we won't bring anything to the table that hasn't been checked.\nNils: Perfect. That's the first time I've not had to explain it three times.\nHost: You shouldn't have to. Say it once and we'll hold it.",
+  "reading": "Stating a dietary restriction early changes the whole conversation. Nils names it before ordering and separates an allergy from a preference, which tells the kitchen how seriously to treat it.\n\nHe then asks the question that actually matters — whether surfaces are shared — instead of assuming an answer. The host responds with concrete safe options rather than a general reassurance.\n\nNils checks an item he might have overlooked, the bread, and sets a rule for uncertainty: if in doubt, send it back. Making that explicit removes the need for anyone to guess later.\n\nThe host's commitment closes the loop by naming who is told and what won't happen. One clear statement, held consistently, is less work for everyone than repeated explanations.",
+  "easy": "Nils tells the host he has a shellfish allergy, not just a preference. The host flags it to the kitchen before ordering, warns about cross-contact in a small kitchen and suggests safe dishes. Nils checks the bread and says he would rather a dish came back than guess.",
+  "zh": "忌口要在点单前说，并区分“过敏”与“不吃”。问清共用台面等真实风险，接受具体安全选项而不是笼统保证，并事先约定：有疑问就退回，不要猜。",
+  "phrases": [
+   {
+    "text": "It's not a preference, it's an allergy.",
+    "meaning": "This is a medical restriction, not a taste.",
+    "cue": "Make clear how seriously a restriction should be treated."
+   },
+   {
+    "text": "Is it a kitchen where things share surfaces?",
+    "meaning": "Is there cross-contact between dishes?",
+    "cue": "Ask the specific risk question instead of assuming."
+   },
+   {
+    "text": "If there's any doubt, I'd rather it came back than I guessed.",
+    "meaning": "Send it back rather than risk uncertainty.",
+    "cue": "Set a rule for handling doubt in advance."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What does Nils make clear?",
+    "options": [
+     "He eats it rarely.",
+     "He dislikes the taste.",
+     "It's an allergy."
+    ],
+    "answer": 2,
+    "explanation": "Nils says it's an allergy, not a preference, which tells the kitchen how seriously to treat it."
+   },
+   {
+    "question": "What does Nils ask about the bread?",
+    "options": [
+     "Whether it has nuts.",
+     "Whether anything is on it.",
+     "Whether it is fresh."
+    ],
+    "answer": 1,
+    "explanation": "He asks whether the bread comes with anything on it; it's served with salted butter."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why ask about shared surfaces?",
+    "options": [
+     "It delays the order.",
+     "It condemns the kitchen.",
+     "It addresses cross-contact."
+    ],
+    "answer": 2,
+    "explanation": "The host confirms a small kitchen, offers to note cross-contact and names safe dishes."
+   },
+   {
+    "question": "What does the rule about doubt achieve?",
+    "options": [
+     "Nobody has to guess.",
+     "It ends the meal early.",
+     "It forces a refund."
+    ],
+    "answer": 0,
+    "explanation": "Saying send it back rather than guess removes uncertainty for staff and guest."
+   }
+  ],
+  "speakingPrompt": "Explain your restriction and your rule for uncertainty in four sentences, as if speaking to a server.",
+  "writingPrompt": "Write what you'd say in a fictional restaurant about one dietary restriction: its seriousness, one risk question, and one rule for handling doubt."
+ },
+ {
+  "id": "L22",
+  "level": 1,
+  "theme": "culture",
+  "title": "Talking about it afterwards.",
+  "subtitle": "看完演出，怎么聊才不只是“还行”。",
+  "readingTitle": "Small talk after a show",
+  "script": "Rae: So — worth the queue?\nFinn: More than worth it. The second song had the whole room quiet, which I wasn't expecting at a place that size.\nRae: I kept thinking about the drummer. She barely looked at her kit the entire set.\nFinn: Right? And the singer introduced one song by saying it was written on a night bus, and you could hear that.\nRae: How do you mean?\nFinn: It had that tired, half-awake feeling. Not sad exactly — more like watching a city through a window at midnight.\nRae: That's a good way to put it. I'd have just said I liked it.\nFinn: You liked the encore more than I did, though. You were on your feet.\nRae: I was! It's the only one I'd want to hear again immediately.\nFinn: Same. So, one song each — what are you taking home?\nRae: The encore, obviously. You?\nFinn: The bus one. I'll probably annoy you with it for a week.",
+  "reading": "Conversation after a show improves when people describe what they noticed rather than deliver a verdict. “It was good” ends a discussion; naming the quiet room, the drummer or the origin of a song keeps it going.\n\nFinn goes one step further and explains an impression rather than asserting it. Saying a song felt like watching a city through a window at midnight gives Rae something to react to, and she says so.\n\nThey also exchange perspectives honestly. Rae admits she would only have said she liked it, and Finn points out that Rae responded physically to the encore more than he did. Neither treats the other's reaction as wrong.\n\nThe closing question — one song each — is a simple structure that turns small talk into a shared summary. It gives both people an equal turn and something concrete to remember.",
+  "easy": "Rae and Finn discuss a concert. Finn describes the quiet room during the second song and says one song felt like watching a city through a window at midnight. Rae admits she would only have said she liked it. They finish by choosing one song each to remember.",
+  "zh": "聊作品的进阶方式：说“我注意到什么”，而不是只给评价。把感受解释成一个画面，对方才能接话。最后用“各选一首”的结构，把闲聊变成共同的总结。",
+  "phrases": [
+   {
+    "text": "So — worth the queue?",
+    "meaning": "Was it worth the effort of getting in?",
+    "cue": "Open a conversation about an event you both attended."
+   },
+   {
+    "text": "That's a good way to put it.",
+    "meaning": "You described it better than I could.",
+    "cue": "Acknowledge someone else's wording."
+   },
+   {
+    "text": "One song each — what are you taking home?",
+    "meaning": "Which one will you remember?",
+    "cue": "Give a conversation a simple, equal structure."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What surprised Finn about song two?",
+    "options": [
+     "It had no music.",
+     "It was the loudest.",
+     "The room went quiet."
+    ],
+    "answer": 2,
+    "explanation": "Finn says the second song had the whole room quiet, unexpected at a place that size."
+   },
+   {
+    "question": "What do they agree to do last?",
+    "options": [
+     "Leave the venue early.",
+     "Buy the album together.",
+     "Pick one song each."
+    ],
+    "answer": 2,
+    "explanation": "Finn asks for one song each; Rae picks the encore and Finn picks the bus song."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why beat a verdict with detail?",
+    "options": [
+     "It avoids the music.",
+     "A verdict closes talk.",
+     "It proves you paid."
+    ],
+    "answer": 1,
+    "explanation": "The reading contrasts it was good, which closes a conversation, with naming specifics."
+   },
+   {
+    "question": "What does the midnight-window image do?",
+    "options": [
+     "It corrects Rae's opinion.",
+     "It explains the price.",
+     "It gives Rae something to answer."
+    ],
+    "answer": 2,
+    "explanation": "Rae responds that it's a good way to put it, showing the image gave her something to answer."
+   }
+  ],
+  "speakingPrompt": "Describe one moment from a fictional show and why it stayed with you, in three sentences.",
+  "writingPrompt": "Write four sentences about a fictional film, gig or exhibition: one specific moment you noticed, how it felt, and one question you'd ask a friend about it."
+ },
+ {
+  "id": "L23",
+  "level": 2,
+  "theme": "science",
+  "title": "Why the second coffee stops working.",
+  "subtitle": "把机制讲清楚，比给建议更有说服力。",
+  "readingTitle": "Explaining caffeine and sleep pressure",
+  "script": "Milo: I've had three coffees today and I'm still exhausted. Isn't caffeine supposed to fix this?\nSana: It doesn't fix it — it hides it. Caffeine blocks the receptors that adenosine docks onto, so you stop feeling the sleep pressure building up.\nMilo: But the pressure's still there?\nSana: Exactly. It keeps accumulating. When the caffeine wears off, all of it arrives at once, which is why the crash feels worse than the tiredness did.\nMilo: So the third cup is doing less than the first.\nSana: Less, and later. Caffeine's half-life is around five hours for most people, so an afternoon cup is still half there at bedtime. It won't stop you falling asleep, but it can reduce the deep sleep you get.\nMilo: Which means I wake up tired, drink more, and it gets worse.\nSana: That's the loop. The useful test isn't how you feel at four in the afternoon — it's whether you'd feel the same without the coffee.\nMilo: How would I even check that?\nSana: Cut it after eleven in the morning for two weeks and see. If your sleep improves and the afternoons get easier, the coffee was borrowing energy rather than making it.\nMilo: Borrowing. That's an uncomfortable way to describe my entire routine.\nSana: It's the mechanism, though. Nothing's being created; something's being moved to later.",
+  "reading": "An explanation lands better when it names a mechanism instead of giving instructions. Sana doesn't start with advice; she describes adenosine, receptors and the accumulation of sleep pressure, which makes the later recommendation feel like a consequence rather than a rule.\n\nThe half-life detail is what turns a general warning into a personal calculation. Five hours means an afternoon cup is still half present at bedtime, and the effect described is on deep sleep rather than on falling asleep — a distinction most people miss.\n\nMilo identifies the loop himself, which is the mark of a good explanation: the listener can extend the model to their own behaviour without being told.\n\nThe proposed test is honest about its limits. Two weeks without afternoon caffeine doesn't prove a mechanism, but it separates how someone feels from what they've consumed, and the final line keeps the claim modest: energy is moved, not created.",
+  "easy": "Caffeine blocks the receptors where adenosine builds up, so sleep pressure keeps rising without being felt. When it wears off, the pressure arrives at once. Caffeine's half-life is about five hours, so an afternoon cup can reduce deep sleep. Sana suggests stopping after eleven in the morning for two weeks to see whether sleep improves.",
+  "zh": "解释机制比给建议更有效：咖啡因阻断腺苷受体，掩盖而非消除睡眠压力；半衰期约五小时，影响的是深睡而不是入睡。让对方自己推出“循环”，并给一个可检验的做法。",
+  "phrases": [
+   {
+    "text": "It doesn't fix it — it hides it.",
+    "meaning": "The problem is masked, not solved.",
+    "cue": "Summarise a mechanism in one contrast."
+   },
+   {
+    "text": "Less, and later.",
+    "meaning": "The effect is smaller and delayed.",
+    "cue": "Compress a trade-off into two words."
+   },
+   {
+    "text": "The coffee was borrowing energy rather than making it.",
+    "meaning": "It defers tiredness instead of removing it.",
+    "cue": "Use a metaphor that keeps the claim modest."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What does caffeine actually do?",
+    "options": [
+     "It hides the pressure.",
+     "It creates new energy.",
+     "It removes sleep pressure."
+    ],
+    "answer": 0,
+    "explanation": "Sana says it blocks adenosine receptors so pressure isn't felt while it keeps accumulating."
+   },
+   {
+    "question": "What test does Sana propose?",
+    "options": [
+     "Sleep nine hours nightly.",
+     "None after eleven, two weeks.",
+     "Drink more for a week."
+    ],
+    "answer": 1,
+    "explanation": "She suggests cutting caffeine after eleven in the morning for two weeks and watching sleep."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why is the half-life detail useful?",
+    "options": [
+     "It replaces the test.",
+     "It makes it personal.",
+     "It proves caffeine harms."
+    ],
+    "answer": 1,
+    "explanation": "Five hours lets Milo work out that an afternoon cup is still half present at bedtime."
+   },
+   {
+    "question": "What marks a good explanation here?",
+    "options": [
+     "Advice repeated twice.",
+     "The listener extends it.",
+     "Immediate agreement."
+    ],
+    "answer": 1,
+    "explanation": "Milo identifies the loop on his own without being told."
+   }
+  ],
+  "speakingPrompt": "Explain why a third coffee helps less than the first, in four sentences, without giving advice.",
+  "writingPrompt": "Explain one everyday mechanism to a friend in four sentences: what it blocks or moves, why the effect fades, and one way to test it."
+ },
+ {
+  "id": "L24",
+  "level": 3,
+  "theme": "relationships",
+  "title": "Still family, still disagreeing.",
+  "subtitle": "和家人分歧时，可以不退让，也不升级。",
+  "readingTitle": "Holding a position with a parent",
+  "script": "Nadim: You've read the message Mum sent, then.\nYasmin: I have. And before you start — I'm not going to tell you what to do with your own life.\nNadim: She rather did, though.\nYasmin: She did. And I think she's wrong about the deadline she's set you. That doesn't mean she's wrong to be worried.\nNadim: Those feel like the same thing to her.\nYasmin: They might. But you can hold both. You can say: I hear that you're frightened, and I'm not making this decision by the date you want.\nNadim: I've tried something like that. It comes out sounding cold.\nYasmin: Then put the warmth first and the boundary second, in the same sentence. Not two messages a day apart — she'll read the gap as a withdrawal.\nNadim: So something like… I know this scares you, and I'm not going to rush it, and I do want you to know what I decide.\nYasmin: That's nearly perfect. You've told her she's not being cut out, which is the actual fear underneath the deadline.\nNadim: And if she pushes again?\nYasmin: Then repeat the same sentence. Consistency isn't stubbornness — it's the only thing that eventually lowers the temperature.\nNadim: I'd rather be wrong and calm than right and exhausted.\nYasmin: You can be both. That's the part nobody tells you.",
+  "reading": "A family disagreement rarely turns on the stated issue. Here the deadline is the visible conflict, but Yasmin identifies the fear underneath it — being excluded from a decision — and treats that as the thing to answer.\n\nHer advice separates two judgements that are easy to fuse: that the mother is wrong about the deadline, and that she isn't wrong to be worried. Holding both is what allows a boundary without a rupture.\n\nThe delivery matters as much as the content. Warmth and boundary belong in the same sentence, because a gap between two messages reads as a withdrawal. The rehearsal line Nadim produces contains both, plus an explicit reassurance about future inclusion.\n\nFinally, repetition is reframed. Saying the same sentence again isn't stubbornness but the mechanism that lowers tension over time — which requires deciding in advance not to win the argument on any single day.",
+  "easy": "Nadim's mother has set him a deadline about a life decision. Yasmin says the deadline is wrong but the worry isn't, and that both can be held at once. She advises putting warmth and boundary in the same sentence, reassuring him that his mother won't be excluded, and repeating the same sentence if she pushes again.",
+  "zh": "家庭分歧表面是期限，底下是“被排除在外”的恐惧。可以同时判定：期限不合理，但担心不是错。把温度和边界放进同一句话，避免两次消息之间的空隙被读成疏远；重复同一句是降温机制，不是固执。",
+  "phrases": [
+   {
+    "text": "That doesn't mean she's wrong to be worried.",
+    "meaning": "One judgement doesn't cancel the other.",
+    "cue": "Separate a person's conclusion from their concern."
+   },
+   {
+    "text": "Put the warmth first and the boundary second, in the same sentence.",
+    "meaning": "Combine care and limit without a gap.",
+    "cue": "Deliver a boundary without sounding cold."
+   },
+   {
+    "text": "Consistency isn't stubbornness.",
+    "meaning": "Repeating yourself isn't the same as refusing to listen.",
+    "cue": "Reframe repetition as the way tension lowers."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What sits underneath the deadline?",
+    "options": [
+     "An argument about money.",
+     "Nadim's career plans.",
+     "Fear of being excluded."
+    ],
+    "answer": 2,
+    "explanation": "Yasmin says being cut out is the actual fear underneath the deadline."
+   },
+   {
+    "question": "What if his mother pushes again?",
+    "options": [
+     "Stop replying to her.",
+     "Repeat the same sentence.",
+     "Change the subject."
+    ],
+    "answer": 1,
+    "explanation": "She says to repeat the same sentence, and that consistency lowers the temperature."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Which two judgements stay separate?",
+    "options": [
+     "Both of them are right.",
+     "Career and family topics.",
+     "Deadline wrong, worry not."
+    ],
+    "answer": 2,
+    "explanation": "Holding both allows a boundary without a rupture."
+   },
+   {
+    "question": "Why one sentence, not two messages?",
+    "options": [
+     "It is quicker to write.",
+     "A gap reads as withdrawal.",
+     "She dislikes long texts."
+    ],
+    "answer": 1,
+    "explanation": "Yasmin warns that two messages a day apart would be read as pulling away."
+   }
+  ],
+  "speakingPrompt": "Say one sentence to a fictional relative that carries both warmth and a boundary.",
+  "writingPrompt": "Write four sentences for a difficult family conversation: acknowledge the concern, state the boundary, offer one reassurance, and say what you'll do next."
+ },
+ {
+  "id": "L25",
+  "level": 2,
+  "theme": "ideas",
+  "title": "Must everything be optimised?",
+  "subtitle": "效率是手段，但很容易被当成目的。",
+  "readingTitle": "Efficiency as a means and as a habit",
+  "script": "Hal: I've got my morning down to eleven minutes. Shower, coffee, out the door. It's extremely efficient.\nNia: And what have you gained with the twenty minutes you saved?\nHal: …I've no idea. I usually spend it scrolling in the car park.\nNia: So the efficiency went straight back into the machine.\nHal: That's a bit harsh.\nNia: Is it? Efficiency is brilliant at answering “how fast”, and useless at answering “what for”. Once you get good at the first question, you stop asking the second.\nHal: But you can't be wasteful with time either.\nNia: Agreed — I'm not arguing for dawdling. I'm arguing that the saving should land somewhere you chose. Eleven minutes is fine if the extra twenty goes to something you'd defend.\nHal: Like what?\nNia: A walk without your phone. Breakfast sitting down. Ten minutes of not being productive, which turns out to be when people have ideas.\nHal: So the test isn't whether I'm fast. It's whether I know what the speed is for.\nNia: And whether you'd still choose it if you had to say out loud what it buys.",
+  "reading": "Efficiency is a measure of means, not of ends. The conversation turns on Nia's question about what the saved time actually became — and Hal's honest answer, scrolling in a car park, reveals that the saving wasn't chosen at all.\n\nHer distinction is precise: efficiency answers “how fast” and cannot answer “what for”. Skill at the first question tends to displace the second, which is why optimisation can expand without improving anything.\n\nNia avoids the easy anti-efficiency position. She doesn't argue for wasting time; she argues that a saving should land somewhere deliberate. That keeps the eleven-minute morning acceptable, conditional on what the twenty minutes buys.\n\nThe final test is a good one: would you keep the optimisation if you had to state its benefit out loud? Something that survives being named was probably worth doing; something that doesn't was a habit wearing the costume of a decision.",
+  "easy": "Hal has reduced his morning to eleven minutes but cannot say what he does with the twenty minutes he saves; he usually scrolls in the car park. Nia says efficiency answers how fast but not what for. She isn't against saving time, but thinks the saving should go somewhere chosen. Her test is whether Hal would keep the routine if he had to say out loud what it buys.",
+  "zh": "效率回答“多快”，不回答“为了什么”。省下时间不等于选好用途；判断标准是：如果必须大声说出这个优化换来了什么，你还会保留它吗？",
+  "phrases": [
+   {
+    "text": "What have you gained with the time you saved?",
+    "meaning": "Where did the saving actually go?",
+    "cue": "Ask what an optimisation produced."
+   },
+   {
+    "text": "Efficiency answers how fast, and can't answer what for.",
+    "meaning": "Speed and purpose are different questions.",
+    "cue": "Separate means from ends in one sentence."
+   },
+   {
+    "text": "Would you keep it if you had to say what it buys?",
+    "meaning": "State the benefit out loud and see if it survives.",
+    "cue": "Test a habit by making its payoff explicit."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What does Hal do with saved time?",
+    "options": [
+     "He scrolls in the car park.",
+     "He calls his family.",
+     "He exercises."
+    ],
+    "answer": 0,
+    "explanation": "Hal admits he has no idea and usually spends it scrolling in the car park."
+   },
+   {
+    "question": "What is Nia's actual position?",
+    "options": [
+     "Savings should be chosen.",
+     "Stop being efficient.",
+     "Mornings should take longer."
+    ],
+    "answer": 0,
+    "explanation": "She isn't arguing for dawdling, only that saved time should go somewhere deliberate."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why does speed displace purpose?",
+    "options": [
+     "Optimisation feels productive.",
+     "People dislike being fast.",
+     "Time cannot be measured."
+    ],
+    "answer": 0,
+    "explanation": "Nia says once you get good at the first question you stop asking the second."
+   },
+   {
+    "question": "What does the final test identify?",
+    "options": [
+     "Habits masquerading as choices.",
+     "Whether Hal runs late.",
+     "How much time is wasted."
+    ],
+    "answer": 0,
+    "explanation": "Something that survives being stated aloud was probably worth doing; something that doesn't was a habit."
+   }
+  ],
+  "speakingPrompt": "Give one example of an optimisation in your own routine and say what it buys, in three sentences.",
+  "writingPrompt": "Write four sentences about a fictional habit you've optimised: what you saved, where the saving went, and whether you'd keep it if you had to justify it out loud."
+ },
+ {
+  "id": "L26",
+  "level": 2,
+  "theme": "news",
+  "title": "What the headline leaves out.",
+  "subtitle": "标题和正文说的，不一定是同一件事。",
+  "readingTitle": "Reading past the headline",
+  "script": "Kate: Did you see the headline about the new bus lane?\nIdris: I did. \"City removes parking for a lane nobody uses.\"\nKate: That's not quite what the report said. The lane opens next month.\nIdris: So the nobody-uses part is a guess.\nKate: It's worse than a guess. It's the number of cars counted before the lane existed.\nIdris: Right. So they measured an empty road and called it evidence.\nKate: The report does say parking losses are real for two shops on that street.\nIdris: That part matters. I just don't like it being sold as a verdict.\nKate: Agreed. Hold both: some shops lose, and the lane hasn't been tested yet.",
+  "reading": "A headline is a compression, and compression always drops something. The question is whether what it drops changes the meaning.\n\nIn this story the phrase \"nobody uses\" sounds like an observation. In the underlying report it is a count taken before the lane opened, which makes it a prediction at best. The number is real; the sentence built around it is not yet true.\n\nThat does not make the complaint empty. Two shops on the street will lose parking spaces, and that loss is documented. A careful reader holds two things at once: a real cost for a small group, and an outcome nobody can measure until next month.\n\nThe habit worth building is asking what was measured, and when. Most misleading summaries are not lies. They are true numbers attached to the wrong sentence.",
+  "easy": "A headline says the city is removing parking for a bus lane nobody uses. The count behind that phrase was taken before the lane opened. Two shops will genuinely lose parking. The lane opens next month, so nobody knows yet how many people will use it.",
+  "zh": "读新闻的关键动作：问“这个数字是什么时候测的”。真实的数字放进错误的句子里，就会变成误导。学会同时握住两件相反但都成立的事实。",
+  "phrases": [
+   {
+    "text": "That's not quite what the report said.",
+    "meaning": "The summary differs from the source.",
+    "cue": "Correct a summary without calling the person a liar."
+   },
+   {
+    "text": "So they measured an empty road and called it evidence.",
+    "meaning": "The measurement doesn't support the claim.",
+    "cue": "Name a methodological gap in plain English."
+   },
+   {
+    "text": "Hold both: some shops lose, and the lane hasn't been tested yet.",
+    "meaning": "Two things can be true at once.",
+    "cue": "Keep a conversation from collapsing into one side."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What is wrong with the phrase nobody uses?",
+    "options": [
+     "It was written by the bus company.",
+     "It ignores the shops on the street.",
+     "It comes from a count taken before the lane opened."
+    ],
+    "answer": 2,
+    "explanation": "Kate says the number counted cars before the lane existed, so it is not a usage figure."
+   },
+   {
+    "question": "What does Kate accept as real?",
+    "options": [
+     "Two shops lose parking spaces.",
+     "The report was never published.",
+     "The lane will fail."
+    ],
+    "answer": 0,
+    "explanation": "She says parking losses for two shops on that street are real and documented."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why is the number called a prediction at best?",
+    "options": [
+     "The shops disputed the total.",
+     "The count happened before the lane opened.",
+     "The city refused to publish it."
+    ],
+    "answer": 1,
+    "explanation": "The reading says the count was taken before the lane opened, so it can only predict use."
+   },
+   {
+    "question": "What habit does the reading recommend?",
+    "options": [
+     "Trusting official reports completely.",
+     "Avoiding all headlines.",
+     "Asking what was measured and when."
+    ],
+    "answer": 2,
+    "explanation": "The closing paragraph names the habit: ask what was measured, and when."
+   }
+  ],
+  "speakingPrompt": "In three sentences, explain a headline that was technically true but misleading, using fictional details.",
+  "writingPrompt": "Write a short paragraph about a fictional survey. State one real number, then explain one thing the number cannot tell you."
+ },
+ {
+  "id": "L27",
+  "level": 1,
+  "theme": "health",
+  "title": "A walk, not a cure.",
+  "subtitle": "聊健康时，怎么关心而不越界。",
+  "readingTitle": "Support without prescriptions",
+  "script": "June: You look tired. Are you sleeping at all?\nOmar: Not much. Work's been strange and my head won't switch off.\nJune: Do you want advice, or do you want me to just listen for a bit?\nOmar: Honestly? Listen. Everyone keeps telling me to exercise.\nJune: A walk does help me, but I'm not going to pretend it fixes your week.\nOmar: That's the thing. It helps for an hour. Then it's the same.\nJune: So what would actually help tonight?\nOmar: Eating something that isn't toast, probably. And not being told I need a routine.\nJune: I can do dinner. I can't do your routine.\nOmar: That's a fair trade.",
+  "reading": "Support goes wrong when it arrives as a prescription. \"You should exercise\" is often said with warmth, and still lands as a judgement about how someone is living.\n\nJune does something simpler and more useful: she asks what kind of help is wanted. Advice and listening are different services, and offering the wrong one can feel like being managed.\n\nShe also separates her own experience from Omar's. A walk helps her; she does not claim it will fix his week. That distinction keeps her suggestion honest instead of turning it into a rule for someone else.\n\nThe ending is small and specific. Dinner is something she can actually provide tonight. A routine is not. Agreeing on what you can do beats promising what you cannot.",
+  "easy": "Omar is tired and cannot sleep. June asks whether he wants advice or listening. He wants listening, because people keep telling him to exercise. June says a walk helps her but will not fix his week. They agree she will bring dinner, and she will not comment on his routine.",
+  "zh": "有效支持的第一步是问“你要建议还是要我听”。把自己的经验说成经验，而不是对方必须遵守的规则；把能做的事说具体。",
+  "phrases": [
+   {
+    "text": "Do you want advice, or do you want me to just listen?",
+    "meaning": "Which kind of help would be useful?",
+    "cue": "Ask before offering solutions."
+   },
+   {
+    "text": "A walk does help me, but I'm not going to pretend it fixes your week.",
+    "meaning": "This works for me; it isn't a universal answer.",
+    "cue": "Share experience without prescribing it."
+   },
+   {
+    "text": "I can do dinner. I can't do your routine.",
+    "meaning": "State clearly what you can and cannot offer.",
+    "cue": "Make help concrete and bounded."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What does Omar actually want from June?",
+    "options": [
+     "Someone to listen.",
+     "A referral to a doctor.",
+     "A training plan."
+    ],
+    "answer": 0,
+    "explanation": "He says honestly that he wants her to listen, not to advise."
+   },
+   {
+    "question": "What does June offer at the end?",
+    "options": [
+     "A daily routine.",
+     "Dinner tonight.",
+     "A long walk together."
+    ],
+    "answer": 1,
+    "explanation": "She says she can do dinner but cannot do his routine."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why can advice feel like judgement?",
+    "options": [
+     "It is always medically wrong.",
+     "It implies the person is living wrongly.",
+     "It takes too long to explain."
+    ],
+    "answer": 1,
+    "explanation": "The reading says advice often lands as a judgement about how someone is living."
+   },
+   {
+    "question": "What makes June's suggestion honest?",
+    "options": [
+     "She separates her experience from his.",
+     "She avoids the topic entirely.",
+     "She repeats it until Omar agrees."
+    ],
+    "answer": 0,
+    "explanation": "She says a walk helps her without claiming it will fix his week."
+   }
+  ],
+  "speakingPrompt": "Someone tells you they are exhausted. Ask one question before you offer anything, then say what you can actually do.",
+  "writingPrompt": "Write four sentences offering help to a fictional friend. Include one question, one limit, and one concrete offer."
+ },
+ {
+  "id": "L28",
+  "level": 2,
+  "theme": "tech",
+  "title": "The setting nobody reads.",
+  "subtitle": "隐私设置不是勾选任务，是有代价的选择。",
+  "readingTitle": "Defaults are decisions",
+  "script": "Theo: My phone asked if I want to share location with the app for a better experience.\nIris: What does a better experience mean?\nTheo: No idea. It's the same experience with more data.\nIris: Did you turn it off?\nTheo: I did, and now it asks every single time I open it.\nIris: That's the design. Friction is a nudge.\nTheo: So they make the private option annoying.\nIris: Exactly. Not blocked, just slightly more work than saying yes.\nTheo: I keep saying yes at night. I'm too tired to read anything.\nIris: Then change the default once, when you're not tired.\nTheo: That's the only advice that has ever worked on me.",
+  "reading": "Most privacy choices are not made once. They are made again and again, at the worst possible moment, by a tired person holding a phone.\n\nA settings screen that asks every time is not neutral. Saying no costs attention, and attention is exactly what a person has least of at midnight. The design does not forbid the private option; it prices it.\n\nThe practical response is to stop treating the prompt as a decision. Set the default while you are rested, once, and let the boring setting carry the work. This is not a heroic act of digital hygiene. It is noticing where the effort is being placed.\n\nThe larger point generalises. Any choice that arrives repeatedly, at a moment of low energy, is being made for you by whoever chose the timing.",
+  "easy": "An app asks Theo to share his location for a better experience. He turns it off, but the app then asks every time he opens it. Iris says the repeated prompt is a nudge: refusing costs attention, so people say yes when tired. Theo decides to change the default once, while rested.",
+  "zh": "反复弹出的授权提示不是中立的：拒绝要消耗注意力，而深夜最缺注意力。做法是把选择放在有精力时一次做完，而不是每次都被问一次。",
+  "phrases": [
+   {
+    "text": "What does a better experience mean?",
+    "meaning": "Ask for a concrete definition of a vague benefit.",
+    "cue": "Refuse to accept marketing language at face value."
+   },
+   {
+    "text": "Friction is a nudge.",
+    "meaning": "Making something mildly annoying shapes behaviour.",
+    "cue": "Describe a design pattern in one line."
+   },
+   {
+    "text": "Change the default once, when you're not tired.",
+    "meaning": "Decide at a time when you can actually decide.",
+    "cue": "Turn a repeated choice into a single one."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What happens after Theo turns location sharing off?",
+    "options": [
+     "The phone restarts.",
+     "The app stops working.",
+     "The app asks every time it opens."
+    ],
+    "answer": 2,
+    "explanation": "He says it now asks every single time he opens the app."
+   },
+   {
+    "question": "Why does Theo sometimes say yes?",
+    "options": [
+     "He wants better recommendations.",
+     "He is too tired to read the prompt.",
+     "Iris tells him to."
+    ],
+    "answer": 1,
+    "explanation": "He admits he says yes at night because he is too tired to read anything."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why is the repeated prompt not neutral?",
+    "options": [
+     "It deletes other settings.",
+     "It costs attention that people lack at that moment.",
+     "It is illegal in most countries."
+    ],
+    "answer": 1,
+    "explanation": "The reading says saying no costs attention, which is scarce late at night."
+   },
+   {
+    "question": "What does the reading suggest instead of deciding each time?",
+    "options": [
+     "Setting the default once while rested.",
+     "Deleting the app entirely.",
+     "Ignoring all settings."
+    ],
+    "answer": 0,
+    "explanation": "It recommends setting the default once when you are rested."
+   }
+  ],
+  "speakingPrompt": "Describe one setting on your phone that keeps asking you something, and what it costs you each time.",
+  "writingPrompt": "Write a short review of a fictional app's permission prompt: what it asks, when it asks, and how the timing affects your answer."
+ },
+ {
+  "id": "L29",
+  "level": 2,
+  "theme": "learning",
+  "title": "Practice that feels worse.",
+  "subtitle": "学得顺，不等于学得会。",
+  "readingTitle": "Why easy practice misleads",
+  "script": "Marta: I've been rereading the same chapter for an hour and I still can't explain it.\nEllis: Rereading feels productive because the page looks familiar.\nMarta: Familiar isn't the same as known.\nEllis: Right. Try closing the book and writing what you remember. It will feel awful.\nMarta: It does feel awful. I got about a third of it.\nEllis: That third is real. The other two thirds were the page doing the work.\nMarta: So the comfortable version was the one wasting my time.\nEllis: Not wasting. It just doesn't test anything.\nMarta: How often should I do the painful version?\nEllis: Short and often. Ten minutes beats an hour once a week.",
+  "reading": "Rereading a chapter produces a feeling of fluency. The words are where you expect them, the layout is familiar, and the material seems to be going in. None of that is evidence that you could explain it tomorrow.\n\nRetrieval is less comfortable and more informative. Closing the book and writing what you remember shows you exactly where the gaps are, which is unpleasant precisely because it is accurate. A blank third of a page is useful information; a smoothly reread chapter is not.\n\nThe mistake is treating comfort as a signal of learning. The better signal is whether you can produce the idea without the page in front of you.\n\nFrequency matters more than duration here. Ten minutes of retrieval, repeated across days, does more than a single heroic hour, because each session starts from a slightly weaker memory and has to work harder to rebuild it.",
+  "easy": "Marta rereads a chapter for an hour but cannot explain it. Ellis says familiarity is not knowledge and suggests closing the book and writing what she remembers. She recalls only a third, but Ellis says that third is real. Ten minutes often works better than one long session.",
+  "zh": "重读带来的“熟悉感”不是掌握的证据。合上书回忆虽然难受，但能精确暴露缺口；短而频繁比一次性长练更有效。",
+  "phrases": [
+   {
+    "text": "Familiar isn't the same as known.",
+    "meaning": "Recognition is not recall.",
+    "cue": "Separate a feeling from evidence."
+   },
+   {
+    "text": "The other two thirds were the page doing the work.",
+    "meaning": "The material was familiar, not retrieved.",
+    "cue": "Explain why comfort misleads."
+   },
+   {
+    "text": "Short and often. Ten minutes beats an hour once a week.",
+    "meaning": "Frequency beats duration.",
+    "cue": "Give a practical study instruction."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What does Ellis suggest Marta do?",
+    "options": [
+     "Read a summary instead.",
+     "Reread more slowly.",
+     "Close the book and write what she remembers."
+    ],
+    "answer": 2,
+    "explanation": "Ellis suggests closing the book and writing what she remembers, even though it feels awful."
+   },
+   {
+    "question": "How often does Ellis recommend the harder version?",
+    "options": [
+     "Short sessions, often.",
+     "Only before exams.",
+     "Once a week for an hour."
+    ],
+    "answer": 0,
+    "explanation": "Ellis says short and often, and ten minutes beats an hour once a week."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why is a blank third of a page useful?",
+    "options": [
+     "It shows exactly where the gaps are.",
+     "It proves the chapter was too long.",
+     "It saves time later."
+    ],
+    "answer": 0,
+    "explanation": "The reading says the blank part is accurate information about gaps."
+   },
+   {
+    "question": "Why does frequency matter more than duration?",
+    "options": [
+     "Teachers require daily work.",
+     "Long sessions are impossible.",
+     "Each session rebuilds a slightly weaker memory."
+    ],
+    "answer": 2,
+    "explanation": "Each session starts from a weaker memory and has to work harder to rebuild it."
+   }
+  ],
+  "speakingPrompt": "Explain in three sentences why rereading feels effective but tests very little.",
+  "writingPrompt": "Write a study plan for one fictional exam. Say what you will retrieve, how often, and how you will know it worked."
+ },
+ {
+  "id": "L30",
+  "level": 1,
+  "theme": "money",
+  "title": "The subscription you forgot.",
+  "subtitle": "小额订阅怎么悄悄变成大支出。",
+  "readingTitle": "Small amounts, repeated",
+  "script": "Ben: I did that thing where you add up your subscriptions.\nRosa: Was it bad?\nBen: Eleven a month on a film service I stopped watching in March.\nRosa: Eleven isn't much.\nBen: Eleven times eight months is eighty-eight. For nothing.\nRosa: Did you cancel it?\nBen: I tried. The cancel button is behind three pages and one survey.\nRosa: That's deliberate.\nBen: So is the free trial that needs a card.\nRosa: I cancelled four last night. Took twenty minutes.\nBen: And how much did you save?\nRosa: About thirty a month. I nearly spent it immediately.\nBen: On what?\nRosa: A different subscription. Obviously.",
+  "reading": "A subscription is a decision made once and paid many times. That structure favours the seller: the first decision feels small, and every later payment requires no decision at all.\n\nThe maths is unremarkable and still surprising. Eleven a month is less than a cinema ticket; over eight months it is a decent pair of shoes. Neither number is wrong. The second one is just harder to feel.\n\nCancelling is often harder than subscribing, which is a design choice rather than an accident. A cancel flow that hides behind surveys is doing the work of keeping revenue, and it is worth naming out loud instead of blaming yourself for not noticing.\n\nWhat helps is a periodic review rather than willpower. Twenty minutes twice a year, with a list, tells you what you are actually paying for. Then the freed money has to go somewhere on purpose, or it will find another subscription.",
+  "easy": "Ben discovers he pays eleven a month for a film service he stopped using. Over eight months that is eighty-eight. Cancelling takes three pages and a survey. Rosa cancels four subscriptions and saves about thirty a month, then nearly spends it on a new one.",
+  "zh": "订阅是“决定一次、付费很多次”的结构，天然有利于卖方。半年一次的清单复盘比意志力更可靠；省下的钱要主动安排去处。",
+  "phrases": [
+   {
+    "text": "I did that thing where you add up your subscriptions.",
+    "meaning": "I finally totalled my recurring payments.",
+    "cue": "Open a money conversation casually."
+   },
+   {
+    "text": "The cancel button is behind three pages and one survey.",
+    "meaning": "Cancelling is deliberately difficult.",
+    "cue": "Describe dark-pattern friction."
+   },
+   {
+    "text": "Eleven times eight months is eighty-eight.",
+    "meaning": "Multiply a small amount by its duration.",
+    "cue": "Make a recurring cost concrete."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "How much has Ben paid for a service he stopped using?",
+    "options": [
+     "Thirty a month.",
+     "Eleven in total.",
+     "Eighty-eight over eight months."
+    ],
+    "answer": 2,
+    "explanation": "Ben multiplies eleven by eight months and gets eighty-eight."
+   },
+   {
+    "question": "What does Rosa nearly do with the money she saved?",
+    "options": [
+     "Put it in savings.",
+     "Spend it on another subscription.",
+     "Give it to Ben."
+    ],
+    "answer": 1,
+    "explanation": "She says she nearly spent it immediately, on a different subscription."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why does the subscription structure favour the seller?",
+    "options": [
+     "Only the first payment needs a decision.",
+     "Prices rise every month.",
+     "Refunds are automatic."
+    ],
+    "answer": 0,
+    "explanation": "The first decision feels small and later payments require no decision at all."
+   },
+   {
+    "question": "What does the reading recommend instead of willpower?",
+    "options": [
+     "A stricter bank account.",
+     "Cancelling everything at once.",
+     "A periodic review with a list."
+    ],
+    "answer": 2,
+    "explanation": "It suggests twenty minutes twice a year with a list."
+   }
+  ],
+  "speakingPrompt": "List three fictional subscriptions and say what each one actually gives you per month.",
+  "writingPrompt": "Write a short note to a friend explaining how a small monthly charge became a large yearly cost. Use a fictional amount."
+ },
+ {
+  "id": "L31",
+  "level": 1,
+  "theme": "environment",
+  "title": "One bin, three habits.",
+  "subtitle": "环保不是一次表态，是几个能坚持的小动作。",
+  "readingTitle": "Habits that survive a busy week",
+  "script": "Pip: The building finally got the separate bins.\nNils: And half of it is in the wrong one already.\nPip: Give people a week. Nobody grew up sorting this.\nNils: The signs are tiny. You need to stand right in front of them.\nPip: That's fixable. Bigger labels, one picture each.\nNils: What actually gets me is the food waste. It smells and nobody takes it down.\nPip: So we take it down on the same day each week. Tuesday, before the shop.\nNils: Whose turn is it?\nPip: Mine, then yours. And if one of us forgets, the other says so without a speech.\nNils: That I can live with.",
+  "reading": "Most environmental advice fails on the same point: it asks for a decision every time. A person who has to think about which bin, which day and whose turn will eventually stop thinking about it.\n\nThe building in this conversation does three small things differently. It makes the label readable from where a person actually stands. It attaches the food waste to an existing errand, the Tuesday shop. And it makes the responsibility alternate, with permission to remind each other plainly.\n\nNone of these is inspiring. That is the point. A habit survives a busy week because it has been attached to something that already happens, not because someone cares more.\n\nThe general rule is worth keeping: reduce the number of decisions, not the number of good intentions. One clear label beats a poster. One fixed day beats a reminder to be more mindful.",
+  "easy": "A building gets separate bins, but people put waste in the wrong one. The signs are too small. Pip suggests bigger labels with one picture each. They also agree to take food waste down every Tuesday, alternating turns, and to remind each other without a lecture.",
+  "zh": "环保建议常败在“每次都要做决定”。降低决定次数比提高觉悟更有效：标签要看得见，动作要挂到已有的习惯上，责任要轮流。",
+  "phrases": [
+   {
+    "text": "Give people a week. Nobody grew up sorting this.",
+    "meaning": "Allow time to learn a new habit.",
+    "cue": "Ask for patience instead of blaming."
+   },
+   {
+    "text": "So we take it down on the same day each week.",
+    "meaning": "Attach a new habit to a fixed point.",
+    "cue": "Turn an intention into a schedule."
+   },
+   {
+    "text": "The other says so without a speech.",
+    "meaning": "Remind plainly, without a lecture.",
+    "cue": "Set a norm for gentle accountability."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What is wrong with the new signs?",
+    "options": [
+     "There are too many of them.",
+     "They are too small to read.",
+     "They are in the wrong language."
+    ],
+    "answer": 1,
+    "explanation": "Nils says the signs are tiny and you need to stand right in front of them."
+   },
+   {
+    "question": "What do they agree about the food waste?",
+    "options": [
+     "To stop producing it.",
+     "To take it down every Tuesday, alternating turns.",
+     "To ask the building manager."
+    ],
+    "answer": 1,
+    "explanation": "They agree on Tuesday before the shop, taking turns, mine then yours."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why does most environmental advice fail?",
+    "options": [
+     "It asks for a decision every time.",
+     "It costs too much money.",
+     "It is written by companies."
+    ],
+    "answer": 0,
+    "explanation": "The reading says it asks for a decision every time, which people eventually stop making."
+   },
+   {
+    "question": "What is the general rule at the end?",
+    "options": [
+     "Buy better bins.",
+     "Post more reminders.",
+     "Reduce decisions, not intentions."
+    ],
+    "answer": 2,
+    "explanation": "Reduce the number of decisions rather than increasing good intentions."
+   }
+  ],
+  "speakingPrompt": "Describe one small habit you could attach to something you already do every week.",
+  "writingPrompt": "Write instructions for a fictional shared kitchen: three rules, each with a reason and a fixed moment."
+ },
+ {
+  "id": "L32",
+  "level": 1,
+  "theme": "home",
+  "title": "The flat with the good light.",
+  "subtitle": "看房时，哪些缺点可以接受，哪些不能。",
+  "readingTitle": "What you can live with",
+  "script": "Cara: So, the flat. Great light, terrible kitchen.\nDerek: The kitchen is small, but it works. I cooked in worse for years.\nCara: There's no window in the bathroom.\nDerek: That one I can't fix. Mould will find it eventually.\nCara: And the street is loud until about eleven.\nDerek: Loud at night I can handle. Loud at six in the morning I can't.\nCara: Let's check tomorrow at six, then, before we decide.\nDerek: That's the most sensible thing anyone has said all week.\nCara: If it's quiet at six, I'd take it. The kitchen I can live with.\nDerek: Same. But I want to hear the six o'clock version first.",
+  "reading": "Viewing a flat is mostly an exercise in separating problems into three kinds: the ones you can change, the ones you can adapt to, and the ones that will quietly get worse. A small kitchen belongs to the second group. A bathroom with no window belongs to the third.\n\nThe mistake is treating all drawbacks as equally negotiable because the good parts are attractive. Good light is real, and it does not compensate for a room that cannot dry out.\n\nDerek's approach is more useful than a pros and cons list. He names his own limits in advance: noise at night is fine, noise at six is not. That converts a vague feeling into something testable.\n\nSo they plan to visit at six in the morning. It is a small act of imagination with a large effect, because it replaces an opinion about the flat with evidence about the flat.",
+  "easy": "Cara and Derek view a flat with great light but a terrible kitchen and a bathroom with no window. Derek says the kitchen is workable but the windowless bathroom will get worse. Cara worries about street noise. They agree to visit at six in the morning to test it.",
+  "zh": "看房时，把缺点分成三类：能改的、能适应的、会悄悄恶化的。提前说出自己的底线，把模糊感受变成可验证的事实。",
+  "phrases": [
+   {
+    "text": "That one I can't fix.",
+    "meaning": "This is a structural problem, not a preference.",
+    "cue": "Separate fixable from unfixable."
+   },
+   {
+    "text": "Loud at night I can handle. Loud at six in the morning I can't.",
+    "meaning": "State your limit precisely.",
+    "cue": "Turn a feeling into a testable boundary."
+   },
+   {
+    "text": "Let's check tomorrow at six, then, before we decide.",
+    "meaning": "Test the worry instead of debating it.",
+    "cue": "Replace opinion with evidence."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Which problem does Derek say cannot be fixed?",
+    "options": [
+     "The bathroom with no window.",
+     "The street noise.",
+     "The small kitchen."
+    ],
+    "answer": 0,
+    "explanation": "Derek says the windowless bathroom is the one he cannot fix and mould will find it."
+   },
+   {
+    "question": "What do they decide to do?",
+    "options": [
+     "Ask for a new kitchen.",
+     "Sign the lease today.",
+     "Visit at six in the morning."
+    ],
+    "answer": 2,
+    "explanation": "Cara suggests checking at six tomorrow before deciding."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Which group does the windowless bathroom belong to?",
+    "options": [
+     "Problems that quietly get worse.",
+     "Problems you can adapt to.",
+     "Problems you can change."
+    ],
+    "answer": 0,
+    "explanation": "The reading puts it in the third group, problems that will quietly get worse."
+   },
+   {
+    "question": "Why is visiting at six useful?",
+    "options": [
+     "It replaces an opinion with evidence.",
+     "It proves the landlord is honest.",
+     "It shows the kitchen size."
+    ],
+    "answer": 0,
+    "explanation": "It replaces an opinion about the flat with evidence about the flat."
+   }
+  ],
+  "speakingPrompt": "Describe a place you have lived in: one thing you could change, one you adapted to, one that got worse.",
+  "writingPrompt": "Write a short checklist for viewing a fictional flat, with three questions you would ask at a specific time of day."
+ },
+ {
+  "id": "L33",
+  "level": 2,
+  "theme": "sport",
+  "title": "Losing well.",
+  "subtitle": "输球之后，怎么复盘才有用。",
+  "readingTitle": "The review after the score",
+  "script": "Wes: We lost by two and everyone's talking about the referee.\nIko: The referee was bad. We were also bad for twenty minutes.\nWes: Which twenty?\nIko: Right after half time. We stopped moving and let them walk through.\nWes: That's when the second goal came.\nIko: So we can fix that. We can't fix the referee.\nWes: People won't like hearing it.\nIko: They never do. But if we blame the whistle, we practice nothing this week.\nWes: Fair. So what do we actually work on?\nIko: Movement without the ball. Ten minutes at the start of every session.\nWes: That's boring and probably right.",
+  "reading": "A loss produces two competing stories. One is about what was unfair, and it is often partly true. The other is about what was controllable, and it is usually more useful.\n\nIko does not deny the referee's mistakes. She simply notices that they cannot be practised. The twenty minutes after half time can be. Choosing the controllable part is not optimism; it is a decision about where effort goes next.\n\nBlaming external factors feels like loyalty and often functions as avoidance. It protects the group from an uncomfortable review, and it also protects the group from improving.\n\nThe practical version is narrow: name one repeatable weakness, give it a small amount of time in every session, and let the score take care of itself. Boring, specific and probably right.",
+  "easy": "The team loses by two. Everyone blames the referee. Iko agrees the referee was bad but points to twenty bad minutes after half time when the team stopped moving. They decide to practise movement without the ball for ten minutes each session.",
+  "zh": "输球后有两个故事：一个关于不公平，一个关于可控。选可控的那个不是乐观，而是决定把力气放哪里；复盘要落到一个可重复的小练习。",
+  "phrases": [
+   {
+    "text": "We were also bad for twenty minutes.",
+    "meaning": "We had our own failures.",
+    "cue": "Add the uncomfortable half of the story."
+   },
+   {
+    "text": "We can fix that. We can't fix the referee.",
+    "meaning": "Focus on the controllable part.",
+    "cue": "Redirect blame into practice."
+   },
+   {
+    "text": "Movement without the ball.",
+    "meaning": "Off-ball running.",
+    "cue": "Name a specific skill to train."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "When did the team play badly?",
+    "options": [
+     "Right after half time.",
+     "During the final whistle.",
+     "In the first ten minutes."
+    ],
+    "answer": 0,
+    "explanation": "Iko says right after half time they stopped moving."
+   },
+   {
+    "question": "What will they practise?",
+    "options": [
+     "Movement without the ball.",
+     "Referee signals.",
+     "Penalty kicks."
+    ],
+    "answer": 0,
+    "explanation": "Iko suggests movement without the ball for ten minutes each session."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why does Iko focus on the controllable part?",
+    "options": [
+     "Because it can be practised.",
+     "Because the referee admitted fault.",
+     "Because the coach demanded it."
+    ],
+    "answer": 0,
+    "explanation": "She notices that referee mistakes cannot be practised but the bad twenty minutes can."
+   },
+   {
+    "question": "What can blaming external factors become?",
+    "options": [
+     "A form of avoidance.",
+     "A way to improve quickly.",
+     "A rule of the game."
+    ],
+    "answer": 0,
+    "explanation": "The reading says it protects the group from an uncomfortable review and from improving."
+   }
+  ],
+  "speakingPrompt": "Describe a fictional match you lost and name one thing you could practise afterwards.",
+  "writingPrompt": "Write a short post-match note: one external factor, one controllable weakness, one drill for next week."
+ },
+ {
+  "id": "L34",
+  "level": 3,
+  "theme": "family",
+  "title": "Still family, still disagreeing.",
+  "subtitle": "和家人意见不同，怎么不把关系烧掉。",
+  "readingTitle": "Disagreement without rupture",
+  "script": "Nadim: Mum's decided the whole family is coming for the holiday. All of us.\nYasmin: Including the cousin you haven't spoken to since the wedding?\nNadim: Especially him. She thinks a table fixes things.\nYasmin: Does it?\nNadim: It fixes her worry for one afternoon.\nYasmin: Do you want to go?\nNadim: I want to see her. I don't want to pretend nothing happened.\nYasmin: Then say that. Two sentences, no accusation.\nNadim: I'll come for you. I'm not ready to pretend with him.\nYasmin: That's honest and it gives her something to work with.\nNadim: She'll cry.\nYasmin: Probably. Then she'll plan the seating.",
+  "reading": "Family disagreement is rarely solved by winning the argument. It is managed by keeping two things separate: the relationship you want to preserve, and the position you are not willing to abandon.\n\nNadim's two sentences do exactly that. The first names what he is offering. The second names the limit, without describing the cousin's character or relitigating the wedding. Nothing is hidden and nothing is added.\n\nAccusation is tempting because it feels like honesty. In practice it hands the other person a defence instead of a decision. A limit stated plainly leaves them something to plan around, which is often all that is available.\n\nYasmin's prediction is not cynical. The tears and the seating chart can both happen. Emotional response and practical progress are not opposites, and expecting only one of them makes the conversation harder than it needs to be.",
+  "easy": "Nadim's mother invites the whole family, including a cousin he has not spoken to since a wedding. He wants to see his mother but not pretend nothing happened. Yasmin suggests two sentences: he will come for her, but he is not ready to pretend with the cousin.",
+  "zh": "处理家庭分歧的关键：把“想保住的关系”和“不愿放弃的立场”分开说。两句真话，不指责，也不隐藏，对方才有可操作的空间。",
+  "phrases": [
+   {
+    "text": "She thinks a table fixes things.",
+    "meaning": "She believes proximity solves conflict.",
+    "cue": "Describe someone's hope without mocking it."
+   },
+   {
+    "text": "I want to see her. I don't want to pretend nothing happened.",
+    "meaning": "State both the offer and the limit.",
+    "cue": "Say a hard thing in two clauses."
+   },
+   {
+    "text": "That's honest and it gives her something to work with.",
+    "meaning": "Clarity creates room to plan.",
+    "cue": "Praise a boundary stated well."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Why does Nadim's mother want everyone together?",
+    "options": [
+     "She wants to discuss the wedding.",
+     "The cousin asked her to.",
+     "She thinks a shared table fixes things."
+    ],
+    "answer": 2,
+    "explanation": "Nadim says she thinks a table fixes things and it eases her worry."
+   },
+   {
+    "question": "What does Nadim decide to say?",
+    "options": [
+     "He will come for his mother but not pretend with the cousin.",
+     "He wants an apology first.",
+     "He will not attend."
+    ],
+    "answer": 0,
+    "explanation": "He plans to say he will come for her but is not ready to pretend with the cousin."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "What two things does the reading say to keep separate?",
+    "options": [
+     "The past and the future.",
+     "The mother and the cousin.",
+     "The relationship and the position."
+    ],
+    "answer": 2,
+    "explanation": "It says keep the relationship you want to preserve separate from the position you will not abandon."
+   },
+   {
+    "question": "Why does accusation make things harder?",
+    "options": [
+     "It is dishonest.",
+     "It gives the other person a defence instead of a decision.",
+     "It always causes tears."
+    ],
+    "answer": 1,
+    "explanation": "Accusation hands the other person a defence instead of a decision."
+   }
+  ],
+  "speakingPrompt": "Say a limit to a fictional family member in two sentences: one thing you will do, one thing you will not.",
+  "writingPrompt": "Write a short message to a fictional relative about a family event, stating one offer and one limit without accusing anyone."
+ },
+ {
+  "id": "L35",
+  "level": 3,
+  "theme": "career",
+  "title": "Saying no to a good opportunity.",
+  "subtitle": "拒绝好机会，也要拒绝得有理由。",
+  "readingTitle": "The cost of an attractive yes",
+  "script": "Ruth: They offered me the lead role on the new project.\nAde: That's the one you wanted six months ago.\nRuth: It is. And I'm probably going to say no.\nAde: Why? It's a good project.\nRuth: Because it starts in the same month as the thing I already promised.\nAde: Can't you do both?\nRuth: Badly, yes. The last time I did both, I delivered neither properly.\nAde: So what's the actual reason you'd give them?\nRuth: That I can't give it the time it needs, and I'd rather say that now than in month two.\nAde: That's a strong no.\nRuth: A no with a reason is easier to hear than a slow yes that collapses.",
+  "reading": "An attractive opportunity is hard to refuse because the cost is invisible at the moment of the offer. The benefit is concrete: a title, a project, a chance. The cost is a promise you already made, and promises do not send reminders.\n\nRuth's reasoning is not about ambition. It is about arithmetic. Two commitments in the same month do not both get her best attention, and last time neither got it properly.\n\nThe sentence she plans to use is worth studying. It names the constraint, not the person offering. It also names the timing of the refusal, which matters: a clear no now is kinder than a slow collapse later.\n\nThere is a version of this that is pure self-protection, and it is not what she is doing. She is choosing which promise to keep, and saying so before someone else has to discover it.",
+  "easy": "Ruth is offered a lead role she wanted six months ago, but it starts in the same month as a promise she already made. She decides to decline, saying she cannot give it the time it needs, and that saying so now is better than failing in month two.",
+  "zh": "好机会难拒绝，因为收益是具体的，代价是看不见的旧承诺。拒绝时要说限制条件，而不是评价对方；越早说清楚的“不”，越不伤人。",
+  "phrases": [
+   {
+    "text": "I can't give it the time it needs.",
+    "meaning": "I lack the capacity, not the interest.",
+    "cue": "Decline by naming the constraint."
+   },
+   {
+    "text": "The last time I did both, I delivered neither properly.",
+    "meaning": "Evidence from your own history.",
+    "cue": "Support a limit with a fact."
+   },
+   {
+    "text": "A no with a reason is easier to hear than a slow yes that collapses.",
+    "meaning": "Clear refusal beats unreliable agreement.",
+    "cue": "Explain why early honesty helps."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Why is Ruth going to decline?",
+    "options": [
+     "The project is not interesting.",
+     "It clashes with a promise she already made.",
+     "The pay is too low."
+    ],
+    "answer": 1,
+    "explanation": "It starts in the same month as something she already promised."
+   },
+   {
+    "question": "What happened last time she took on two things?",
+    "options": [
+     "She finished both early.",
+     "She delivered neither properly.",
+     "She was promoted."
+    ],
+    "answer": 1,
+    "explanation": "She says the last time she did both she delivered neither properly."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why is the cost of an opportunity invisible?",
+    "options": [
+     "Promises do not send reminders.",
+     "Employers hide the salary.",
+     "The project has no start date."
+    ],
+    "answer": 0,
+    "explanation": "The benefit is concrete while the cost is a promise that sends no reminder."
+   },
+   {
+    "question": "What makes Ruth's refusal strong?",
+    "options": [
+     "It delays the decision.",
+     "It names the constraint, not the person.",
+     "It includes a complaint about pay."
+    ],
+    "answer": 1,
+    "explanation": "It names the constraint and the timing rather than attacking the offer."
+   }
+  ],
+  "speakingPrompt": "Decline a fictional opportunity in three sentences: what you appreciate, what limits you, and what you can offer instead.",
+  "writingPrompt": "Write a short message turning down a fictional project. Name one constraint, one existing commitment, and one alternative."
+ },
+ {
+  "id": "L36",
+  "level": 2,
+  "theme": "cities",
+  "title": "A bench is infrastructure.",
+  "subtitle": "城市里那些被忽略的小设计。",
+  "readingTitle": "Small design, large effect",
+  "script": "Sana: They're removing the benches on the square.\nMilo: All of them?\nSana: The three near the fountain. Apparently people loiter.\nMilo: People sit down. That's what a square is for.\nSana: The shop owners say it hurts business.\nMilo: Did anyone ask the people who sit there?\nSana: The consultation had eleven responses. All from the street with the shops.\nMilo: So the sample decided the square.\nSana: There's a proposal to replace them with a planter edge. Low, narrow.\nMilo: That's a bench you can't rest on. Design as a polite refusal.\nSana: Exactly. It looks like seating and works as a barrier.",
+  "reading": "A bench is easy to dismiss as decoration. In practice it decides who can stay in a public space: older people, parents, anyone carrying shopping, anyone who cannot walk far without resting.\n\nRemoving seating is rarely announced as exclusion. It arrives as a concern about loitering, or as a plan for a cleaner square. The effect is the same: the space becomes usable only by people passing through.\n\nThe consultation detail matters. Eleven responses, all from one street, is not a public opinion; it is a sample. Small samples are not automatically wrong, but they should be described as what they are.\n\nThe proposed planter edge is the most revealing part. It offers the shape of seating without the function, which lets a decision look like a compromise. Recognising that move is a useful skill in any city.",
+  "easy": "The city plans to remove three benches from a square because people loiter. Shop owners say the benches hurt business, but the consultation had only eleven responses, all from one street. The replacement is a low, narrow planter edge that looks like seating but cannot be rested on.",
+  "zh": "长椅决定谁能留在公共空间。用“看起来像座位”的花坛边缘替代长椅，是把排除包装成折中；小样本也不等于民意。",
+  "phrases": [
+   {
+    "text": "People sit down. That's what a square is for.",
+    "meaning": "Restating an obvious purpose.",
+    "cue": "Push back on a euphemism."
+   },
+   {
+    "text": "So the sample decided the square.",
+    "meaning": "A small group shaped a public decision.",
+    "cue": "Name a consultation problem plainly."
+   },
+   {
+    "text": "That's a bench you can't rest on.",
+    "meaning": "It mimics a function without providing it.",
+    "cue": "Describe design that excludes politely."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Why are the benches being removed?",
+    "options": [
+     "People loiter there, according to the city.",
+     "The fountain is moving.",
+     "They are broken."
+    ],
+    "answer": 0,
+    "explanation": "Sana says the three near the fountain are going because people loiter."
+   },
+   {
+    "question": "What is the proposed replacement?",
+    "options": [
+     "More benches.",
+     "A fence.",
+     "A low, narrow planter edge."
+    ],
+    "answer": 2,
+    "explanation": "The proposal is a planter edge that is low and narrow."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Who is most affected by removing seating?",
+    "options": [
+     "People who need to rest.",
+     "People driving through.",
+     "Shop owners only."
+    ],
+    "answer": 0,
+    "explanation": "The reading names older people, parents, and anyone who cannot walk far without resting."
+   },
+   {
+    "question": "Why is the planter edge revealing?",
+    "options": [
+     "It was designed by residents.",
+     "It offers the shape of seating without the function.",
+     "It is more expensive."
+    ],
+    "answer": 1,
+    "explanation": "It looks like seating but works as a barrier, letting a decision look like a compromise."
+   }
+  ],
+  "speakingPrompt": "Describe one small thing in a public space that decides who can stay there.",
+  "writingPrompt": "Write a short proposal for a fictional square: one change, who it helps, and one objection you expect."
+ }
 ]

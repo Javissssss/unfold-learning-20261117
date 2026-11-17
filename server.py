@@ -25,6 +25,8 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent
+VOICE_PACKS = ("a", "b")
+LESSON_COUNT = 36
 STATIC_FILES = {
     "/": ("index.html", "text/html; charset=utf-8"),
     "/index.html": ("index.html", "text/html; charset=utf-8"),
@@ -33,9 +35,16 @@ STATIC_FILES = {
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/lessons.json": ("lessons.json", "application/json; charset=utf-8"),
     "/catalog.json": ("catalog.json", "application/json; charset=utf-8"),
-    **{f"/audio/L{number:02}.wav": (f"audio/L{number:02}.wav", "audio/wav") for number in range(1, 18)},
+    "/content.js": ("content.js", "text/javascript; charset=utf-8"),
+    "/dict.js": ("dict.js", "text/javascript; charset=utf-8"),
+    **{f"/audio/{pack}/L{number:02}.wav": (f"audio/{pack}/L{number:02}.wav", "audio/wav")
+       for pack in VOICE_PACKS for number in range(1, LESSON_COUNT + 1)},
+    **{f"/audio/{pack}/_preview.wav": (f"audio/{pack}/_preview.wav", "audio/wav") for pack in VOICE_PACKS},
+    **{f"/audio/{pack}/timings.json": (f"audio/{pack}/timings.json", "application/json; charset=utf-8")
+       for pack in VOICE_PACKS},
 }
-THEMES = {"meetings", "projects", "communication", "business", "daily", "social", "travel", "food", "culture", "science", "relationships", "ideas"}
+THEMES = {"meetings", "projects", "communication", "business", "daily", "social", "travel", "food", "culture", "science", "relationships", "ideas",
+          "news", "health", "tech", "learning", "money", "environment", "home", "sport", "family", "career", "cities"}
 TOPICS = {
     "meetings": "clarifying decisions and next actions in a fictional workplace meeting",
     "projects": "giving a project update with a blocker, a condition, and a clear request",
@@ -49,6 +58,17 @@ TOPICS = {
     "science": "explaining a scientific idea and distinguishing evidence from speculation",
     "relationships": "friendship, family, boundaries and empathetic conversations",
     "ideas": "debating everyday ethical choices, ambiguity and competing values",
+    "news": "comparing a headline with the underlying report, and separating measurement from claim",
+    "health": "talking about tiredness and support without giving medical advice",
+    "tech": "discussing privacy settings, defaults and everyday software choices",
+    "learning": "talking about study methods, retrieval practice and honest self-assessment",
+    "money": "discussing small recurring costs, subscriptions and household budgeting",
+    "environment": "building small, repeatable household habits around waste and energy",
+    "home": "weighing the drawbacks of a place to live and deciding what is workable",
+    "sport": "reviewing a fictional match and choosing what is actually trainable",
+    "family": "holding a boundary with a relative while keeping the relationship",
+    "career": "turning down an opportunity with a clear reason and a workable alternative",
+    "cities": "reading a small piece of public-space design and who it includes or excludes",
 }
 TOKEN_PARAMS = {"max_completion_tokens", "max_tokens", "none"}
 MAX_BODY = 32_768
@@ -394,10 +414,35 @@ class UnfoldServer(ThreadingHTTPServer):
                     if item['id'] in self.lessons:
                         raise ValidationError('教材标识重复。')
                     self.lessons[item['id']]=item
+        self.audio_missing = self.check_audio()
         self.request_times: deque[float] = deque()
         self.rate_lock = threading.Lock()
         self.ai_slots = threading.BoundedSemaphore(2)
         super().__init__(address, UnfoldHandler)
+
+    def check_audio(self) -> list[str]:
+        """Report bundled audio that is absent, so a playback failure is diagnosable.
+
+        Every published lesson must have a recording in each voice pack plus an
+        audition sample. Missing files are logged at startup and surfaced through
+        /api/health instead of failing silently inside the player.
+        """
+        missing: list[str] = []
+        for pack in VOICE_PACKS:
+            for lesson_id in sorted(self.lessons):
+                if not (ROOT / "audio" / pack / f"{lesson_id}.wav").is_file():
+                    missing.append(f"{pack}/{lesson_id}")
+            if not (ROOT / "audio" / pack / "_preview.wav").is_file():
+                missing.append(f"{pack}/_preview")
+        if missing:
+            shown = ", ".join(missing[:10])
+            print(f"warning: {len(missing)} bundled audio files missing: {shown}"
+                  f"{' ...' if len(missing) > 10 else ''}", flush=True)
+        else:
+            total = len(VOICE_PACKS) * (len(self.lessons) + 1)
+            print(f"audio check: {total} files present for {len(self.lessons)} lessons "
+                  f"x {len(VOICE_PACKS)} voice packs", flush=True)
+        return missing
 
     def handle_error(self, request, client_address) -> None:
         # WebView navigation may close a keep-alive connection. Do not echo
@@ -559,6 +604,10 @@ class UnfoldHandler(BaseHTTPRequestHandler):
                 "detail": config.error or ("配置就绪，尚未验证真实调用。" if config.configured else "待配置：" + "、".join(missing)),
                 "csrf_token": self.server.csrf_token, "api_protocol": "Chat Completions (OpenAI-style)",
                 "base_url":config.base_url,"token_param":config.token_param,"token_limit":config.token_limit,
+                "audio_ready": not self.server.audio_missing,
+                "audio_missing": len(self.server.audio_missing),
+                "audio_missing_ids": self.server.audio_missing[:20],
+                "lesson_count": len(self.server.lessons),
             })
             return
         if path not in STATIC_FILES:
@@ -567,6 +616,11 @@ class UnfoldHandler(BaseHTTPRequestHandler):
         filename, content_type = STATIC_FILES[path]
         try:
             data = (ROOT / filename).read_bytes()
+        except FileNotFoundError:
+            # An optional asset (for example a second voice pack) has to read as
+            # "not here" rather than a server fault, so the client can fall back.
+            self.send_json(404, {"error": "文件不存在。"})
+            return
         except OSError:
             self.send_json(500, {"error": "产品文件无法读取。请确认交付文件完整。"})
             return

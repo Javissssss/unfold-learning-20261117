@@ -1,101 +1,677 @@
 [
-  {
-    "id":"L01","level":1,"theme":"meetings","title":"Move the meeting, not the goal.","subtitle":"调整会议时间，听出安排背后的目的。","readingTitle":"A change with a clear next step",
-    "script":"Alex: Can we move our project meeting from Monday to Tuesday? The client needs one more day to review the draft.\nSam: Tuesday works for me. Do we still need a full hour?\nAlex: No. Let's keep it to thirty minutes. We only need to agree on the next step.\nSam: Should I send the slides before the meeting?\nAlex: Yes, please send them by Monday afternoon. Then everyone can read them in advance.\nSam: Great. I'll update the invitation and add the new goal.\nAlex: Thanks. The time is changing, but the goal is not.",
-    "reading":"A useful meeting invitation tells people more than when to show up. It explains what the group needs to decide and what people should do before they arrive.\n\nIn this project, the team is waiting for the client's comments on a draft. Moving the meeting gives the client enough time to respond. A shorter meeting is possible because the team only needs to choose the next step, not review every slide together.\n\nThe slides will be shared in advance. Team members can read them at their own pace and bring specific questions. The updated invitation should include both the new time and the decision the group needs to make.\n\nThe important change is not simply a different date. It is a clearer plan for using everyone's time.",
-    "easy":"The meeting will be on Tuesday, not Monday. The client needs more time. The team will meet for thirty minutes and decide what to do next.",
-    "zh":"抓住三点：会议改到周二；客户需要多一天；会议缩短，目的是确定下一步，而不是逐页讲幻灯片。",
-    "phrases":[{"text":"Tuesday works for me.","meaning":"Tuesday is a time I can attend.","cue":"Tell a colleague that a suggested meeting time is okay."},{"text":"Let's keep it to thirty minutes.","meaning":"Let's limit the meeting to thirty minutes.","cue":"Suggest a shorter meeting without sounding abrupt."},{"text":"Please read them in advance.","meaning":"Read them before the meeting happens.","cue":"Ask people to prepare before a discussion."}],
-    "listenQuestions":[{"question":"Why is Alex moving the meeting?","options":["Sam cannot work on Monday.","The client needs more time to review the draft.","The slides are missing."],"answer":1,"explanation":"Alex says the client needs one more day to review the draft. Sam is not the reason for the change."},{"question":"What does Alex want the team to do in the meeting?","options":["Agree on the next step.","Read every slide together.","Prepare a new invitation."],"answer":0,"explanation":"The meeting is for agreeing on the next step. The slides should be read before it."}],
-    "readingQuestions":[{"question":"What should the updated invitation make clear?","options":["Only the new date.","The client's full history.","The new time and the decision to make."],"answer":2,"explanation":"The invitation should explain both when people meet and what they need to decide."},{"question":"How does sharing slides in advance help?","options":["It removes the need for any questions.","People can prepare and bring specific questions.","It guarantees that the client will agree."],"answer":1,"explanation":"People can read at their own pace and use the meeting for focused questions and decisions."}],
-    "speakingPrompt":"In two or three sentences, explain why the meeting changed and what Sam needs to do.","writingPrompt":"Write a short message changing a meeting time. Include a reason and one clear action. Use fictional details."
-  },
-  {
-    "id":"L02","level":1,"theme":"projects","title":"A quick update, a clear request.","subtitle":"分清进展、阻碍，以及对方真正需要的帮助。","readingTitle":"An update people can act on",
-    "script":"Maya: Here's a quick update on the website project. The home page is ready, and the team is testing the contact form.\nLeo: Are we still on track for Friday?\nMaya: Mostly. We are waiting for the final product photos. Without them, we can test the layout but cannot finish the product page.\nLeo: What do you need from me?\nMaya: Could you ask the design team to send the photos by tomorrow morning?\nLeo: Yes. I'll check with them today.\nMaya: Thanks. If the photos arrive on time, we can keep Friday as our target. I'll let you know if anything changes.",
-    "reading":"A project update should help someone understand the situation and choose an action. A long list of completed tasks is not always enough.\n\nMaya's update separates three things: what is ready, what is still in progress, and what is blocking the next step. The home page is ready. The contact form is being tested. The product page depends on photos from another team.\n\nShe also makes a specific request. Leo does not need to solve the entire project. He needs to contact the design team and ask for the photos by a clear time.\n\nFriday is a target, not an unconditional promise. Maya explains what must happen for the team to meet it. This makes the update useful without hiding uncertainty.",
-    "easy":"Some parts of the website are ready. The product page still needs photos. Maya asks Leo to help get them. Friday is possible if the photos arrive on time.",
-    "zh":"不要把“基本按计划”听成无条件保证。进度取决于照片能否及时到位，Leo收到的是一个明确的协调请求。",
-    "phrases":[{"text":"Are we still on track for Friday?","meaning":"Does the current progress still support finishing on Friday?","cue":"Check whether a project is following its plan."},{"text":"We are waiting for the final photos.","meaning":"We cannot finish this part until the photos arrive.","cue":"Explain what is blocking the next step."},{"text":"I'll let you know if anything changes.","meaning":"I will tell you about any new situation.","cue":"Promise an update without promising a perfect outcome."}],
-    "listenQuestions":[{"question":"What is blocking completion of the product page?","options":["A broken contact form.","A missing home page.","The final product photos."],"answer":2,"explanation":"Maya says the team cannot finish the product page without the photos."},{"question":"What does Maya ask Leo to do?","options":["Build the product page.","Ask the design team to send the photos.","Move the target to next month."],"answer":1,"explanation":"She asks Leo to contact the design team, not to build or redesign the website."}],
-    "readingQuestions":[{"question":"Why is Friday described as a target rather than a guarantee?","options":["It depends on the photos arriving on time.","The team has cancelled the project.","Maya does not know what a website is."],"answer":0,"explanation":"The update names a condition that must be met for Friday to remain realistic."},{"question":"What makes the request useful?","options":["It includes every task in the project.","It avoids naming a person or a time.","It identifies an action and a deadline."],"answer":2,"explanation":"Leo knows whom to contact, what to ask for, and when the photos are needed."}],
-    "speakingPrompt":"Give a short update: what is done, what is blocked, and what help is needed.","writingPrompt":"Write three sentences about a fictional project. Include one completed task, one blocker, and one request."
-  },
-  {
-    "id":"L03","level":1,"theme":"communication","title":"Ask before you assume.","subtitle":"听懂模糊要求，并用具体问题确认意思。","readingTitle":"Turn a vague request into a clear task",
-    "script":"Nina: Could you make the report a little shorter?\nOwen: Sure. When you say shorter, do you mean fewer pages or less detail?\nNina: Fewer pages. The managers need a quick overview before the discussion.\nOwen: Should I remove the examples?\nNina: Keep the two most useful ones. Put the extra tables in a separate file.\nOwen: Okay. So the main report should focus on the key findings and two examples.\nNina: Exactly.\nOwen: When do you need the new version?\nNina: By Thursday afternoon.\nOwen: Got it. I'll send a shorter main report and keep the extra information available.",
-    "reading":"Words like shorter, better, and clearer can mean different things to different people. If a request is vague, the safest next step is to check what the person wants to achieve.\n\nNina is not asking Owen to remove useful information at random. She wants managers to see the key findings quickly. Once Owen knows the purpose, he can decide what belongs in the main report and what can go into a separate file.\n\nHe checks his understanding by summarizing the task in his own words. This gives Nina a chance to correct him before he starts the work.\n\nA useful clarification is specific. It asks about the expected result, the audience, or the deadline. It does not simply repeat, 'I don't understand.'",
-    "easy":"Nina wants fewer pages, not less useful information. Owen should keep key findings and two examples in the main report. Extra tables can go in another file.",
-    "zh":"“更短”在这里指页数更少，并非随便删掉信息。先确认读者和目的，再确认保留内容与期限。",
-    "phrases":[{"text":"When you say shorter, do you mean fewer pages?","meaning":"I want to check the exact meaning of your request.","cue":"Clarify a word that could have more than one meaning."},{"text":"So the main report should focus on the key findings.","meaning":"This is my understanding of the main task.","cue":"Summarize an instruction to check that you understood it."},{"text":"I'll keep the extra information available.","meaning":"The extra information will still be accessible if needed.","cue":"Make something shorter without losing supporting material."}],
-    "listenQuestions":[{"question":"What does Nina mean by shorter?","options":["Fewer pages.","Smaller text on every page.","No examples or findings."],"answer":0,"explanation":"Nina explicitly says she means fewer pages."},{"question":"What should happen to the extra tables?","options":["They should be deleted.","They should appear on the first page.","They should go in a separate file."],"answer":2,"explanation":"Nina asks for a separate file, so the information is not lost."}],
-    "readingQuestions":[{"question":"Why does Owen summarize the task?","options":["To avoid doing any work.","To let Nina correct his understanding before he starts.","To replace the deadline with a new one."],"answer":1,"explanation":"A summary creates a chance to check shared understanding early."},{"question":"Which question best clarifies a vague request?","options":["Why is everyone so difficult?","Can I ignore it?","What result does the audience need?"],"answer":2,"explanation":"The expected result and audience help turn a vague request into a concrete task."}],
-    "speakingPrompt":"Explain how Owen checks the meaning of the request without sounding defensive.","writingPrompt":"A fictional colleague asks you to make a presentation better. Write two specific clarification questions."
-  },
-  {
-    "id":"L04","level":2,"theme":"communication","title":"Disagree without closing the door.","subtitle":"听出礼貌背后的立场、顾虑和替代方案。","readingTitle":"A useful disagreement has a next step",
-    "script":"Elena: I think we should launch the new service next week. We have waited long enough.\nMarcus: I see why you'd want to move quickly. My concern is that the support team hasn't tried the new process yet.\nElena: The process looks simple. Do we really need more testing?\nMarcus: Not a long test. What if we started with a small group of customers for two days? We could check the common questions before opening it to everyone.\nElena: I don't want the whole launch to slip.\nMarcus: Neither do I. A small trial could help us move forward with fewer surprises. If we don't find a major issue, we can keep the wider launch on Friday.\nElena: That sounds reasonable. Let's define what would count as a major issue.",
-    "reading":"Marcus does not disagree with the goal of launching the service. He disagrees with the idea of skipping a small trial. This difference matters.\n\nHe first acknowledges Elena's reason for moving quickly. Then he names a specific concern: the support team has not tested the process. He does not describe the whole plan as bad or accuse anyone of being careless.\n\nHis alternative is limited in size and time. A two-day trial with a small group can produce information without automatically delaying the entire launch. But the team still needs a clear rule for what would stop a wider release.\n\nPolite disagreement is not the same as weak disagreement. Marcus states a real concern and proposes a practical next step. The conversation moves from defending opinions to deciding how to manage uncertainty.",
-    "easy":"Both people want to launch soon. Marcus wants a short trial first because support has not tested the process. Elena accepts the idea, but they still need a rule for serious problems.",
-    "zh":"双方目标一致，分歧在路径。Marcus先认可速度诉求，再提出具体风险与小范围试验，不是含糊地反对上线。",
-    "phrases":[{"text":"I see why you'd want to move quickly.","meaning":"I understand the reason behind your preference.","cue":"Acknowledge someone's reasoning before disagreeing."},{"text":"My concern is that the team hasn't tried the process.","meaning":"This specific gap is what worries me.","cue":"Name a concern without attacking the whole plan."},{"text":"What if we started with a small group?","meaning":"Could a limited first step be a useful alternative?","cue":"Offer an alternative as a question that invites discussion."}],
-    "listenQuestions":[{"question":"What does Marcus propose?","options":["Cancelling the service.","A two-day trial with a small customer group.","Waiting until every possible problem is solved."],"answer":1,"explanation":"He proposes a limited trial, not cancellation or an unlimited delay."},{"question":"What is still unresolved at the end?","options":["Whether the team wants any customers.","The name of the service.","What would count as a major issue."],"answer":2,"explanation":"Elena's final line asks the team to define the stopping condition."}],
-    "readingQuestions":[{"question":"What is the main disagreement about?","options":["Whether to do a small trial before the wider launch.","Whether the service should ever exist.","Whether support staff should be removed."],"answer":0,"explanation":"They share the launch goal but differ on whether a trial is needed first."},{"question":"Why is Marcus's disagreement useful?","options":["He hides his concern behind vague praise.","He names a concern and offers a limited next step.","He proves that Elena has no good ideas."],"answer":1,"explanation":"His response is specific and actionable, while still acknowledging Elena's priorities."}],
-    "speakingPrompt":"State the shared goal, the concern, and the proposed alternative in your own words.","writingPrompt":"Politely challenge a fictional launch plan. Acknowledge one benefit, name one concern, and propose a next step."
-  },
-  {
-    "id":"L05","level":2,"theme":"projects","title":"A deadline with an honest trade-off.","subtitle":"区分拒绝、条件承诺和范围协商。","readingTitle":"Negotiate scope, not just a date",
-    "script":"Harper: Could your team finish the complete proposal by Wednesday?\nTheo: We can have the main recommendation ready by then. A fully checked cost estimate would take until Friday.\nHarper: I need something for the leadership discussion on Thursday.\nTheo: In that case, we could send a short decision brief on Wednesday and the detailed estimate on Friday. The brief would explain the options and flag the numbers that are still provisional.\nHarper: Would the recommendation be reliable without the final estimate?\nTheo: Reliable enough to choose which option to explore, but not enough to approve the full budget. I'd make that distinction clear.\nHarper: Okay. Please state what decision the brief supports and what still needs checking.\nTheo: Will do. That way we can support Thursday's discussion without presenting unfinished numbers as final.",
-    "reading":"A deadline problem often includes a scope problem. Harper needs information for a Thursday discussion, but that does not necessarily mean she needs every part of the final proposal by Wednesday.\n\nTheo separates a short decision brief from a fully checked estimate. This creates a possible sequence: discuss the options first, then make a budget decision once the detailed work is complete.\n\nThe important limit is explicit. The early recommendation can support a choice about what to explore. It cannot support final approval of the entire budget. Calling the same document ready without naming that limit would be misleading.\n\nA useful compromise preserves the purpose of the deadline while showing what remains uncertain. It also makes the next deliverable clear, so an early version does not silently become the final one.",
-    "easy":"Theo can send a short brief on Wednesday and a checked estimate on Friday. The brief helps choose an option to explore. It is not enough to approve the whole budget.",
-    "zh":"这里不是简单拒绝周三交付，而是拆分交付范围。“足够选择探索方向”不等于“足够批准最终预算”。文中金额与项目均为虚构情景。",
-    "phrases":[{"text":"The numbers are still provisional.","meaning":"The numbers may change after more checks.","cue":"Make clear that an early estimate is not final."},{"text":"I'd make that distinction clear.","meaning":"I would explicitly explain the difference between the two uses.","cue":"Prevent two different decision standards from being mixed."},{"text":"We can send a brief first and the detailed estimate later.","meaning":"We can separate the work into two useful deliverables.","cue":"Negotiate a deadline by changing the scope and sequence."}],
-    "listenQuestions":[{"question":"What can Theo provide by Wednesday?","options":["A fully approved budget.","Every checked detail.","A short brief with the main recommendation."],"answer":2,"explanation":"The main recommendation can be ready, but the fully checked estimate needs until Friday."},{"question":"What decision can the early brief support?","options":["Which option to explore.","Final approval of the full budget.","Whether all checks can be cancelled."],"answer":0,"explanation":"Theo explicitly limits the brief to choosing an option to explore."}],
-    "readingQuestions":[{"question":"Why does separating the deliverables help?","options":["It makes checking unnecessary.","It supports the early discussion without hiding unfinished work.","It turns provisional numbers into verified ones."],"answer":1,"explanation":"The sequence preserves the discussion date while acknowledging the work that remains."},{"question":"What would be misleading?","options":["Stating which decision a document supports.","Naming a later estimate date.","Calling the early version ready without explaining its limits."],"answer":2,"explanation":"Ready can mean different things. The limit on how the document can be used needs to be explicit."}],
-    "speakingPrompt":"Explain the difference between the Wednesday brief and the Friday estimate.","writingPrompt":"Using fictional details, offer a staged delivery: an early version for a limited decision and a later final version. Do not include real company numbers."
-  },
-  {
-    "id":"L06","level":2,"theme":"communication","title":"Read between the lines, carefully.","subtitle":"理解委婉反馈，但不把推测当作事实。","readingTitle":"Feedback that leaves room for interpretation",
-    "script":"Priya: Thanks for sending the presentation. There's a lot of useful work here.\nDaniel: Glad to hear it. Do you think it's ready for the client?\nPriya: The examples are strong. I wonder if the main recommendation could come a little earlier.\nDaniel: Do you mean moving the recommendation to the first section?\nPriya: Yes. Right now, the client has to go through several background slides before seeing what we suggest.\nDaniel: Okay. Is there anything else I should change?\nPriya: The final section could be more focused. We may not need every detail in the live presentation.\nDaniel: I'll shorten that section and keep the extra material as backup.\nPriya: That would help. Let's look at the revised version tomorrow before we call it final.",
-    "reading":"Positive language in feedback does not always mean a document is finished. Priya praises the examples, then asks for changes to the order and focus of the presentation.\n\nThe phrase 'I wonder if' softens a suggestion. In this conversation, the following explanation makes the intended change clear: the main recommendation should appear earlier because the client needs to see the proposal before working through the background.\n\nHowever, tone alone is not enough to infer every hidden meaning. Daniel checks the suggested change directly rather than assuming Priya wants a completely new presentation.\n\nThe final line also matters. Priya wants to review the revised version before calling it final. The presentation has useful strengths, but it has not yet received final approval. Understanding both parts is more accurate than treating the feedback as either pure praise or total rejection.",
-    "easy":"Priya likes the examples, but she wants two changes. Move the recommendation earlier and shorten the final section. She still wants to review the new version before approval.",
-    "zh":"肯定优点不等于最终通过。“I wonder if”在此是委婉建议；但应结合后面的具体解释，不能仅凭语气猜测隐藏意图。",
-    "phrases":[{"text":"I wonder if the recommendation could come earlier.","meaning":"I am suggesting that the recommendation appear sooner.","cue":"Suggest a change in a considerate way."},{"text":"Do you mean moving it to the first section?","meaning":"Is this specific change what you are asking for?","cue":"Check an implied suggestion rather than guessing."},{"text":"Let's review it before we call it final.","meaning":"A further review is needed before final approval.","cue":"Make clear that positive feedback is not yet approval."}],
-    "listenQuestions":[{"question":"Why does Priya want the recommendation earlier?","options":["She dislikes every example.","The client currently sees too much background first.","The presentation has no background."],"answer":1,"explanation":"She says the client must go through several background slides before seeing the suggestion."},{"question":"What is the presentation's status at the end?","options":["Revisions and another review are still needed.","It has been fully approved.","It has been cancelled."],"answer":0,"explanation":"Priya asks to review the revised version tomorrow before calling it final."}],
-    "readingQuestions":[{"question":"How should Daniel handle a softened suggestion?","options":["Ignore it because it is not a direct command.","Assume the entire presentation is wrong.","Check the specific change being requested."],"answer":2,"explanation":"Specific clarification is safer than ignoring or overinterpreting tone."},{"question":"Which interpretation best fits Priya's feedback?","options":["The work has strengths and still needs changes.","The work is useless.","Everything is complete and approved."],"answer":0,"explanation":"Both the praise and the requested changes are part of the meaning."}],
-    "speakingPrompt":"Explain what Priya praises, what she wants changed, and what remains unapproved.","writingPrompt":"Give balanced feedback on a fictional presentation: name a strength, request a specific change, and state the next review step."
-  },
-  {
-    "id":"L07","level":3,"theme":"business","title":"An attractive idea is not a decision.","subtitle":"理解商业讨论中的权衡、证据与可逆决策。","readingTitle":"Choose the next experiment, not the best story",
-    "script":"Jordan: The premium plan could bring in more revenue from each customer. Why not focus the whole team on it?\nCasey: That is one possibility. But a higher price per customer doesn't tell us how many customers would actually choose it.\nJordan: Our interviews were encouraging. Several people said they wanted the extra features.\nCasey: Encouraging, yes. They were also people who already liked our product. We should be careful about treating that group as representative of the whole market.\nJordan: So what would you do instead?\nCasey: Keep the current plan stable and test the premium offer with a limited group. We should look at actual choices, not just positive comments.\nJordan: Wouldn't that slow us down?\nCasey: It might slow the initial rollout. It could also stop us from committing the whole team to an assumption we haven't checked.\nJordan: Fair point. Let's agree on what evidence would justify expanding the test.",
-    "reading":"The premium plan has a plausible benefit: more revenue per customer. But that benefit is only one part of a business outcome. Demand, retention, support needs, and delivery costs can all affect what happens next. This is a fictional case, not a report about a real company.\n\nJordan offers encouraging interview comments as evidence. Casey does not dismiss them. Instead, Casey asks whether the people interviewed represent the broader group the company hopes to serve. Positive comments from existing fans may not tell the team enough about actual purchasing choices.\n\nThe proposed test is a way to learn before making a large commitment. It keeps the current offer stable and gives the team a limited setting in which to observe behavior. The test is not proof that the premium plan will succeed or fail.\n\nA good discussion distinguishes a promising idea, the evidence currently available, and the evidence needed for the next decision. The useful question is not only 'Which story sounds more attractive?' It is also 'What would change our mind, and how can we find out?'",
-    "easy":"The premium plan may earn more from each customer, but demand is uncertain. The interviews were with people who already liked the product. Casey suggests a limited test before a large commitment.",
-    "zh":"“每个客户收入更高”不代表整体业务更好。采访对象可能有偏差；小规模测试用来获取决策证据，并不是成功保证。案例为虚构。",
-    "phrases":[{"text":"We should be careful about treating that group as representative.","meaning":"That group may not reflect the wider population we care about.","cue":"Question whether the evidence comes from the right sample."},{"text":"Look at actual choices, not just positive comments.","meaning":"Observe behavior as well as what people say they like.","cue":"Distinguish interest from an actual decision."},{"text":"What evidence would justify expanding the test?","meaning":"What would we need to observe before taking the next, larger step?","cue":"Agree on a decision rule before reviewing a result."}],
-    "listenQuestions":[{"question":"What is Casey's concern about the interviews?","options":["They involved existing fans, who may not represent the whole market.","They contained no positive comments.","They were about a different product."],"answer":0,"explanation":"Casey notes that the interviewees already liked the product and questions their representativeness."},{"question":"What does Casey's test aim to avoid?","options":["Learning anything about customers.","Keeping the current plan stable.","A large commitment to an unchecked assumption."],"answer":2,"explanation":"Casey wants to test an assumption before committing the entire team."}],
-    "readingQuestions":[{"question":"What does the limited test establish in advance?","options":["Guaranteed success.","A setting for collecting evidence, not a guaranteed outcome.","Proof that all interviews are useless."],"answer":1,"explanation":"The test creates a way to learn; its outcome is not known in advance."},{"question":"Which distinction is central to the reading?","options":["A promising idea, current evidence, and evidence needed for the next decision.","Expensive words and simple words.","Good people and bad people."],"answer":0,"explanation":"The discussion separates the appeal of an idea from the evidence required to commit more resources."}],
-    "speakingPrompt":"Summarize Jordan's argument, Casey's concern, and the next decision the team needs to make.","writingPrompt":"Describe a fictional business experiment. State an assumption, one observation to collect, and a condition for expanding. Do not include confidential information."
-  },
-  {
-    "id":"L08","level":3,"theme":"business","title":"A number needs a frame.","subtitle":"听出数字背后的口径和解释边界，不只抓住涨跌。","readingTitle":"The question after the headline",
-    "script":"Morgan: The pilot team's response time is down by twenty percent. That sounds like a clear improvement.\nRiley: It might be. What period are we comparing it with?\nMorgan: The month before the pilot.\nRiley: And is the mix of requests the same?\nMorgan: Not exactly. During the pilot, simple requests were sent to the new self-service page. The team handled fewer of those directly.\nRiley: Then we need to be precise. The team may be faster, but the change in request mix could also affect the average.\nMorgan: Are you saying the result isn't useful?\nRiley: No. I'm saying we should describe what the number does and doesn't show. We can compare similar request types and also check whether customers are getting their problems solved.\nMorgan: Right. A faster average is only one part of the picture.\nRiley: Exactly. We need the definition, the comparison, and the customer outcome before making a strong claim.",
-    "reading":"A headline number can be accurate and still invite an inaccurate conclusion. In this fictional pilot, the reported average response time is lower than in the previous month. That does not, on its own, isolate the effect of the team's new process.\n\nThe mix of requests has changed. Simple requests now go to a self-service page, so the requests handled directly by the team are not identical to the previous period. An average combines the items that remain, and the composition of those items matters.\n\nRiley does not claim to know how much of the change came from the process or the request mix. The available information is not enough to separate those effects. Comparing similar request types would provide a more focused check.\n\nResponse time is also not the same as solving a customer's problem. The team needs to examine the customer outcome as well. Clear English here depends on understanding the boundary of the claim: a measured change is evidence to investigate, not automatically proof of the explanation someone prefers.",
-    "easy":"The average response time fell, but the request mix also changed. We cannot tell from this number alone why it fell. Compare similar requests and check whether customers' problems are solved.",
-    "zh":"数字为虚构教学情景。平均响应时间下降不自动证明流程效果；请求结构发生变化，而且响应快不等于问题解决好。现有信息不足以拆分原因。",
-    "phrases":[{"text":"What period are we comparing it with?","meaning":"What is the time period used as the comparison baseline?","cue":"Ask for the baseline before interpreting a change."},{"text":"We should describe what the number does and doesn't show.","meaning":"We need to state the evidence and its limits.","cue":"Prevent a measurement from becoming an unsupported explanation."},{"text":"A faster average is only one part of the picture.","meaning":"This metric does not capture the entire outcome.","cue":"Add context without dismissing a useful metric."}],
-    "listenQuestions":[{"question":"What changed besides the reported response time?","options":["The pilot was moved to a different year.","Simple requests were redirected to self-service.","All customers stopped making requests."],"answer":1,"explanation":"Morgan explains that simple requests were sent to a new self-service page."},{"question":"What does Riley recommend?","options":["Discard every number.","Assume the process caused the entire improvement.","Compare similar request types and check customer outcomes."],"answer":2,"explanation":"Riley wants a more comparable measurement and a check on whether problems are solved."}],
-    "readingQuestions":[{"question":"Can the reading identify the exact contribution of the new process?","options":["No. The available information cannot separate the effects.","Yes. The entire change is caused by the process.","Yes. The process had no effect at all."],"answer":0,"explanation":"The reading explicitly states that the available information is insufficient to isolate the effects."},{"question":"Which conclusion is supported?","options":["Faster responses always solve problems.","A measured change needs context before a strong causal claim.","Changing request mix makes every metric invalid."],"answer":1,"explanation":"The number is useful, but interpreting its cause and business meaning requires context."}],
-    "speakingPrompt":"Explain why Riley is cautious without saying that the reported number must be wrong.","writingPrompt":"Write a careful interpretation of a fictional metric. Name a comparison and one limitation. Do not use real company figures."
-  },
-  {
-    "id":"L09","level":3,"theme":"meetings","title":"Agreement is more than a quiet room.","subtitle":"识别讨论中的默认、未决问题与真正的承诺。","readingTitle":"Make alignment visible",
-    "script":"Avery: We've discussed the rollout plan. If there are no objections, I'll assume we're aligned.\nQuinn: I support the direction, but I don't think we've settled who owns the customer handover.\nAvery: I thought operations would handle it.\nSasha: We can coordinate the schedule. We haven't agreed to own the customer communications. That would need input from the account team.\nAvery: Thanks for pointing that out. Let's not treat silence as a commitment. What exactly needs an owner before we begin?\nQuinn: The handover checklist, the customer message, and the process for unexpected issues.\nSasha: I can own the schedule and draft the checklist. The account team should review the message, and we need a named contact for issues.\nAvery: Good. I'll confirm those responsibilities in writing and ask the account team to respond. We are aligned on the direction; the handover details are still open.\nQuinn: That is a much clearer summary.",
-    "reading":"A meeting can end with general support and still leave essential decisions unresolved. In this fictional rollout, the participants support the direction, but they have not all accepted the responsibilities that Avery assumes.\n\nQuinn distinguishes agreement on the goal from agreement on ownership. Sasha then makes the limit of operations' commitment explicit: coordinating a schedule is not the same as owning customer communications.\n\nAvery changes the closing summary. Instead of declaring full alignment, Avery records what is settled and what remains open. Written confirmation gives the account team a chance to accept or challenge the proposed responsibility.\n\nA clear summary names actions, owners, and unresolved questions. It should not invent agreement from a lack of objections. The purpose is not to force every detail into a single meeting. It is to make the current state visible so that people can move forward without relying on different assumptions.",
-    "easy":"The group agrees on the direction, but not every responsibility. Operations can coordinate the schedule. Customer communications and unexpected issues still need clear owners and confirmation.",
-    "zh":"方向一致不等于责任已落实。沉默不能自动当作承诺；协调时间表与负责客户沟通是不同职责。结尾要区分已定与未定。",
-    "phrases":[{"text":"I support the direction, but ownership is still open.","meaning":"I agree with the goal, but responsibility has not been decided.","cue":"Separate broad agreement from an unresolved detail."},{"text":"Let's not treat silence as a commitment.","meaning":"A lack of objection does not necessarily mean someone has accepted responsibility.","cue":"Check an assumed agreement before relying on it."},{"text":"I'll confirm those responsibilities in writing.","meaning":"I will record the proposed owners and ask for confirmation.","cue":"Turn a meeting discussion into explicit next actions."}],
-    "listenQuestions":[{"question":"What has operations actually agreed to do?","options":["Own all customer communications.","Take responsibility for every unexpected issue.","Coordinate the schedule."],"answer":2,"explanation":"Sasha says operations can coordinate the schedule but has not agreed to own customer communications."},{"question":"How does Avery revise the final summary?","options":["Direction is agreed; handover details remain open.","Every responsibility is fully settled.","Nobody supports the rollout."],"answer":0,"explanation":"Avery explicitly separates agreement on direction from unresolved handover details."}],
-    "readingQuestions":[{"question":"What is the problem with assuming alignment from silence?","options":["People can only agree by shouting.","A lack of objection may hide different assumptions or unaccepted responsibilities.","Written confirmation is always unnecessary."],"answer":1,"explanation":"Silence does not establish that each person accepts the same responsibilities."},{"question":"What should a clear meeting summary include?","options":["Only a positive closing sentence.","Claims that every detail is settled.","Actions, owners, and unresolved questions."],"answer":2,"explanation":"Making the current state explicit helps the team act without inventing agreement."}],
-    "speakingPrompt":"Summarize what is agreed, what operations accepts, and what still requires confirmation.","writingPrompt":"Write a closing note for a fictional meeting. Separate agreed direction, named actions, and one open question."
-  }
+ {
+  "id": "L01",
+  "level": 1,
+  "theme": "meetings",
+  "title": "Move the meeting, not the goal.",
+  "subtitle": "改时间的时候，把目的说清楚，别让对方猜。",
+  "readingTitle": "A change people can act on",
+  "script": "Alex: Hey Sam, can we push Monday's project call to Tuesday? The client still needs a day to look at the draft.\nSam: Tuesday works for me. Do we still need the full hour?\nAlex: Honestly, no. Let's keep it to thirty minutes. We only need to land on the next step.\nSam: Should I send the slides over beforehand?\nAlex: That'd be great. If they go out Monday afternoon, people can actually read them instead of watching you read them.\nSam: Fair enough. I'll update the invite and put the new goal in the subject line.\nAlex: Perfect. The time's changing — the goal isn't.",
+  "reading": "A meeting invitation should say more than when to show up. It should tell people what the group needs to decide and what to do before they arrive.\n\nHere the team is waiting on the client's notes. Moving the call gives the client room to respond, and shortening it is possible because the group only has to choose a next step, not walk through every slide together.\n\nSending the slides early changes what the meeting is for. People read at their own speed and arrive with real questions, so the thirty minutes go to decisions rather than reading aloud.\n\nThe useful part of the change is not the new date. It is a clearer plan for other people's attention.",
+  "easy": "The call moves from Monday to Tuesday because the client needs more time. The meeting will be thirty minutes, not an hour. Sam will send the slides on Monday afternoon and update the invitation with the goal.",
+  "zh": "抓三点：会议改到周二；客户还需要一天；会议缩短到三十分钟，只为定下一步，幻灯片提前发。",
+  "phrases": [
+   {
+    "text": "Can we push Monday's call to Tuesday?",
+    "meaning": "Can we move the meeting to a later day?",
+    "cue": "Ask to reschedule without sounding like you are cancelling it."
+   },
+   {
+    "text": "Let's keep it to thirty minutes.",
+    "meaning": "Let's limit the meeting to thirty minutes.",
+    "cue": "Propose a shorter meeting as a favour to everyone's calendar."
+   },
+   {
+    "text": "The time's changing — the goal isn't.",
+    "meaning": "The schedule changes, but the purpose stays the same.",
+    "cue": "Reassure people that a change of plan is not a change of direction."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Why is Alex moving the call?",
+    "options": [
+     "The slides aren't ready yet.",
+     "The client needs one more day.",
+     "Sam can't attend on Monday."
+    ],
+    "answer": 1,
+    "explanation": "Alex says the client still needs a day with the draft; Sam's availability isn't mentioned as the reason."
+   },
+   {
+    "question": "What are the thirty minutes for?",
+    "options": [
+     "Reading every slide aloud.",
+     "Agreeing on the next step.",
+     "Writing a new invitation."
+    ],
+    "answer": 1,
+    "explanation": "Alex says they only need to land on the next step, because the slides are read beforehand."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "What must the updated invitation make clear?",
+    "options": [
+     "Only the new date.",
+     "The client's history.",
+     "The time and the decision."
+    ],
+    "answer": 2,
+    "explanation": "Sam puts the new goal in the subject line, so the invite carries both when and what for."
+   },
+   {
+    "question": "How does sending slides early help?",
+    "options": [
+     "It removes the need for questions.",
+     "It guarantees client agreement.",
+     "Meeting time goes to decisions."
+    ],
+    "answer": 2,
+    "explanation": "Reading beforehand means the meeting isn't spent reading aloud."
+   }
+  ],
+  "speakingPrompt": "In two or three sentences, say why the call moved and what Sam will do next.",
+  "writingPrompt": "Write a short note moving a meeting. Give one reason, one preparation step and one clear goal. Use fictional details."
+ },
+ {
+  "id": "L02",
+  "level": 1,
+  "theme": "projects",
+  "title": "A quick update, a clear ask.",
+  "subtitle": "分清“做完了”“卡住了”和“我需要你做什么”。",
+  "readingTitle": "An update people can act on",
+  "script": "Maya: Quick update on the site. Home page is done, and we're testing the contact form now.\nLeo: Are we still good for Friday?\nMaya: Mostly. We're waiting on the final product photos. Without them I can check the layout, but I can't finish the product page.\nLeo: What do you need from me?\nMaya: Could you chase the design team and get the photos by tomorrow morning?\nLeo: Sure, I'll ping them today.\nMaya: Thanks. If they land on time, Friday still holds. I'll shout if anything shifts.",
+  "reading": "A good update helps someone understand the situation and pick an action. A long list of finished tasks usually doesn't.\n\nMaya separates three things: what's ready, what's in progress, and what's blocking. The home page is done, the contact form is being tested, and the product page depends on photos from another team.\n\nShe also makes one specific request. Leo doesn't have to solve the project — he has to contact the design team before a stated time.\n\nFriday is a target with a condition attached, not an unconditional promise. Naming the condition keeps the update honest without hiding the risk.",
+  "easy": "The home page is ready and the contact form is being tested. The product page needs final photos. Maya asks Leo to contact the design team and get them by tomorrow morning. Friday is still possible if the photos arrive on time.",
+  "zh": "别把“基本按计划”听成保证。照片是关键前提，Leo 拿到的是一个明确的协调请求，而不是整个项目。",
+  "phrases": [
+   {
+    "text": "Are we still good for Friday?",
+    "meaning": "Is the Friday target still realistic?",
+    "cue": "Check a deadline in one short question."
+   },
+   {
+    "text": "We're waiting on the final photos.",
+    "meaning": "We can't move forward until the photos arrive.",
+    "cue": "Name the blocker without blaming anyone."
+   },
+   {
+    "text": "I'll shout if anything shifts.",
+    "meaning": "I'll tell you if the situation changes.",
+    "cue": "Promise an update without promising a perfect result."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What is blocking the product page?",
+    "options": [
+     "A broken contact form.",
+     "The final product photos.",
+     "A missing home page."
+    ],
+    "answer": 1,
+    "explanation": "Maya can check the layout but can't finish the product page without the photos."
+   },
+   {
+    "question": "What does Maya ask Leo to do?",
+    "options": [
+     "Chase the design team.",
+     "Build the product page.",
+     "Move the deadline back."
+    ],
+    "answer": 0,
+    "explanation": "She asks him to contact the design team and get the photos by tomorrow morning."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why is Friday a target, not a promise?",
+    "options": [
+     "It depends on the photos.",
+     "The project was cancelled.",
+     "Maya hasn't seen the plan."
+    ],
+    "answer": 0,
+    "explanation": "The update states the condition that has to hold for Friday to remain realistic."
+   },
+   {
+    "question": "What makes the request useful?",
+    "options": [
+     "It lists every task.",
+     "It avoids naming anyone.",
+     "It names action and deadline."
+    ],
+    "answer": 2,
+    "explanation": "Leo knows whom to contact, what to ask for and when it's needed."
+   }
+  ],
+  "speakingPrompt": "Give a short update: what's done, what's blocked, and what help you need.",
+  "writingPrompt": "Write three sentences about a fictional project: one finished item, one blocker, one request with a time."
+ },
+ {
+  "id": "L03",
+  "level": 1,
+  "theme": "communication",
+  "title": "Ask before you assume.",
+  "subtitle": "模糊的要求要用具体问题落地，别自己脑补。",
+  "readingTitle": "Turning a vague ask into a clear task",
+  "script": "Nina: Could you make the report a bit shorter?\nOwen: Sure. When you say shorter — fewer pages, or less detail?\nNina: Fewer pages. The managers want something they can skim before the discussion.\nOwen: Should I cut the examples?\nNina: Keep the two that carry the argument. Put the extra tables in a separate file.\nOwen: Okay, so the main report is the key findings plus two examples, and everything else lives next to it.\nNina: Exactly.\nOwen: When do you need it?\nNina: Thursday afternoon, if that's realistic.\nOwen: It is. I'll send the short version and keep the rest one click away.",
+  "reading": "Words like shorter, better and clearer mean different things to different people. When a request is vague, the safest move is to ask what the person is trying to achieve.\n\nNina isn't asking Owen to delete useful material at random. She wants managers to reach the key findings fast. Once Owen knows the purpose, he can decide what belongs in the main document and what belongs beside it.\n\nHe then repeats the task back in his own words. That gives Nina a chance to correct him before the work starts, rather than after.\n\nGood clarification is specific. It asks about the outcome, the audience or the deadline — not just “I don't understand”.",
+  "easy": "Nina wants fewer pages, not less useful information. Owen keeps the key findings and two examples in the main report and moves the extra tables to another file. He repeats the task back to check it, and the new version is due Thursday afternoon.",
+  "zh": "“更短”指页数更少，不是随便删信息。先问目的和读者，再确认保留内容、附件位置和期限。",
+  "phrases": [
+   {
+    "text": "When you say shorter — fewer pages, or less detail?",
+    "meaning": "Which of these two meanings do you have in mind?",
+    "cue": "Offer two readings of an ambiguous word instead of guessing."
+   },
+   {
+    "text": "So the main report is the key findings plus two examples.",
+    "meaning": "This is my understanding of the task.",
+    "cue": "Play the task back to catch misunderstandings early."
+   },
+   {
+    "text": "I'll keep the rest one click away.",
+    "meaning": "The extra material stays available if needed.",
+    "cue": "Shorten a document without losing the support behind it."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What does Nina mean by shorter?",
+    "options": [
+     "Smaller text everywhere.",
+     "No examples at all.",
+     "Fewer pages overall."
+    ],
+    "answer": 2,
+    "explanation": "Nina says fewer pages, so managers can skim before the discussion."
+   },
+   {
+    "question": "What happens to the extra tables?",
+    "options": [
+     "They are deleted.",
+     "They go on page one.",
+     "They move to a file."
+    ],
+    "answer": 2,
+    "explanation": "Nina asks for a separate file so the information isn't lost."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why does Owen repeat the task back?",
+    "options": [
+     "To avoid the work.",
+     "To let Nina correct him.",
+     "To change the deadline."
+    ],
+    "answer": 1,
+    "explanation": "Playing it back creates an early chance to fix a misunderstanding."
+   },
+   {
+    "question": "Which question best clarifies a vague request?",
+    "options": [
+     "Can I just ignore it?",
+     "What must the reader get?",
+     "Why is this so hard?"
+    ],
+    "answer": 1,
+    "explanation": "Asking about the outcome and audience turns a vague word into a concrete task."
+   }
+  ],
+  "speakingPrompt": "Explain how Owen checks the meaning of the request without sounding defensive.",
+  "writingPrompt": "A fictional colleague asks you to make a presentation “better”. Write two specific clarification questions."
+ },
+ {
+  "id": "L04",
+  "level": 2,
+  "theme": "communication",
+  "title": "Disagree without closing the door.",
+  "subtitle": "不同意对方的方案，同时不让对话结束。",
+  "readingTitle": "Keeping a conversation open",
+  "script": "Priya: I've looked at the vendor proposal, and I'd go with the second option. It's cheaper and it starts sooner.\nDan: I hear you on the price. My worry is support — the second vendor has one person covering our whole region.\nPriya: That's a fair point. I hadn't weighted response time as heavily as cost.\nDan: So we're not really disagreeing about the goal. We're weighing different risks.\nPriya: Right. What if we ask both vendors for their escalation numbers and a named backup?\nDan: I'd be happy with that. If the second vendor can show real cover, the savings are hard to argue with.\nPriya: Then let's not decide today. I'll send both of them the same two questions and we can compare answers on Thursday.\nDan: Works for me. And thanks for not treating my objection as an attack.",
+  "reading": "Disagreement goes better when both people can say what they're actually weighing. Here the two positions look opposed, but they share the same goal and differ on which risk matters more.\n\nDan states his concern as a specific risk rather than a verdict. Priya acknowledges it and adjusts her own weighting instead of defending her first answer.\n\nThey then convert the disagreement into a question that can be answered with evidence. Asking both vendors the same two things makes the comparison fair and gives the conversation a next step.\n\nChoosing not to decide today isn't avoidance. It's a decision to gather one missing piece of information first.",
+  "easy": "Priya prefers the cheaper vendor. Dan is worried about support cover. They agree they want the same thing but weigh different risks. They will ask both vendors the same two questions and compare the answers on Thursday instead of deciding now.",
+  "zh": "把分歧说成“我们在权衡不同风险”，而不是“你错了”。然后用同一个问题向双方取证，把争论变成可比较的事实。",
+  "phrases": [
+   {
+    "text": "I hear you on the price.",
+    "meaning": "I accept that part of your argument.",
+    "cue": "Acknowledge one point before raising a different concern."
+   },
+   {
+    "text": "My worry is support.",
+    "meaning": "The risk I see is in support cover.",
+    "cue": "Frame an objection as a specific risk, not a rejection."
+   },
+   {
+    "text": "Let's not decide today.",
+    "meaning": "Let's wait for one more piece of information.",
+    "cue": "Delay a decision on purpose, with a reason and a date."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What is Dan's main concern?",
+    "options": [
+     "The price is too high.",
+     "Support cover is thin.",
+     "The start date is late."
+    ],
+    "answer": 1,
+    "explanation": "Dan worries one person covers the whole region, so response time is a risk."
+   },
+   {
+    "question": "What will they do instead of deciding?",
+    "options": [
+     "Ask both vendors questions.",
+     "Take the cheaper option.",
+     "Cancel the whole project."
+    ],
+    "answer": 0,
+    "explanation": "Priya will send both vendors the same two questions and they'll compare on Thursday."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "How does the reading describe their disagreement?",
+    "options": [
+     "They have different goals.",
+     "They weigh different risks.",
+     "One of them is wrong."
+    ],
+    "answer": 1,
+    "explanation": "Dan says they aren't disagreeing about the goal, only about which risk matters more."
+   },
+   {
+    "question": "Why is delaying the decision reasonable?",
+    "options": [
+     "It favours the cheap vendor.",
+     "It avoids the topic.",
+     "It gathers missing evidence."
+    ],
+    "answer": 2,
+    "explanation": "They name the exact information they need and a date to compare it."
+   }
+  ],
+  "speakingPrompt": "Retell the disagreement in three sentences, making clear what each person is weighing.",
+  "writingPrompt": "Write a short reply disagreeing with a fictional proposal. Name one point you accept, one risk you see, and one question that would settle it."
+ },
+ {
+  "id": "L05",
+  "level": 2,
+  "theme": "projects",
+  "title": "A deadline with an honest trade-off.",
+  "subtitle": "别只说“做不完”，把可选项和代价摆出来。",
+  "readingTitle": "Trading scope for time",
+  "script": "Tom: Bad news first — the payment integration is slower than we thought. As things stand, Friday isn't happening.\nRita: How far off are we?\nTom: The happy path works. Error handling and refunds are what's eating the time. I'd need until Wednesday for all three.\nRita: What are the options?\nTom: Two, really. We ship Friday with payments and refunds, and error handling follows the week after — or we hold everything to Wednesday and launch once.\nRita: What breaks if error handling comes later?\nTom: A failed payment shows a generic message instead of telling the customer what to do. It's ugly, but it doesn't lose money.\nRita: Then ship Friday and put a note in the release saying what's missing. I'd rather be honest about the gap than silent about it.\nTom: Good. I'll write the known-issues list today so nobody's surprised.",
+  "reading": "“We can't make it” is only half an update. The useful half is what could be delivered, what would be missing, and what the missing part actually costs.\n\nTom separates the working path from the unfinished edge cases, then puts two options side by side with their consequences. That turns a delay into a decision Rita can actually make.\n\nHe also answers the question behind the question: not “is it finished?” but “what happens to a customer if it isn't?” A generic error message is unpleasant but not financially harmful, which makes the trade-off acceptable.\n\nChoosing the earlier date comes with a written note about the gap. Shipping something incomplete is defensible; shipping it quietly is not.",
+  "easy": "The payment work won't be finished by Friday. Tom offers two choices: ship Friday without full error handling, or wait until Wednesday and ship everything. A missing error message is annoying but doesn't lose money, so Rita chooses Friday with a written note about what is missing.",
+  "zh": "延期汇报要带选项和代价：能交付什么、缺什么、缺了会怎样。选定早发就要写明缺口，别静悄悄上线。",
+  "phrases": [
+   {
+    "text": "Bad news first.",
+    "meaning": "I'm going to start with the problem.",
+    "cue": "Signal an honest update before any good news."
+   },
+   {
+    "text": "What are the options?",
+    "meaning": "Tell me the choices and their costs.",
+    "cue": "Ask for a decision set instead of a single bad outcome."
+   },
+   {
+    "text": "I'd rather be honest about the gap than silent about it.",
+    "meaning": "I prefer naming what's missing.",
+    "cue": "Choose transparency when shipping something incomplete."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Which work is taking the time?",
+    "options": [
+     "The release notes.",
+     "The happy path.",
+     "Error handling and refunds."
+    ],
+    "answer": 2,
+    "explanation": "Tom says the happy path works and that error handling and refunds are eating the time."
+   },
+   {
+    "question": "What does Rita decide?",
+    "options": [
+     "Ship Friday with a note.",
+     "Cancel the launch.",
+     "Wait until Wednesday."
+    ],
+    "answer": 0,
+    "explanation": "Rita chooses the earlier ship plus an honest note about what's missing."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "What makes Tom's update useful?",
+    "options": [
+     "He promises Friday anyway.",
+     "He gives two options.",
+     "He blames another team."
+    ],
+    "answer": 1,
+    "explanation": "He names what could ship, what would be missing and what that costs."
+   },
+   {
+    "question": "Why is missing error handling acceptable?",
+    "options": [
+     "Customers never see it.",
+     "It's ugly but costs nothing.",
+     "It will never be needed."
+    ],
+    "answer": 1,
+    "explanation": "A failed payment shows a generic message, which is unpleasant but not financially harmful."
+   }
+  ],
+  "speakingPrompt": "Present the two options and the reason for choosing one, in four sentences.",
+  "writingPrompt": "Write a short message reporting a delay on a fictional task. Give two options, one consequence each, and your recommendation."
+ },
+ {
+  "id": "L06",
+  "level": 2,
+  "theme": "communication",
+  "title": "Read between the lines, carefully.",
+  "subtitle": "听懂言外之意，但别把它当成事实。",
+  "readingTitle": "What was said, and what was implied",
+  "script": "Grace: So I ran the numbers past Hannah, and she said, “interesting — let's revisit this next quarter.”\nIvan: Hmm. That's not a no.\nGrace: It's not a yes either. She used to say “let's do it” when she meant it.\nIvan: What did she do with the last proposal she pushed back on?\nGrace: She asked for more detail, twice, and then it quietly disappeared.\nIvan: Then “revisit next quarter” might mean she doesn't want to say no in front of the team.\nGrace: That's my read too. But it's still a read. I could be wrong.\nIvan: So what's the move?\nGrace: I'll ask her directly what would have to change for it to happen this quarter. If she can name conditions, it's alive. If she goes vague again, I'll treat it as a no and stop spending time on it.\nIvan: That's better than guessing in either direction.",
+  "reading": "People often signal reluctance without stating it. Reading those signals is useful — as long as you keep them separate from what was actually said.\n\nGrace notices a change in Hannah's language and compares it with a past pattern. That's evidence, but it's still an interpretation, and she says so out loud.\n\nThe way out of ambiguity isn't a better guess. It's a question whose answer reveals something: asking what would have to change gives Hannah a chance to name real conditions.\n\nGrace also decides in advance how she'll read each possible answer. Setting that rule before asking stops her from hearing what she hopes to hear.",
+  "easy": "Hannah said “interesting — let's revisit this next quarter.” Grace thinks that may mean no, because Hannah used to say “let's do it.” She admits it's only an interpretation. She will ask what would have to change, and decide in advance how to read the answer.",
+  "zh": "把“可能是不想当众拒绝”当成假设，而不是结论。用一个能暴露信息的问题去验证，并提前定好每种回答怎么解读。",
+  "phrases": [
+   {
+    "text": "That's not a no.",
+    "meaning": "It hasn't been refused.",
+    "cue": "Point out that a reply left the outcome open."
+   },
+   {
+    "text": "That's my read too. But it's still a read.",
+    "meaning": "I share the interpretation, and it's not a fact.",
+    "cue": "Hold an inference as an inference."
+   },
+   {
+    "text": "What would have to change?",
+    "meaning": "What conditions would make this possible?",
+    "cue": "Ask a question that reveals whether a plan is alive."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What did Hannah actually say?",
+    "options": [
+     "Let's do it now.",
+     "Let's revisit next quarter.",
+     "No, this won't work."
+    ],
+    "answer": 1,
+    "explanation": "Grace quotes Hannah's exact words, which are neither a yes nor a no."
+   },
+   {
+    "question": "What will Grace do next?",
+    "options": [
+     "Drop the proposal quietly.",
+     "Ask what would have to change.",
+     "Send it to another manager."
+    ],
+    "answer": 1,
+    "explanation": "Grace plans to ask Hannah what conditions would make it happen this quarter."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "How does the reading treat Grace's inference?",
+    "options": [
+     "As a fact about Hannah.",
+     "As evidence-based interpretation.",
+     "As careless guessing."
+    ],
+    "answer": 1,
+    "explanation": "Grace notices a pattern, and the reading keeps that separate from what was said."
+   },
+   {
+    "question": "Why decide in advance how to read each answer?",
+    "options": [
+     "To avoid asking at all.",
+     "To block wishful hearing.",
+     "To put Hannah on edge."
+    ],
+    "answer": 1,
+    "explanation": "Setting the rule before asking limits interpreting an answer as you'd like it to be."
+   }
+  ],
+  "speakingPrompt": "Summarise what was said, what Grace infers, and how she plans to test the inference.",
+  "writingPrompt": "Write four sentences about an ambiguous reply you received in a fictional situation: what was said, what you suspect, and one question that would settle it."
+ },
+ {
+  "id": "L07",
+  "level": 3,
+  "theme": "business",
+  "title": "An attractive idea isn't a decision.",
+  "subtitle": "兴奋感是信息，不是结论。",
+  "readingTitle": "Separating enthusiasm from evidence",
+  "script": "Noel: Okay, hear me out. A subscription box for specialty coffee — recurring revenue, loyal customers, and the margins look fantastic on paper.\nFay: On paper. What's the churn assumption?\nNoel: Four percent a month, which is what the article I read used.\nFay: Right. And where did that article get it from?\nNoel: …I don't actually know. It was a summary of a summary.\nFay: That's the thing. The idea is attractive, and attractive ideas generate numbers that flatter them. What would convince you it's real?\nNoel: Pre-orders from people who don't know me.\nFay: That's a start. And what would convince you it isn't?\nNoel: If fifty strangers won't commit ten pounds before they've tasted anything, the margin story collapses — we'd be a shop with extra steps.\nFay: Then let's not build the business yet. Let's build the test. Two weeks, fifty strangers, one landing page.\nNoel: Deal. Though I'm noticing I want the answer to be yes.\nFay: Good that you said it out loud. That's exactly the feeling that ruins a decision.",
+  "reading": "Enthusiasm is data about the person feeling it, not about the opportunity. Noel's excitement is real, and it's also the reason his numbers look good.\n\nThe weak link is provenance. A churn rate carried along by “a summary of a summary” isn't a fact, and the discussion turns on where a number came from rather than how convenient it is.\n\nFay's method is to ask for falsification in both directions: what would prove it real, and what would prove it isn't. A plan that can only be confirmed is usually a preference in disguise.\n\nThe test they choose is cheap, time-boxed and involves strangers, which removes the two things most likely to flatter the result — personal relationships and unlimited runway. Naming the wish for a yes out loud is the last defence.",
+  "easy": "Noel likes a coffee subscription idea and its margins. Fay asks where the churn number came from, and Noel admits it's second-hand. They agree on a test: fifty strangers, two weeks, one landing page, pre-orders before tasting. Noel admits he wants the answer to be yes.",
+  "zh": "先问数字的来源，再问结论。用可证伪的测试代替论证：谁能证真、什么会证伪、成本多低、多久出结果。承认自己希望答案是“是”，本身就是防线。",
+  "phrases": [
+   {
+    "text": "Hear me out.",
+    "meaning": "Listen to my idea before judging it.",
+    "cue": "Open a pitch while inviting a real reaction."
+   },
+   {
+    "text": "Where did that number come from?",
+    "meaning": "What is the source of this figure?",
+    "cue": "Ask about provenance rather than plausibility."
+   },
+   {
+    "text": "Let's build the test, not the business.",
+    "meaning": "Let's design cheap evidence first.",
+    "cue": "Convert an attractive idea into a falsifiable experiment."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What is wrong with the churn figure?",
+    "options": [
+     "It's too high for coffee.",
+     "Its source is second-hand.",
+     "Fay calculated it wrongly."
+    ],
+    "answer": 1,
+    "explanation": "Noel admits it came from a summary of a summary, so its provenance is unknown."
+   },
+   {
+    "question": "What test do they agree on?",
+    "options": [
+     "A full product launch.",
+     "A survey of their friends.",
+     "Fifty strangers, two weeks."
+    ],
+    "answer": 2,
+    "explanation": "Fay proposes two weeks, fifty strangers and one landing page; Noel agrees."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why ask what would disprove the idea?",
+    "options": [
+     "To be difficult.",
+     "To expose a hidden preference.",
+     "To delay everything forever."
+    ],
+    "answer": 1,
+    "explanation": "A plan that can only be confirmed is usually a preference in disguise."
+   },
+   {
+    "question": "What does Noel's closing admission show?",
+    "options": [
+     "He rejects the test.",
+     "He sees his wish as a risk.",
+     "He has lost interest."
+    ],
+    "answer": 1,
+    "explanation": "Naming the desire for a favourable answer is treated as a defence, not a weakness."
+   }
+  ],
+  "speakingPrompt": "Explain in four sentences why an attractive idea still needs a test, using the coffee example.",
+  "writingPrompt": "Describe a fictional business idea you like. State one number it depends on, where that number came from, and one cheap test that could disprove it."
+ },
+ {
+  "id": "L08",
+  "level": 3,
+  "theme": "business",
+  "title": "A number needs a frame.",
+  "subtitle": "同一个数字，换个参照就是另一个结论。",
+  "readingTitle": "Comparison, base rates and what changed",
+  "script": "Rosa: Our return rate is eleven percent. Legal wants to know if that's a problem.\nBen: Eleven percent of what, and compared with whom?\nRosa: Of units shipped this quarter. Last year it was eight.\nBen: Okay, so the honest sentence is “up three points year on year”, not “eleven percent”. Eleven on its own doesn't mean anything.\nRosa: The category average is around nine, I think.\nBen: “I think” — can we source that? Because if it's nine, we're two points above the market and that's a real conversation. If it's thirteen, we're fine and Legal can relax.\nRosa: And the mix changed. We launched two new products this quarter.\nBen: Then the aggregate is hiding the answer. Split old products from new. If the old ones are still at eight, the problem is a design issue in the new line, not a company-wide slide.\nRosa: That's a much smaller question to investigate.\nBen: Smaller and answerable. Also say what the denominator did — if shipments jumped, eleven percent might be the same number of returns as before.\nRosa: I'll come back with the split and the source for the category figure. No more bare numbers.",
+  "reading": "A statistic on its own rarely supports a conclusion. It needs a comparison, a base and a definition.\n\nEleven percent becomes meaningful against last year's eight and against a sourced category average. Whether the category figure is nine or thirteen changes the answer completely, which is why “I think” isn't good enough for Legal.\n\nAggregates can also hide the mechanism. If the mix changed, splitting old products from new turns a vague company-wide worry into a specific, investigable question about one product line.\n\nFinally, a rate without its denominator can mislead. If shipments grew, the same number of returns produces a different percentage. Reporting both keeps the story honest.",
+  "easy": "The return rate is eleven percent this quarter and eight percent last year. Ben says the number needs comparisons: last year, a sourced category average, and a split between old and new products. He also wants the shipment figures, because a rate alone can mislead.",
+  "zh": "裸数字不下结论。要有：同比、有出处的行业基准、结构拆分（新老产品）、以及分母变化。把“公司是不是出问题了”缩小成“哪条线、和谁比、差多少”。",
+  "phrases": [
+   {
+    "text": "Eleven percent of what, and compared with whom?",
+    "meaning": "What's the base and the benchmark?",
+    "cue": "Refuse a bare number until it has a frame."
+   },
+   {
+    "text": "Can we source that?",
+    "meaning": "Where is the evidence for that figure?",
+    "cue": "Ask for provenance before treating a figure as fact."
+   },
+   {
+    "text": "The aggregate is hiding the answer.",
+    "meaning": "The combined figure conceals the detail that matters.",
+    "cue": "Push for a breakdown instead of a single average."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "Why does Ben reject a bare eleven percent?",
+    "options": [
+     "It's too small to matter.",
+     "It has no comparison.",
+     "Legal may not see it."
+    ],
+    "answer": 1,
+    "explanation": "Ben says the honest sentence is up three points year on year, not eleven percent alone."
+   },
+   {
+    "question": "What split does Ben ask for?",
+    "options": [
+     "Old products versus new.",
+     "Domestic versus export.",
+     "Online versus retail."
+    ],
+    "answer": 0,
+    "explanation": "Because the mix changed with two launches, he wants old separated from new."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why does the category average matter?",
+    "options": [
+     "It decides above or below market.",
+     "It replaces internal data.",
+     "It is required by law."
+    ],
+    "answer": 0,
+    "explanation": "Nine versus thirteen leads to opposite conclusions, which is why a source is needed."
+   },
+   {
+    "question": "What risk does Ben flag about the denominator?",
+    "options": [
+     "Percentages are always wrong.",
+     "Growing shipments shift the rate.",
+     "Returns can't be counted."
+    ],
+    "answer": 1,
+    "explanation": "He asks what shipments did, because the same return count yields a different rate."
+   }
+  ],
+  "speakingPrompt": "Restate the eleven percent finding with the three comparisons Ben asks for.",
+  "writingPrompt": "Take a fictional metric and write four sentences that frame it: base period, benchmark with a source, one breakdown, and what the denominator did."
+ },
+ {
+  "id": "L09",
+  "level": 3,
+  "theme": "meetings",
+  "title": "Agreement is more than a quiet room.",
+  "subtitle": "没人反对，不等于大家都同意。",
+  "readingTitle": "Silence, consent and the cost of a fast yes",
+  "script": "Idris: Right, nobody's objected, so we're agreed. I'll send it out as decided.\nKate: Can I slow this down for a second? Nobody's objected out loud, but that's not the same as everybody agreeing.\nIdris: What's the difference?\nKate: Three people have said nothing at all. Mei's been looking at her laptop since the slide changed, and Tomas raised this concern last month and got talked round.\nIdris: So you think there's disagreement we haven't heard?\nKate: I think there's disagreement that's expensive to raise after we've announced it. Quiet is cheap now and costly later.\nIdris: Fair. What would you do?\nKate: One round, thirty seconds each, and the question isn't “any objections?” — it's “what would make this fail?” That's easier to answer honestly.\nIdris: And if someone names a real risk?\nKate: Then we've spent five minutes now instead of a month in November. Mei — you've been quiet. What would make this fail?\nMei: Honestly? The handover. Nobody's written down what happens when the current team leaves.\nIdris: …Okay. Not agreed yet. Let's fix that first.",
+  "reading": "Silence is ambiguous. It can mean consent, confusion, exhaustion, or a judgement that speaking up isn't worth the cost. Treating it as agreement converts a cheap conversation now into an expensive one later.\n\nKate distinguishes between the absence of objection and the presence of consent, and she points to observable signals — who hasn't spoken, who was previously talked round — rather than to a feeling.\n\nHer proposed question matters. “Any objections?” invites performance and punishes the person who says yes. “What would make this fail?” gives everyone a legitimate reason to raise a problem, including people who support the plan.\n\nThe payoff is immediate: the first honest answer names a risk nobody had written down, and the group reopens a decision it had almost closed.",
+  "easy": "Idris thinks silence means agreement. Kate points out that three people said nothing and that one of them raised a concern before. She suggests asking “what would make this fail?” instead of “any objections?”. Mei then names a missing handover plan, and the decision is reopened.",
+  "zh": "沉默有多种含义，不能直接当同意。换问法：不要问“有没有反对”，要问“什么会让它失败”。这样支持者也能说出风险，成本发生在决策前而不是宣布后。",
+  "phrases": [
+   {
+    "text": "Can I slow this down for a second?",
+    "meaning": "Let's pause before closing this.",
+    "cue": "Interrupt a premature decision politely."
+   },
+   {
+    "text": "Quiet is cheap now and costly later.",
+    "meaning": "Raising it now costs little; afterwards it costs a lot.",
+    "cue": "Explain why unresolved silence is expensive."
+   },
+   {
+    "text": "What would make this fail?",
+    "meaning": "Name the risks rather than the objections.",
+    "cue": "Ask a question that makes honest disagreement safe."
+   }
+  ],
+  "listenQuestions": [
+   {
+    "question": "What is Kate's objection?",
+    "options": [
+     "Idris spoke too fast.",
+     "The meeting ran long.",
+     "Silence isn't consent."
+    ],
+    "answer": 2,
+    "explanation": "Kate says nobody objecting out loud is not the same as everybody agreeing."
+   },
+   {
+    "question": "Which question does Kate suggest?",
+    "options": [
+     "Who actually disagrees?",
+     "What would make this fail?",
+     "Any objections here?"
+    ],
+    "answer": 1,
+    "explanation": "She argues a failure-mode question is easier to answer honestly."
+   }
+  ],
+  "readingQuestions": [
+   {
+    "question": "Why is “any objections?” weaker?",
+    "options": [
+     "It punishes a yes.",
+     "It's too long to answer.",
+     "It can't be translated."
+    ],
+    "answer": 0,
+    "explanation": "The reading says it invites performance and makes honest disagreement costly."
+   },
+   {
+    "question": "What happens after Mei speaks?",
+    "options": [
+     "Idris reopens the decision.",
+     "Mei is asked to leave.",
+     "The decision is sent out."
+    ],
+    "answer": 0,
+    "explanation": "Idris says not agreed yet, and they address the missing handover plan first."
+   }
+  ],
+  "speakingPrompt": "Explain why a silent room may not be an agreeing room, and how one question changes that.",
+  "writingPrompt": "Write a short note to a fictional team before a decision meeting, asking each person for one thing that could make the plan fail."
+ }
 ]
