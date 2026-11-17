@@ -1,0 +1,12 @@
+/* Category navigation and practical settings feedback. */
+.category-navigation{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.category-chip{min-height:44px;border:1px solid var(--color-control-border);border-radius:var(--radius-control);padding:8px 12px;background:var(--color-surface);color:var(--color-ink);font-size:.9375rem}
+.category-chip:hover{background:var(--color-surface-soft)}
+.category-chip.active{background:var(--color-selected);border-color:var(--color-primary);color:var(--color-primary-hover)}
+.category-chip span{font-size:.875rem;color:var(--color-muted);font-variant-numeric:tabular-nums}
+.reading-word-action{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:24px}
+.size-preview{font-size:1.125rem;line-height:1.8;background:var(--color-surface-soft);padding:12px;border-radius:var(--radius-control)}
+.size-preview.large-preview{font-size:1.375rem}
+.ai-practice{padding:24px 0;border-top:1px solid var(--color-line);margin-top:24px}
+.dialogue-history{max-height:40vh;overflow:auto;overflow-wrap:anywhere}
+.tabs{flex-wrap:wrap}

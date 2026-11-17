@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T20:35:00.0173353+08:00",
+  "title": "Design System: Unfold",
+  "extensions": {
+    "colorMeta": {
+      "bg": { "role": "neutral", "displayName": "蓝灰地面", "tonalRamp": ["oklch(15% 0.0019 255.5)", "oklch(27% 0.0040 255.5)", "oklch(39% 0.0057 255.5)", "oklch(51% 0.0062 255.5)", "oklch(63% 0.0055 255.5)", "oklch(75% 0.0037 255.5)", "oklch(87% 0.0016 255.5)", "oklch(95% 0.0004 255.5)"] },
+      "rail": { "role": "neutral", "displayName": "导航蓝灰", "tonalRamp": ["oklch(15% 0.0038 255.5)", "oklch(27% 0.0082 255.5)", "oklch(39% 0.0115 255.5)", "oklch(51% 0.0126 255.5)", "oklch(63% 0.0111 255.5)", "oklch(75% 0.0075 255.5)", "oklch(87% 0.0031 255.5)", "oklch(95% 0.0008 255.5)"] },
+      "surface": { "role": "neutral", "displayName": "内容白", "tonalRamp": ["oklch(15% 0.0000 0.0)", "oklch(27% 0.0000 0.0)", "oklch(39% 0.0000 0.0)", "oklch(51% 0.0000 0.0)", "oklch(63% 0.0000 0.0)", "oklch(75% 0.0000 0.0)", "oklch(87% 0.0000 0.0)", "oklch(95% 0.0000 0.0)"] },
+      "surface-soft": { "role": "neutral", "displayName": "轻蓝灰面", "tonalRamp": ["oklch(15% 0.0026 247.9)", "oklch(27% 0.0056 247.9)", "oklch(39% 0.0078 247.9)", "oklch(51% 0.0086 247.9)", "oklch(63% 0.0076 247.9)", "oklch(75% 0.0051 247.9)", "oklch(87% 0.0021 247.9)", "oklch(95% 0.0005 247.9)"] },
+      "ink": { "role": "neutral", "displayName": "蓝黑墨色", "tonalRamp": ["oklch(15% 0.0148 259.5)", "oklch(27% 0.0315 259.5)", "oklch(39% 0.0442 259.5)", "oklch(51% 0.0484 259.5)", "oklch(63% 0.0426 259.5)", "oklch(75% 0.0288 259.5)", "oklch(87% 0.0121 259.5)", "oklch(95% 0.0030 259.5)"] },
+      "muted": { "role": "neutral", "displayName": "次要蓝灰", "tonalRamp": ["oklch(15% 0.0133 258.3)", "oklch(27% 0.0282 258.3)", "oklch(39% 0.0396 258.3)", "oklch(51% 0.0434 258.3)", "oklch(63% 0.0381 258.3)", "oklch(75% 0.0258 258.3)", "oklch(87% 0.0109 258.3)", "oklch(95% 0.0027 258.3)"] },
+      "primary": { "role": "primary", "displayName": "行动钴蓝", "tonalRamp": ["oklch(15% 0.0489 263.3)", "oklch(27% 0.1039 263.3)", "oklch(39% 0.1460 263.3)", "oklch(51% 0.1599 263.3)", "oklch(63% 0.1407 263.3)", "oklch(75% 0.0951 263.3)", "oklch(87% 0.0400 263.3)", "oklch(95% 0.0099 263.3)"] },
+      "primary-hover": { "role": "primary", "displayName": "深钴蓝", "tonalRamp": ["oklch(15% 0.0489 263.4)", "oklch(27% 0.1039 263.4)", "oklch(39% 0.1460 263.4)", "oklch(51% 0.1599 263.4)", "oklch(63% 0.1407 263.4)", "oklch(75% 0.0951 263.4)", "oklch(87% 0.0400 263.4)", "oklch(95% 0.0099 263.4)"] },
+      "selected": { "role": "primary", "displayName": "浅蓝选中面", "tonalRamp": ["oklch(15% 0.0065 268.4)", "oklch(27% 0.0138 268.4)", "oklch(39% 0.0193 268.4)", "oklch(51% 0.0212 268.4)", "oklch(63% 0.0186 268.4)", "oklch(75% 0.0126 268.4)", "oklch(87% 0.0053 268.4)", "oklch(95% 0.0013 268.4)"] },
+      "line": { "role": "neutral", "displayName": "轻分隔线", "tonalRamp": ["oklch(15% 0.0057 258.4)", "oklch(27% 0.0120 258.4)", "oklch(39% 0.0169 258.4)", "oklch(51% 0.0185 258.4)", "oklch(63% 0.0163 258.4)", "oklch(75% 0.0110 258.4)", "oklch(87% 0.0046 258.4)", "oklch(95% 0.0011 258.4)"] },
+      "control-border": { "role": "neutral", "displayName": "控件蓝灰边", "tonalRamp": ["oklch(15% 0.0131 257.9)", "oklch(27% 0.0278 257.9)", "oklch(39% 0.0390 257.9)", "oklch(51% 0.0428 257.9)", "oklch(63% 0.0376 257.9)", "oklch(75% 0.0254 257.9)", "oklch(87% 0.0107 257.9)", "oklch(95% 0.0026 257.9)"] },
+      "danger": { "role": "error", "displayName": "错误暗红", "tonalRamp": ["oklch(15% 0.0419 20.1)", "oklch(27% 0.0890 20.1)", "oklch(39% 0.1251 20.1)", "oklch(51% 0.1369 20.1)", "oklch(63% 0.1205 20.1)", "oklch(75% 0.0815 20.1)", "oklch(87% 0.0343 20.1)", "oklch(95% 0.0085 20.1)"] },
+      "error-bg": { "role": "error", "displayName": "错误浅红面", "tonalRamp": ["oklch(15% 0.0050 12.8)", "oklch(27% 0.0106 12.8)", "oklch(39% 0.0148 12.8)", "oklch(51% 0.0163 12.8)", "oklch(63% 0.0143 12.8)", "oklch(75% 0.0097 12.8)", "oklch(87% 0.0041 12.8)", "oklch(95% 0.0010 12.8)"] },
+      "warning": { "role": "warning", "displayName": "警告棕", "tonalRamp": ["oklch(15% 0.0270 65.5)", "oklch(27% 0.0573 65.5)", "oklch(39% 0.0805 65.5)", "oklch(51% 0.0882 65.5)", "oklch(63% 0.0776 65.5)", "oklch(75% 0.0525 65.5)", "oklch(87% 0.0221 65.5)", "oklch(95% 0.0055 65.5)"] },
+      "warning-bg": { "role": "warning", "displayName": "警告浅暖面", "tonalRamp": ["oklch(15% 0.0069 78.2)", "oklch(27% 0.0146 78.2)", "oklch(39% 0.0206 78.2)", "oklch(51% 0.0225 78.2)", "oklch(63% 0.0198 78.2)", "oklch(75% 0.0134 78.2)", "oklch(87% 0.0056 78.2)", "oklch(95% 0.0014 78.2)"] },
+      "focus": { "role": "primary", "displayName": "焦点深蓝", "tonalRamp": ["oklch(15% 0.0489 263.3)", "oklch(27% 0.1039 263.3)", "oklch(39% 0.1460 263.3)", "oklch(51% 0.1599 263.3)", "oklch(63% 0.1407 263.3)", "oklch(75% 0.0951 263.3)", "oklch(87% 0.0400 263.3)", "oklch(95% 0.0099 263.3)"] }
+    },
+    "typographyMeta": {
+      "headline": { "displayName": "任务标题", "purpose": "页级任务标题，不是装饰性展示字。" },
+      "title": { "displayName": "分组标题", "purpose": "内容分组与弹窗标题。" },
+      "subheading": { "displayName": "材料标题", "purpose": "材料卡与表达标题。" },
+      "body": { "displayName": "普通正文", "purpose": "界面正文与普通说明。" },
+      "input": { "displayName": "输入文字", "purpose": "16px文本输入，行距1.5。" },
+      "english": { "displayName": "英文阅读", "purpose": "英文文章与展开原文，最长70ch。" },
+      "english-large": { "displayName": "英文大字", "purpose": "仅阅读正文的大字偏好，不改变按钮。" },
+      "button": { "displayName": "按钮文字", "purpose": "通用行动按钮。" },
+      "metadata": { "displayName": "轻量元数据", "purpose": "卡片元数据与非交互标签。" },
+      "navigation": { "displayName": "桌面导航", "purpose": "桌面导航按钮，手机另用短标签。" },
+      "step-label": { "displayName": "步骤文字", "purpose": "桌面有序练习步骤。" }
+    },
+    "shadows": [
+      { "name": "dialog", "value": "0 24px 64px rgba(30,45,69,.22)", "purpose": "仅已有弹窗抬升，常驻内容保持扁平。" }
+    ],
+    "motion": [
+      { "name": "duration-state", "value": "160ms", "purpose": "按钮背景/边界与toast状态过渡；减弱动作偏好时关闭。" },
+      { "name": "ease-state", "value": "cubic-bezier(.2,.7,.2,1)", "purpose": "既有状态变化的缓出曲线。" }
+    ],
+    "breakpoints": [
+      { "name": "rail-compact", "value": "1120px" },
+      { "name": "single-column", "value": "880px" },
+      { "name": "mobile-navigation", "value": "700px" },
+      { "name": "narrow-form", "value": "370px" },
+      { "name": "narrow-player", "value": "340px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "主要按钮",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "主要行动的实际颜色和状态；原生button，样例不执行学习操作。",
+      "html": "<button type=\"button\" class=\"ds-btn ds-primary\">继续阅读 <svg class=\"ds-icon\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M4 10h12M11 5l5 5-5 5\"/></svg></button>",
+      "css": ".ds-btn{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;background:var(--color-surface);color:var(--color-ink);border:1px solid var(--color-control-border);border-radius:var(--radius-control);font:.9375rem/1.4 var(--font-ui);font-weight:600;cursor:pointer;transition:background-color var(--duration-state) var(--ease-state),border-color var(--duration-state) var(--ease-state)}.ds-btn:hover:not(:disabled){background:var(--color-surface-soft)}.ds-btn:active:not(:disabled){background:var(--color-line)}.ds-btn.ds-primary{background:var(--color-primary);border-color:var(--color-primary);color:var(--color-surface)}.ds-btn.ds-primary:hover:not(:disabled){background:var(--color-primary-hover);border-color:var(--color-primary-hover)}.ds-btn.ds-primary:active:not(:disabled){background:var(--color-focus);border-color:var(--color-focus)}.ds-btn:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}button:disabled{cursor:not-allowed;color:var(--color-muted);background:var(--color-surface-soft);border-color:var(--color-line)}.ds-icon{width:20px;height:20px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}"
+    },
+    {
+      "name": "次要按钮",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "白底与可识别边界，不与主行动争夺强调色。",
+      "html": "<button type=\"button\" class=\"ds-btn\">从头重听</button>",
+      "css": ".ds-btn{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;background:var(--color-surface);color:var(--color-ink);border:1px solid var(--color-control-border);border-radius:var(--radius-control);font:.9375rem/1.4 var(--font-ui);font-weight:600;cursor:pointer;transition:background-color var(--duration-state) var(--ease-state),border-color var(--duration-state) var(--ease-state)}.ds-btn:hover:not(:disabled){background:var(--color-surface-soft)}.ds-btn:active:not(:disabled){background:var(--color-line)}.ds-btn:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}button:disabled{cursor:not-allowed;color:var(--color-muted);background:var(--color-surface-soft);border-color:var(--color-line)}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}"
+    },
+    {
+      "name": "轻量按钮",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "次要说明与辅助操作仍保留44px目标，不退化成难点的小文字。",
+      "html": "<button type=\"button\" class=\"ds-btn ds-ghost\">看英文原文</button>",
+      "css": ".ds-btn{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;background:var(--color-surface);color:var(--color-ink);border:1px solid var(--color-control-border);border-radius:var(--radius-control);font:.9375rem/1.4 var(--font-ui);font-weight:600;cursor:pointer;transition:background-color var(--duration-state) var(--ease-state),border-color var(--duration-state) var(--ease-state)}.ds-btn:hover:not(:disabled){background:var(--color-surface-soft)}.ds-btn:active:not(:disabled){background:var(--color-line)}.ds-btn.ds-ghost{background:transparent;border-color:transparent;color:var(--color-muted);padding-inline:12px}.ds-btn.ds-ghost:hover:not(:disabled){color:var(--color-ink);background:var(--color-surface-soft)}.ds-btn:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}button:disabled{cursor:not-allowed;color:var(--color-muted);background:var(--color-surface-soft);border-color:var(--color-line)}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}"
+    },
+    {
+      "name": "删除类按钮",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "暗红是语义状态；实际产品另有确认或撤销，不由样例模拟。",
+      "html": "<button type=\"button\" class=\"ds-btn ds-danger\">删除记录</button>",
+      "css": ".ds-btn{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;background:var(--color-surface);color:var(--color-ink);border:1px solid var(--color-control-border);border-radius:var(--radius-control);font:.9375rem/1.4 var(--font-ui);font-weight:600;cursor:pointer;transition:background-color var(--duration-state) var(--ease-state),border-color var(--duration-state) var(--ease-state)}.ds-btn:hover:not(:disabled){background:var(--color-surface-soft)}.ds-btn:active:not(:disabled){background:var(--color-line)}.ds-btn.ds-danger{color:var(--color-danger);border-color:var(--color-danger)}.ds-btn.ds-danger:hover:not(:disabled){background:var(--color-error-bg)}.ds-btn:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}button:disabled{cursor:not-allowed;color:var(--color-muted);background:var(--color-surface-soft);border-color:var(--color-line)}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}"
+    },
+    {
+      "name": "搜索输入",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "18px绘制图标与40px文字起点；保留原生输入和键盘焦点。",
+      "html": "<label class=\"ds-search\"><span class=\"ds-visually-hidden\">搜索场景</span><svg class=\"ds-search-icon\" aria-hidden=\"true\" viewBox=\"0 0 20 20\"><path d=\"M8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10M12 12l5 5\"/></svg><input class=\"ds-input\" type=\"text\" placeholder=\"搜索标题或场景\"/></label>",
+      "css": ".ds-search{position:relative;display:block;width:100%;max-width:100%;font:1rem/1.6 var(--font-ui);color:var(--color-ink)}.ds-visually-hidden{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.ds-search-icon{position:absolute;inset-inline-start:12px;top:13px;color:var(--color-muted);width:18px;height:18px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}.ds-search .ds-input{box-sizing:border-box;min-height:44px;min-width:0;max-width:100%;width:100%;background:var(--color-surface);color:var(--color-ink);border:1px solid var(--color-control-border);border-radius:var(--radius-control);padding:10px 12px;padding-inline-start:40px;font:1rem/1.5 var(--font-ui);caret-color:var(--color-primary)}.ds-input::placeholder{color:var(--color-muted);opacity:1}.ds-input:hover{cursor:text}.ds-input:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}.ds-input::selection{background:var(--color-selected);color:var(--color-ink)}"
+    },
+    {
+      "name": "桌面导航",
+      "kind": "nav",
+      "refersTo": "navigation-item",
+      "description": "实际桌面导航片段；手机底部五栏规则记录在DESIGN.md，不把固定侧栏塞入组件预览。",
+      "html": "<nav class=\"ds-nav\" aria-label=\"主要导航样例\"><button type=\"button\" class=\"ds-nav-button ds-current\" aria-current=\"page\"><svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 20 20\"><path d=\"M3 10l7-7 7 7M5 9v8h10V9M8 17v-5h4v5\"/></svg>今日练习</button><button type=\"button\" class=\"ds-nav-button\"><svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 20 20\"><path d=\"M4 3h4v14H4zM10 3h4v14h-4zM16 4l3 1-3 12-3-1\"/></svg>场景库</button><button type=\"button\" class=\"ds-nav-button\"><svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 20 20\"><path d=\"M4 6a7 7 0 1 1-1 7M4 2v5h5M10 6v4l3 2\"/></svg>复习</button><button type=\"button\" class=\"ds-nav-button\"><svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 20 20\"><path d=\"M5 3h10a2 2 0 0 1 2 2v12H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2M7 7h6M7 11h6\"/></svg>学习记录</button><button type=\"button\" class=\"ds-nav-button\"><svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 20 20\"><path d=\"M10 3v3M10 14v3M3 10h3M14 10h3M5 5l2 2M13 13l2 2M5 15l2-2M13 7l2-2M10 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8\"/></svg>设置</button></nav>",
+      "css": ".ds-nav{box-sizing:border-box;display:grid;gap:var(--space-2);width:var(--rail-width);max-width:100%;padding:var(--space-4);background:var(--color-rail)}.ds-nav-button{box-sizing:border-box;display:flex;align-items:center;gap:var(--space-3);min-height:48px;width:100%;text-align:start;padding:12px;border:1px solid transparent;border-radius:var(--radius-control);background:transparent;color:var(--color-muted);font:.9375rem/1.6 var(--font-ui);font-weight:600;cursor:pointer}.ds-nav-button:hover{background:var(--color-surface-soft);color:var(--color-ink)}.ds-nav-button.ds-current{background:var(--color-surface);color:var(--color-primary-hover);border-color:var(--color-line)}.ds-nav-button:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}.ds-icon{width:20px;height:20px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}"
+    },
+    {
+      "name": "来源标签",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "非交互元数据，不发明hover、active或假收藏功能。",
+      "html": "<span class=\"ds-tag\">合成音频 · 非真人</span>",
+      "css": ".ds-tag{display:inline-flex;align-items:center;gap:4px;max-width:100%;padding:3px 8px;background:var(--color-surface-soft);color:var(--color-muted);border-radius:4px;font:.875rem/1.5 var(--font-ui);overflow-wrap:anywhere}"
+    },
+    {
+      "name": "场景材料卡",
+      "kind": "card",
+      "refersTo": "lesson-card",
+      "description": "实际L01标题与说明；article不是可点击整卡，行动留在明确按钮。",
+      "html": "<article class=\"ds-lesson-card\"><div class=\"ds-lesson-meta\">基础 · 会议与对齐</div><h3 lang=\"en\">Move the meeting, not the goal.</h3><p>调整会议时间，听出安排背后的目的。</p><div class=\"ds-card-foot\"><span class=\"ds-state\">进行中</span><button class=\"ds-btn\" type=\"button\" aria-label=\"继续：Move the meeting, not the goal.\">继续 <svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 20 20\"><path d=\"M4 10h12M11 5l5 5-5 5\"/></svg></button></div></article>",
+      "css": ".ds-lesson-card{box-sizing:border-box;display:flex;flex-direction:column;min-width:0;background:var(--color-surface);color:var(--color-ink);border:1px solid var(--color-line);border-radius:var(--radius-surface);padding:var(--space-5);font:1rem/1.6 var(--font-ui)}.ds-lesson-meta{color:var(--color-muted);font-size:.875rem;line-height:1.5;margin-bottom:var(--space-4)}.ds-lesson-card h3{font-size:1.125rem;line-height:1.45;font-weight:600;margin:0 0 8px;overflow-wrap:anywhere}.ds-lesson-card p{font-size:.9375rem;color:var(--color-muted);margin:0 0 var(--space-5);flex:1}.ds-card-foot{display:flex;align-items:center;justify-content:space-between;gap:12px}.ds-state{font-size:.875rem;color:var(--color-muted)}.ds-btn{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;background:var(--color-surface);color:var(--color-ink);border:1px solid var(--color-control-border);border-radius:var(--radius-control);font:.875rem/1.4 var(--font-ui);font-weight:600;cursor:pointer;transition:background-color var(--duration-state) var(--ease-state),border-color var(--duration-state) var(--ease-state)}.ds-btn:hover:not(:disabled){background:var(--color-surface-soft)}.ds-btn:active:not(:disabled){background:var(--color-line)}.ds-btn:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}.ds-icon{width:20px;height:20px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}"
+    },
+    {
+      "name": "三步练习导航",
+      "kind": "custom",
+      "refersTo": "practice-step-selected",
+      "description": "编号代表真实顺序；样例展示当前步，实际产品允许直接切换。",
+      "html": "<nav class=\"ds-steps\" aria-label=\"练习步骤样例\"><button type=\"button\" class=\"ds-step ds-current\" aria-current=\"step\"><span class=\"ds-number\">1</span><span>听</span></button><button type=\"button\" class=\"ds-step\"><span class=\"ds-number\">2</span><span>读</span></button><button type=\"button\" class=\"ds-step\"><span class=\"ds-number\">3</span><span>用</span></button></nav>",
+      "css": ".ds-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-2);max-width:820px;font:1rem/1.6 var(--font-ui)}.ds-step{box-sizing:border-box;display:flex;align-items:center;gap:12px;text-align:start;min-height:52px;padding:12px 16px;border:1px solid var(--color-line);border-radius:var(--radius-control);background:var(--color-surface);color:var(--color-muted);font:1rem/1.6 var(--font-ui);font-weight:600;cursor:pointer}.ds-step:hover{background:var(--color-surface-soft)}.ds-step.ds-current{border-color:var(--color-primary);background:var(--color-selected);color:var(--color-primary-hover)}.ds-number{width:24px;height:24px;display:grid;place-items:center;font-size:.875rem;border-radius:50%;background:var(--color-surface-soft);font-variant-numeric:tabular-nums}.ds-current .ds-number{background:var(--color-primary);color:var(--color-surface)}.ds-step:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}@media(max-width:700px){.ds-step{padding:10px 12px;gap:8px;min-height:48px;font-size:.9375rem}.ds-number{width:22px;height:22px}}@media(max-width:370px){.ds-steps{gap:4px}.ds-step{padding-inline:8px;gap:6px}.ds-step span:last-child{font-size:.875rem}}"
+    },
+    {
+      "name": "弹窗结构",
+      "kind": "custom",
+      "refersTo": "dialog",
+      "description": "静态结构样例；实际产品使用原生dialog和app.js处理双向Tab、关闭、确认与保存，样例不伪装成已运行的模态任务。",
+      "html": "<section class=\"ds-dialog\" role=\"dialog\" aria-modal=\"false\" aria-labelledby=\"ds-dialog-title\"><div class=\"ds-modal-heading\"><h2 id=\"ds-dialog-title\">记一次使用</h2><button class=\"ds-modal-close\" type=\"button\" aria-label=\"关闭样例\"><svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 20 20\"><path d=\"M5 5l10 10M5 15L15 5\"/></svg></button></div><div class=\"ds-modal-body\"><p class=\"ds-modal-copy\">记录只留本浏览器，不传AI。</p><label class=\"ds-label\" for=\"ds-note\">记录一个时刻或难点</label><textarea class=\"ds-textarea\" id=\"ds-note\" placeholder=\"写下实际使用的体验\"></textarea><div class=\"ds-form-actions\"><button class=\"ds-btn\" type=\"button\">取消</button><button class=\"ds-btn ds-primary\" type=\"button\">保存记录</button></div></div></section>",
+      "css": ".ds-dialog{box-sizing:border-box;border:0;border-radius:var(--radius-surface);padding:0;width:min(640px,calc(100% - 32px));background:var(--color-surface);color:var(--color-ink);box-shadow:var(--shadow-dialog);max-height:90dvh;overflow:auto;scroll-padding-block-start:120px;font:1rem/1.6 var(--font-ui)}.ds-modal-heading{display:flex;align-items:start;justify-content:space-between;gap:var(--space-4);margin:0;padding:var(--space-6) var(--space-6) var(--space-3);border-bottom:1px solid var(--color-line);position:sticky;top:0;background:var(--color-surface);z-index:1}.ds-modal-heading h2{font-size:1.25rem;line-height:1.4;font-weight:650;letter-spacing:-.01em;margin:8px 0 0;max-width:40ch}.ds-modal-close{box-sizing:border-box;width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;background:transparent;color:var(--color-ink);border:1px solid var(--color-control-border);border-radius:var(--radius-control);padding:8px;cursor:pointer}.ds-modal-close:hover{background:var(--color-surface-soft)}.ds-modal-body{padding:var(--space-5) var(--space-6) var(--space-6)}.ds-modal-copy{font-size:.9375rem;color:var(--color-muted);line-height:1.75;margin:0 0 var(--space-4)}.ds-label{display:block;font-size:.9375rem;font-weight:600;margin:var(--space-5) 0 8px}.ds-textarea{box-sizing:border-box;min-height:128px;min-width:0;width:100%;max-width:100%;background:var(--color-surface);color:var(--color-ink);border:1px solid var(--color-control-border);border-radius:var(--radius-control);padding:10px 12px;font:1rem/1.5 var(--font-ui);resize:vertical;caret-color:var(--color-primary)}.ds-textarea::placeholder{color:var(--color-muted);opacity:1}.ds-form-actions{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:var(--space-6)}.ds-btn{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;background:var(--color-surface);color:var(--color-ink);border:1px solid var(--color-control-border);border-radius:var(--radius-control);font:.9375rem/1.4 var(--font-ui);font-weight:600;cursor:pointer;transition:background-color var(--duration-state) var(--ease-state),border-color var(--duration-state) var(--ease-state)}.ds-btn:hover:not(:disabled){background:var(--color-surface-soft)}.ds-btn:active:not(:disabled){background:var(--color-line)}.ds-btn.ds-primary{background:var(--color-primary);border-color:var(--color-primary);color:var(--color-surface)}.ds-btn.ds-primary:hover:not(:disabled){background:var(--color-primary-hover);border-color:var(--color-primary-hover)}.ds-btn.ds-primary:active:not(:disabled){background:var(--color-focus);border-color:var(--color-focus)}.ds-dialog :focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}.ds-icon{width:20px;height:20px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}@media(max-width:700px){.ds-dialog{max-height:calc(100dvh - 32px)}.ds-modal-heading{padding:var(--space-5) var(--space-5) var(--space-3)}.ds-modal-body{padding:var(--space-5)}}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "安静的练习工作台",
+    "overview": "蓝灰地面、白色材料和钴蓝行动构成一张清楚的练习桌。界面以完成任务为中心：标题说清正在做什么，说明保持次要，原生控件保留熟悉的操作方式。它不是营销海报，也不借纸片、仪器或装饰画制造学习感。\n\n密度通过分组、留白和文字层级控制，不通过花体或醒目标签制造层级。任务标题与正文共用普通系统无衬线字体，中英文材料保持连续的阅读节奏；强调色留给可操作、选中与确认状态。本文从最终源码提取，没有另行发明视觉选择。",
+    "keyCharacteristics": [
+      "蓝灰工作区、白色内容、钴蓝行动，状态色独立。",
+      "同一系统字体栈，任务标题明确，英文正文宽松。",
+      "扁平常驻表面；阴影只标记需要独立焦点的弹窗。",
+      "原生表单与媒体控件，完整触控目标，清晰键盘焦点。"
+    ],
+    "rules": [
+      { "name": "The Action Color Rule", "body": "钴蓝标记行动、选中和明确确认状态；绿色不再作为主视觉，普通说明不借用强调色。", "section": "colors" },
+      { "name": "The Reading Measure Rule", "body": "英文材料使用宽松行距与最长70ch的正文；字号切换只改变阅读正文，不把按钮挤小。", "section": "typography" },
+      { "name": "The Flat Workspace Rule", "body": "常驻材料不抬升、不在悬停时漂浮；需要保护焦点的弹窗才使用柔化阴影。", "section": "elevation" }
+    ],
+    "dos": [
+      "Do 保持中英文共用本机无衬线栈，以字号、字重和留白建立层级。",
+      "Do 保留44px最小触控目标、16px输入字体和可见键盘焦点。",
+      "Do 先改布局和文字优先级，再收间隔；窄屏控件可独占下一行。",
+      "Do 让次要说明按需展开，错误信息同时提供恢复入口。",
+      "Do 以实际媒体、记录和状态生成反馈，新颜色组合继续验证对比度。"
+    ],
+    "donts": [
+      "Don't 恢复绿色主视觉、花体任务标题、渐变标题或装饰性假波形。",
+      "Don't 把轻分隔色用于输入边界，或以缩小字体掩盖裁切与重叠。",
+      "Don't 为常驻卡片增加漂浮阴影、嵌套卡片和统一重复入场。",
+      "Don't 把静态标签、示例组件、打卡或播放点击包装成已完成的功能与能力证据。",
+      "Don't 把sidecar预览色阶当成规范主色，或把现有帮助弹窗推广为所有说明的默认模式。"
+    ]
+  }
+}
