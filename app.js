@@ -3,8 +3,8 @@
   'use strict';
   const GUEST_KEY = 'unfold.workspace.v1';
   let KEY = GUEST_KEY;
-const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
-  const VOICE_PACKS = [['a','清亮 · 女声较高，男声低沉'],['b','温润 · 女声柔和，男声厚实']];
+const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
+  const VOICE_PACKS = [['a','美音'],['b','英音']];
   const LEVELS = {1:'基础',2:'进阶',3:'拓展'};
   const THEMES = {meetings:'会议与对齐',projects:'项目与进展',communication:'沟通与反馈',business:'商业与判断',daily:'日常生活',social:'社交与邀约',travel:'旅行与出行',food:'饮食与烹饪',culture:'影视与文化',science:'科学与证据',relationships:'人际与情绪',ideas:'观点与思辨',news:'新闻与信息',health:'健康与照顾',tech:'科技与隐私',learning:'学习与记忆',money:'金钱与消费',environment:'环境与习惯',home:'居住与选择',sport:'运动与复盘',family:'家庭与边界',career:'职业与取舍',cities:'城市与公共'};
   const hasBundledAudio = l => !!l && !l.generated && /^L(?:0[1-9]|[12][0-9]|3[0-6])$/.test(l.id);
@@ -721,10 +721,12 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
     if(!transcript)return '';
     const t=lessonTimings(l);
     if(!t)return `<section class="transcript" id="transcript-text" lang="en" aria-label="对话英文原文">${esc(l.script)}</section>`;
-    return `<section class="transcript has-turns" id="transcript-text" lang="en" aria-label="对话英文原文，点任意一句可单独重听">`+
+    return `<section class="transcript has-turns" id="transcript-text" lang="en" aria-label="对话英文原文，点任意一句可单独重听，拖动可选中单词查词">`+
       t.lines.map((line,i)=>{
         const cut=line.indexOf(':'),role=line.slice(0,cut).trim(),text=line.slice(cut+1).trim(),range=t.timing[i];
-        return `<button type="button" class="turn${i===activeTurn?' active':''}" data-action="play-turn" data-index="${i}" aria-label="只播放第${i+1}句，${esc(role)}"><span class="turn-role">${esc(role)}</span><span class="turn-text">${esc(text)}</span><span class="turn-time">${formatTime(range[0])}</span></button>`;
+        // Kept as a non-button element so a word inside the sentence can be
+        // selected and looked up; role/tabindex/keydown preserve keyboard use.
+        return `<div class="turn${i===activeTurn?' active':''}" role="button" tabindex="0" data-action="play-turn" data-index="${i}" aria-label="只播放第${i+1}句，${esc(role)}"><span class="turn-role">${esc(role)}</span><span class="turn-text">${esc(text)}</span><span class="turn-time">${formatTime(range[0])}</span></div>`;
       }).join('')+`</section>`;
   }
   function sentenceLoopButton(){
@@ -911,8 +913,8 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
   }
 
   // ---- 划词：选中英文即出现释义 / 收藏 / 朗读 ----------------------------
-  const SELECTABLE='.reading-text,.transcript,.hint-content,.phrase,.optional-body,.reading-card';
-  let selToolbar=null,previewAudio=null,previewResume=false,lastSelection={text:'',context:''};
+  const SELECTABLE='.reading-text,.transcript,.turn,.turn-text,.script-text,.hint-content,.phrase,.optional-body,.reading-card';
+  let selToolbar=null,previewAudio=null,previewResume=false,lastSelection={text:'',context:''},suppressTurnUntil=0;
   function dictLookup(raw){
     const clean=String(raw||'').trim().toLowerCase().replace(/\u2019/g,"'").replace(/^[\u201c("'[]+|[\u201d"'\].!?;,]+$/g,'');
     if(!clean||clean.length>80)return null;
@@ -931,6 +933,13 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
     return null;
   }
   function sentenceOf(node){
+    // Inside the per-sentence transcript the whole button also contains the
+    // speaker name and a timestamp; keep the stored context to the sentence.
+    const turn=node?.closest?.('.turn');
+    if(turn){
+      const body=turn.querySelector('.turn-text')||turn;
+      return (body.textContent||'').replace(/\s+/g,' ').trim().slice(0,600);
+    }
     const block=node?.closest?.('p,li,.phrase,h2,h3,td')||node?.parentElement;
     return (block?.textContent||'').replace(/\s+/g,' ').trim().slice(0,600);
   }
@@ -1080,7 +1089,12 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
     if(a==='clear-ai'){await accountRequest('/api/ai/config',{clear:true});await checkHealth();render();toast('已清除当前进程中的AI配置。');return;}
     if(a==='preview-voice'){const voice=selectedVoice();if(!voice||!window.speechSynthesis){toast('此浏览器没有英文合成声线；内置场景音频不受影响。');return;}stopSound();stopPreview();const sample=new SpeechSynthesisUtterance('A little practice makes room for new ideas.');sample.voice=voice;sample.lang=voice.lang;sample.rate=state.preferences.rate;sample.volume=state.preferences.volume;sample.onend=()=>toast('试听结束。');sample.onerror=()=>toast('试听失败：浏览器拒绝了合成朗读。');window.speechSynthesis.speak(sample);toast('正在试听浏览器声线。');return;}
     if(a==='preview-pack'){previewPack(el.dataset.pack);return;}
-    if(a==='play-turn'){playTurn(Number(el.dataset.index));return;}
+    if(a==='play-turn'){
+      // A click on a sentence still plays it, but a drag that selected a word
+      // must not also restart the audio, or the learner loses their place.
+      if(Date.now()<suppressTurnUntil)return;
+      playTurn(Number(el.dataset.index));return;
+    }
     if(a==='loop-turn'){
       if(!lessonTimings()){toast('这一课还没有逐句时间轴，可整段播放。');return;}
       if(loopTurn>=0){loopTurn=-1;stopLoopWatch();toast('已取消单句循环。');}
@@ -1213,7 +1227,13 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
     }
   });
   document.addEventListener('selectionchange',()=>{clearTimeout(selTimer);selTimer=setTimeout(showSelToolbar,180);});
+  // Selecting text inside a sentence is a drag, not a click on the sentence:
+  // remember that so the trailing click does not restart playback.
   document.addEventListener('mousedown',e=>{if(selToolbar&&!selToolbar.contains(e.target))hideSelToolbar();});
+  document.addEventListener('mouseup',e=>{
+    const sel=window.getSelection();
+    if(sel&&!sel.isCollapsed&&String(sel).trim()&&e.target.closest?.('.turn'))suppressTurnUntil=Date.now()+700;
+  });
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){hideSelToolbar();if(shadowOn)stopShadow();}
     // Shortcuts only act on the listening stage and never while typing.
@@ -1222,6 +1242,8 @@ const AUDIO_REVISION = 'kokoro-fp32-v7-20261118';
     if(tag==='input'||tag==='textarea'||tag==='select'||e.target?.isContentEditable)return;
     if(modal.open)return;
     if(page!=='lesson')return;
+    const turnKey=e.target?.closest?.('.turn');
+    if(turnKey&&(e.key==='Enter'||e.key===' ')){e.preventDefault();playTurn(Number(turnKey.dataset.index));return;}
     if(e.key===' '&&stage===0){e.preventDefault();playSpeech();return;}
     if((e.key==='ArrowLeft'||e.key==='ArrowRight')&&bundledPlayer){e.preventDefault();seekBy(e.key==='ArrowLeft'?-5:5);return;}
     if((e.key==='j'||e.key==='k')&&stage===0){e.preventDefault();stepTurn(e.key==='j'?1:-1);return;}
