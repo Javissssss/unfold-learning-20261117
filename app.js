@@ -3,7 +3,8 @@
   'use strict';
   const GUEST_KEY = 'unfold.workspace.v1';
   let KEY = GUEST_KEY;
-const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
+  const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
+  const audioRevision = () => AUDIO_REVISION+'-'+state.preferences.voicePack;
   const VOICE_PACKS = [['a','美音'],['b','英音']];
   const LEVELS = {1:'基础',2:'进阶',3:'拓展'};
   const THEMES = {meetings:'会议与对齐',projects:'项目与进展',communication:'沟通与反馈',business:'商业与判断',daily:'日常生活',social:'社交与邀约',travel:'旅行与出行',food:'饮食与烹饪',culture:'影视与文化',science:'科学与证据',relationships:'人际与情绪',ideas:'观点与思辨',news:'新闻与信息',health:'健康与照顾',tech:'科技与隐私',learning:'学习与记忆',money:'金钱与消费',environment:'环境与习惯',home:'居住与选择',sport:'运动与复盘',family:'家庭与边界',career:'职业与取舍',cities:'城市与公共'};
@@ -151,13 +152,13 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
   let state=newState(), lessons=[], page='home', lessonId='L01', stage=0;
   let health={configured:false,detail:'正在检查连接…',host:'',model:'',csrf_token:''}, liveUsed=false, offlineText=false;
   let storageBlocked=false, storageWarning='', originalRaw=null, lastStoredRaw=null, voices=[], transcript=false, reviewRevealed=new Set();
-  let speechPlaying=false,speechPaused=false,utterance=null,bundledPlayer=null,audioTimer=null,customAudio=null;
+  let speechPlaying=false,speechPaused=false,utterance=null,bundledPlayer=null,audioTimer=null,nextLessonTimer=null,customAudio=null;
   let audioId='',audioSource='',playerRanges=[],lastAudioTime=null,lastAudioWall=0,playerError='',playerSeeking=false,lastMediaSave=0;
   let recorder=null,recordStream=null,recordChunks=[],recordURL='',recordLesson='',recordStarted=0,recordTick=null,recordTimeout=null,recordPending=false,recordRequest=0;
   let pendingAI=null,aiBusy=false,aiAbort=null,aiRequest=0,healthRequest=0,toastTimer=null,searchTerm='',filterLevel='all',filterTheme='all';
   let reviewTab='due',reviewKey='',reviewDrafts={},undoReview=null,modalReturnSelector='',journalEditing=null;
   let pendingImport=null,pendingDestructiveRaw=null;
-  let account=null,accountCloud=false,syncRevision=0,syncBlocked=false,syncBusy=false,syncTimer=null,syncAgain=false,syncMessage='',remoteSnapshot=null,selectedWord='';
+  let account=null,accountCloud=false,syncRevision=0,syncBlocked=false,syncConflict=false,syncBusy=false,syncTimer=null,syncAgain=false,syncMessage='',remoteSnapshot=null,selectedWord='';
   let dialogueHistory=[],dialogueLesson='';
   const app=document.getElementById('app'), modal=document.getElementById('modal');
   const iconPaths={home:'M3 10l7-7 7 7M5 9v8h10V9M8 17v-5h4v5',books:'M4 3h4v14H4zM10 3h4v14h-4zM16 4l3 1-3 12-3-1',review:'M4 6a7 7 0 1 1-1 7M4 2v5h5M10 6v4l3 2',journal:'M5 3h10a2 2 0 0 1 2 2v12H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2M7 7h6M7 11h6',settings:'M10 3v3M10 14v3M3 10h3M14 10h3M5 5l2 2M13 13l2 2M5 15l2-2M13 7l2-2M10 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8',arrow:'M4 10h12M11 5l5 5-5 5',back:'M16 10H4M9 5l-5 5 5 5',clock:'M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16M10 5v5l3 2',headphones:'M3 11V9a7 7 0 0 1 14 0v2M3 10h3v7H3zM14 10h3v7h-3z',read:'M10 5C7 3 4 3 2 4v12c3-1 5-1 8 1 3-2 5-2 8-1V4c-2-1-5-1-8 1v12',mic:'M7 4a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0V4M4 9v1a6 6 0 0 0 12 0V9M10 16v3M7 19h6',write:'M4 13l9-9 3 3-9 9-4 1 1-4M12 5l3 3M3 18h14',check:'M4 10l4 4 8-8',lock:'M5 9h10v8H5zM7 9V6a3 3 0 0 1 6 0v3',play:'M7 4l9 6-9 6z',pause:'M6 4v12M14 4v12',stop:'M5 5h10v10H5z',search:'M8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10M12 12l5 5',close:'M5 5l10 10M5 15L15 5',plus:'M10 4v12M4 10h12',download:'M10 3v10M6 9l4 4 4-4M3 15v3h14v-3',spark:'M10 2l2 5 5 3-5 2-2 6-2-6-5-2 5-3z',flag:'M4 18V3M4 3h10l-2 4 2 4H4'};
@@ -195,40 +196,58 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     try { originalRaw=localStorage.getItem(KEY);lastStoredRaw=originalRaw;if(originalRaw)state=stateValid(JSON.parse(originalRaw)); }
     catch { storageBlocked=true;storageWarning='旧记录无法读取，已暂停覆盖。请先导出原始记录，再决定是否重置。'; }
   }
-  async function accountRequest(path,payload) {
-    const response=await fetch(path,payload===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json','X-Unfold-Token':health.csrf_token},body:JSON.stringify(payload)});
-    const body=await response.json();if(!response.ok){const error=new Error(body.error||'请求失败');error.status=response.status;throw error;}return body;
+  async function accountRequest(path,payload,timeoutMs=8000,retryToken=true) {
+    const control=new AbortController(),timeout=setTimeout(()=>control.abort(),timeoutMs);
+    let body,response;
+    try{
+      response=await fetch(path,{signal:control.signal,...(payload===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json','X-Unfold-Token':health.csrf_token},body:JSON.stringify(payload)})});
+      body=await response.json();
+    }catch(error){throw new Error(error.name==='AbortError'?'账号连接超时，请重试':'服务未返回可用数据，请检查连接');}
+    finally{clearTimeout(timeout);}
+    // A rejected CSRF request never reached the write handler: refresh once,
+    // but never automatically repeat an uncertain write or an AI invocation.
+    if(response.status===403&&payload!==undefined&&retryToken&&body.error==='请求令牌无效。请刷新本地网页。'){
+      const info=await accountRequest('/api/account/status',undefined,timeoutMs,false);
+      if(info.csrf_token){health.csrf_token=info.csrf_token;return accountRequest(path,payload,timeoutMs,false);}
+    }
+    if(!response.ok){const error=new Error(body.error||'请求失败');error.status=response.status;throw error;}return body;
   }
   function syncStatus(message){syncMessage=message;const el=document.getElementById('sync-status');if(el)el.textContent=message;}
   function scheduleSync(){if(!account||syncBlocked)return;clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow(),1200);}
   async function syncNow(){
     if(!account||syncBlocked||storageBlocked)return;
     if(syncBusy){syncAgain=true;return;}
-    syncBusy=true;syncAgain=false;const snapshot=JSON.stringify(state),revision=syncRevision,uid=account.id;
+    syncBusy=true;syncAgain=false;const snapshot=JSON.stringify(state),revision=syncRevision,uid=account.id,key=KEY;
     syncStatus('正在同步账号记录…');
     try{
       const result=await accountRequest('/api/sync',{revision,state:JSON.parse(snapshot)});
-      if(!account||account.id!==uid)return;
+      if(!account||account.id!==uid||KEY!==key)return;
       syncRevision=result.revision;
       const dirty=JSON.stringify(state)!==snapshot;
-      localStorage.setItem(KEY+'.sync',JSON.stringify({revision:syncRevision,dirty}));
+      localStorage.setItem(key+'.sync',JSON.stringify({revision:syncRevision,dirty}));
       syncStatus(dirty?'还有更改等待同步':'已保存到账号服务器');
       if(dirty||syncAgain)scheduleSync();
     }catch(error){
-      if(!account||account.id!==uid)return;
-      if(error.status===409){syncBlocked=true;syncStatus('另一设备更新了记录，已暂停同步。请到设置处理冲突。');if(page==='settings')render();}
+      if(!account||account.id!==uid||KEY!==key)return;
+      if(error.status===409){syncBlocked=true;syncConflict=true;syncStatus('另一设备更新了记录，已暂停同步。请到设置处理冲突。');if(page==='settings')render();}
+      else if(error.status===401){syncBlocked=true;syncConflict=false;clearVolatileMedia();syncStatus('登录已过期；本机账号副本保留，请重新登录后同步。');if(page==='settings')render();}
       else syncStatus('同步失败：'+error.message+'。本浏览器副本仍保留，可手动重试。');
     }finally{syncBusy=false;}
   }
-  async function activateAccount(user){
-    clearTimeout(syncTimer);syncBlocked=false;remoteSnapshot=null;account=user;KEY=GUEST_KEY+'.account.'+user.id;storageBlocked=false;storageWarning='';originalRaw=null;lastStoredRaw=null;state=newState();readStorage();
+  async function activateAccount(user,timeoutMs=8000){
+    if(syncBusy)throw new Error('上一账号正在同步，请稍候再登录。');
+    clearVolatileMedia();
+    clearTimeout(syncTimer);syncBlocked=false;syncConflict=false;remoteSnapshot=null;account=user;KEY=GUEST_KEY+'.account.'+user.id;storageBlocked=false;storageWarning='';originalRaw=null;lastStoredRaw=null;state=newState();readStorage();
     let meta={revision:0,dirty:false};try{meta=JSON.parse(localStorage.getItem(KEY+'.sync')||'null')||meta;}catch{}
     if(storageBlocked){syncBlocked=true;syncStatus('账号本机副本无法读取，已暂停同步；请先导出原始记录。');return;}
-    const local=lastStoredRaw,remote=await accountRequest('/api/sync');
     syncRevision=Number.isInteger(meta.revision)?meta.revision:0;
+    const local=lastStoredRaw;
+    let remote;
+    try{remote=await accountRequest('/api/sync',undefined,timeoutMs);if(remote.state)stateValid(remote.state);}
+    catch(error){syncBlocked=true;syncStatus('账号记录未载入：'+error.message+'。本机副本保留，请重新登录后重试。');return;}
     if(remote.state){
       const clean=stateValid(remote.state);
-      if(local&&meta.dirty&&syncRevision!==remote.revision){syncBlocked=true;remoteSnapshot=remote;syncStatus('账号和本机都有未合并更改；请在设置处理冲突。');return;}
+      if(local&&meta.dirty&&syncRevision!==remote.revision){syncBlocked=true;syncConflict=true;remoteSnapshot=remote;syncStatus('账号和本机都有未合并更改；请在设置处理冲突。');return;}
       if(!local||!meta.dirty){state=clean;const raw=JSON.stringify(state);localStorage.setItem(KEY,raw);lastStoredRaw=raw;syncRevision=remote.revision;localStorage.setItem(KEY+'.sync',JSON.stringify({revision:syncRevision,dirty:false}));syncStatus('已载入账号记录');}
       else {syncStatus('本机有待同步更改');scheduleSync();}
     }else{
@@ -237,14 +256,16 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
       localStorage.setItem(KEY+'.sync',JSON.stringify({revision:0,dirty:true}));syncStatus('正在把本机记录保存到新账号；访客副本保留。');scheduleSync();
     }
   }
-  async function refreshAccount(){
-    try{const info=await accountRequest('/api/account/status');accountCloud=info.cloud===true;if(info.csrf_token)health.csrf_token=info.csrf_token;if(info.user)await activateAccount(info.user);else{account=null;syncStatus('访客记录仅在本浏览器。');}}
+  async function refreshAccount(info){
+    try{info=info||await accountRequest('/api/account/status',undefined,4000);accountCloud=info.cloud===true;if(info.csrf_token)health.csrf_token=info.csrf_token;if(info.user)await activateAccount(info.user,4000);else{account=null;syncStatus('访客记录仅在本浏览器。');}}
     catch{syncStatus('账号服务器不可用，本地记录仍保留。');}
   }
   function accountForm(register=false){
     openModal(register?'创建账号':'登录账号',`<form id="account-form" data-register="${register}"><p class="modal-copy">${register?'新账号会复制当前访客记录；原访客副本不删除。':'登录后加载该账号记录；访客记录不会删除。'}账号仅属于当前服务器。密码至少10位。</p><div class="field"><label for="account-name">账号</label><input id="account-name" name="username" required minlength="3" maxlength="40" autocomplete="username" pattern="[A-Za-z0-9_]+(?:-[A-Za-z0-9_]+)*"></div><div class="field"><label for="account-password">密码</label><input id="account-password" name="password" type="password" required minlength="10" maxlength="128" autocomplete="${register?'new-password':'current-password'}"></div><p class="helper-copy">${accountCloud?'请妥善保存密码，当前版本没有密码找回。':'本机服务器账号只能在本机使用；跨设备需部署有持久存储的安全服务器。'}</p><button class="btn primary" type="submit">${register?'创建并登录':'登录'}</button></form>`);
+    document.getElementById('account-name').pattern='(?:[A-Za-z0-9_]|-){3,40}';
   }
   async function accountLogin(form){
+    if(syncBusy){toast('账号正在同步，请稍候再登录。');return;}
     const submit=form.querySelector('[type=submit]');submit.disabled=true;const d=new FormData(form);
     try{const result=await accountRequest(form.dataset.register==='true'?'/api/account/register':'/api/account/login',{username:d.get('username'),password:d.get('password')});await activateAccount(result.user);await checkHealth();closeModal();lessonId=getLesson(state.lastLesson)?state.lastLesson:lessons[0].id;navigate('settings');toast('已登录。'+(accountCloud?'':' 当前账号数据存储在本机服务端。'));}
     catch(error){submit.disabled=false;toast(error.message);}
@@ -252,7 +273,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
   async function accountLogout(){
     if(syncBusy){toast('同步进行中，请稍候再退出。');return;}
     if(account&&!syncBlocked){clearTimeout(syncTimer);await syncNow();let m={};try{m=JSON.parse(localStorage.getItem(KEY+'.sync')||'{}');}catch{}if(m.dirty){toast('还有未同步更改，请先重试或导出备份。');return;}}
-    await accountRequest('/api/account/logout',{});clearTimeout(syncTimer);account=null;KEY=GUEST_KEY;state=newState();storageBlocked=false;storageWarning='';readStorage();await checkHealth();closeModal();lessonId=getLesson(state.lastLesson)?state.lastLesson:lessons[0].id;navigate('settings');toast('已退出账号，访客记录保持原样。');
+    await accountRequest('/api/account/logout',{});clearVolatileMedia();clearTimeout(syncTimer);account=null;KEY=GUEST_KEY;state=newState();storageBlocked=false;storageWarning='';originalRaw=null;lastStoredRaw=null;readStorage();await checkHealth();closeModal();lessonId=getLesson(state.lastLesson)?state.lastLesson:lessons[0].id;navigate('settings');toast('已退出账号，访客记录保持原样。');
   }
   function accountConflict(){
     openModal('处理账号同步冲突',`<p class="modal-copy">本机与账号服务器都有更改，不能自动合并。先导出本机副本，再选择载入账号版本或用本机版本覆盖账号版本。期间服务器若再次更新，仍会阻止覆盖。</p><div class="settings-actions">${button('export','导出本机副本','')}${button('sync-load','载入账号版本','')}${button('sync-overwrite','用本机版本覆盖账号','danger')}</div>`);
@@ -283,7 +304,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     const term=String(w.term||'').trim();
     if(!term)return esc(ctx);
     let re=null;
-    try{re=new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'ig');}catch{re=null;}
+    try{re=new RegExp('(?<![\\p{L}\\p{N}_])'+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?![\\p{L}\\p{N}_])','giu');}catch{re=null;}
     return esc(re?ctx.replace(re,m=>'_'.repeat(Math.max(3,m.length))):ctx);
   }
   function weekLogs() { const now=new Date();now.setDate(now.getDate()-((now.getDay()+6)%7)); const first=day(now);return state.journals.filter(j=>j.date>=first&&j.date<=day()); }
@@ -359,7 +380,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
   }
   function listeningPage(l,p) {
     const hasCustom=customAudio?.lessonId===l.id,bundled=hasBundledAudio(l);
-    return `<section class="audio-panel" aria-labelledby="listen-heading"><div class="section-heading"><h2 id="listen-heading">先听主旨</h2><span class="tag neutral">${hasCustom?'本地音频':bundled?'AI场景对话 · 非真人':'合成朗读 · 非真人'}</span></div><p class="player-caption">先抓问题、原因和下一步。切到其他标签会继续播放；展开原文可逐句重听。</p><div class="player-controls"><button type="button" class="btn primary play-button" data-action="play" id="play-button">${icon('play')}<span>播放</span></button>${button('replay','从头重听','',`id="replay-button"`)}<label class="rate-control"><span class="visually-hidden">播放速度</span><select id="play-rate">${[0.75,0.9,1,1.15].map(r=>`<option value="${r}" ${state.preferences.rate===r?'selected':''}>${r}×</option>`).join('')}</select></label></div><div class="seek-track"><label class="visually-hidden" for="audio-seek">音频进度，可拖动回听</label><input id="audio-seek" type="range" min="0" max="100" step="0.1" value="0" disabled><div class="time-labels"><span id="audio-elapsed">0:00</span><span id="audio-duration">${bundled||hasCustom?'加载时长…':'合成朗读不支持拖动'}</span></div></div><div class="inline-status" id="listen-status" role="status">${icon(p.heard?'check':'headphones')}<span>${p.heard?'已听完本课音频':'尚未听完整段音频'}</span></div><div id="audio-error"></div><div id="shadow-status" class="shadow-status" role="status" hidden></div><div class="audio-secondary">${button('transcript',transcript?'收起英文原文':'看英文原文','ghost','aria-controls="transcript-text" aria-expanded="'+transcript+'"')}${sentenceLoopButton()}${shadowButton()}${button('reading-only','现在只练阅读','ghost')}</div>${hasCustom?`<p class="local-audio-name">${esc(customAudio.name)}</p>`:''}</section>${transcriptBlock(l)}${hintPanel(l,p)}<details class="help-disclosure" id="audio-source"><summary>音频来源与更多选择</summary><p>${hasCustom?'这是你选择的本地音频，请核对它与原文一致。文件不上传，刷新后需重新选择。':bundled?'Kokoro神经声线在本机生成，按角色使用不同声线，不朗读角色名。仍为AI合成，不是真人录音。':'本课尚无内置神经语音。可选择对应本地音频；浏览器朗读只作为手动备选，系统联网声线可能需要网络。'} 切换标签和本产品内的页面可持续播放；关闭或刷新播放页会结束。只有实际听过的区间才计入完整播放，拖到末尾不算听完。</p>${button('import-audio','选择对应的本地音频','small')}${hasCustom?button('remove-audio','还原默认音频','ghost small'):''}</details><input type="file" id="audio-file" accept="audio/*" hidden>${questionSet(l,p,'listen')}`;
+    return `<section class="audio-panel" aria-labelledby="listen-heading"><div class="section-heading"><h2 id="listen-heading">先听主旨</h2><span class="tag neutral">${hasCustom?'本地音频':bundled?'AI场景对话 · 非真人':'合成朗读 · 非真人'}</span></div><p class="player-caption">先抓问题、原因和下一步。展开原文可划词、收藏与逐句重听；切页不中断。</p><div class="player-controls"><button type="button" class="btn primary play-button" data-action="play" id="play-button">${icon('play')}<span>播放</span></button>${button('replay','从头重听','',`id="replay-button"`)}<label class="rate-control"><span class="visually-hidden">播放速度</span><select id="play-rate">${[0.75,0.9,1,1.15,1.3].map(r=>`<option value="${r}" ${state.preferences.rate===r?'selected':''}>${r}×</option>`).join('')}</select></label></div><div class="seek-track"><label class="visually-hidden" for="audio-seek">音频进度，可拖动回听</label><input id="audio-seek" type="range" min="0" max="100" step="0.1" value="0" disabled><div class="time-labels"><span id="audio-elapsed">0:00</span><span id="audio-duration">${bundled||hasCustom?'加载时长…':'合成朗读不支持拖动'}</span></div></div><div class="inline-status" id="listen-status" role="status">${icon(p.heard?'check':'headphones')}<span>${p.heard?'已听完本课音频':'尚未听完整段音频'}</span></div><div id="audio-error"></div><div id="shadow-status" class="shadow-status" role="status" hidden></div><div class="audio-secondary">${button('transcript',transcript?'收起英文原文':'看英文原文','ghost','aria-controls="transcript-text" aria-expanded="'+transcript+'"')}${sentenceLoopButton()}${shadowButton()}${button('reading-only','现在只练阅读','ghost')}</div>${hasCustom?`<p class="local-audio-name">${esc(customAudio.name)}</p>`:''}</section>${transcriptBlock(l)}${hintPanel(l,p)}<details class="help-disclosure" id="audio-source"><summary>音频来源与更多选择</summary><p>${hasCustom?'这是你选择的本地音频，请核对它与原文一致。文件不上传，刷新后需重新选择。':bundled?'Kokoro神经声线在本机生成，按角色使用不同声线，不朗读角色名。仍为AI合成，不是真人录音。':'本课尚无内置神经语音。可选择对应本地音频；浏览器朗读只作为手动备选，系统联网声线可能需要网络。'} 切换标签和本产品内的页面可持续播放；关闭或刷新播放页会结束。只有实际听过的区间才计入完整播放，拖到末尾不算听完。</p>${button('import-audio','选择对应的本地音频','small')}${hasCustom?button('remove-audio','还原默认音频','ghost small'):''}</details><input type="file" id="audio-file" accept="audio/*" hidden>${questionSet(l,p,'listen')}`;
   }
   function readingPage(l,p) {
     return `${p.mode==='reading'?`<div class="mode-note"><span>本次只练阅读，不记录听力完成。</span>${button('both-mode','改回听读','ghost')}</div>`:''}<article class="reading-card"><div class="reading-heading"><h2 lang="en">${esc(l.readingTitle)}</h2>${textSizeButton()}</div><div class="reading-text" lang="en">${l.reading.split(/\n\n+/).map(t=>`<p>${esc(t)}</p>`).join('')}</div><div class="reading-word-action">${button('add-word','收藏生词','small')}<span class="helper-copy">先选中单词或短语，也可手动输入。</span></div></article>${hintPanel(l,p)}${questionSet(l,p,'reading')}`;
@@ -411,7 +432,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
   }
   function settingsPage() {
     return `${heading('设置','调整阅读、播放、账号和AI服务。')}<div class="settings-grid">
-      <section class="settings-card"><h2>阅读与播放</h2><div class="field"><label for="text-size-select">字号</label><select id="text-size-select"><option value="small" ${state.preferences.textSize==='small'?'selected':''}>较小</option><option value="standard" ${state.preferences.textSize==='standard'?'selected':''}>标准</option><option value="large" ${state.preferences.textSize==='large'?'selected':''}>较大</option></select></div><p class="size-preview" lang="en">A little practice makes room for new ideas.</p><div class="field"><label for="theme-select">界面主题</label><select id="theme-select">${[['auto','跟随系统'],['light','浅色'],['dark','深色']].map(([v,t])=>`<option value="${v}" ${state.preferences.theme===v?'selected':''}>${t}</option>`).join('')}</select></div><div class="field"><label for="default-rate">播放速度</label><select id="default-rate">${[0.75,0.9,1,1.15,1.3].map(r=>`<option value="${r}" ${state.preferences.rate===r?'selected':''}>${r}×</option>`).join('')}</select></div><div class="field"><label for="volume-range">音量 <output id="volume-out">${Math.round(state.preferences.volume*100)}</output>%</label><input id="volume-range" type="range" min="0" max="100" step="5" value="${Math.round(state.preferences.volume*100)}"></div><label class="self-check" for="auto-next"><input id="auto-next" type="checkbox" ${state.preferences.autoNext?'checked':''}>整段听完后自动播放下一课</label><div class="field"><span class="field-label" id="voice-pack-label">内置对话声线</span><div class="pack-list" role="radiogroup" aria-labelledby="voice-pack-label">${VOICE_PACKS.map(([key,label])=>`<div class="pack-option"><label><input type="radio" name="voice-pack" value="${key}" ${state.preferences.voicePack===key?'checked':''}> ${esc(label)}</label>${button('preview-pack','试听','ghost small',`data-pack="${key}" aria-label="试听${esc(label)}"`)}</div>`).join('')}</div></div><p class="helper-copy">字号、速度、音量立即生效；切换声线会重新加载本课音频。</p><details class="help-disclosure" id="voice-settings"><summary>AI生成场景的浏览器朗读</summary><p>没有内置录音的场景改用浏览器自带合成音，质量因系统而异，与上面选定的声线无关。</p><div class="field"><label for="voice-select">浏览器声线</label><select id="voice-select">${voices.length?voices.map(v=>`<option value="${esc(v.voiceURI)}" ${selectedVoice()?.voiceURI===v.voiceURI?'selected':''}>${esc(v.name+' · '+v.lang)}</option>`).join(''):'<option value="">此浏览器没有英文合成声线</option>'}</select></div>${button('preview-voice','试听','small')}${button('refresh-voices','重新检查','ghost small')}</details></section>
+      <section class="settings-card"><h2>阅读与播放</h2><div class="field"><label for="text-size-select">字号</label><select id="text-size-select"><option value="small" ${state.preferences.textSize==='small'?'selected':''}>较小</option><option value="standard" ${state.preferences.textSize==='standard'?'selected':''}>标准</option><option value="large" ${state.preferences.textSize==='large'?'selected':''}>较大</option></select></div><p class="size-preview" lang="en">A little practice makes room for new ideas.</p><div class="field"><label for="theme-select">界面主题</label><select id="theme-select">${[['auto','跟随系统'],['light','浅色'],['dark','深色']].map(([v,t])=>`<option value="${v}" ${state.preferences.theme===v?'selected':''}>${t}</option>`).join('')}</select></div><div class="field"><label for="default-rate">播放速度</label><select id="default-rate">${[0.75,0.9,1,1.15,1.3].map(r=>`<option value="${r}" ${state.preferences.rate===r?'selected':''}>${r}×</option>`).join('')}</select></div><div class="field"><label for="volume-range">音量 <output id="volume-out">${Math.round(state.preferences.volume*100)}</output>%</label><input id="volume-range" type="range" min="0" max="100" step="5" value="${Math.round(state.preferences.volume*100)}"></div><label class="self-check" for="auto-next"><input id="auto-next" type="checkbox" ${state.preferences.autoNext?'checked':''}>播放结束后自动播放下一课</label><div class="field"><span class="field-label" id="voice-pack-label">内置对话声线</span><div class="pack-list" role="radiogroup" aria-labelledby="voice-pack-label">${VOICE_PACKS.map(([key,label])=>`<div class="pack-option"><label><input type="radio" name="voice-pack" value="${key}" ${state.preferences.voicePack===key?'checked':''}> ${esc(label)}</label>${button('preview-pack','试听','ghost small',`data-pack="${key}" aria-label="试听${esc(label)}"`)}</div>`).join('')}</div></div><p class="helper-copy">字号、速度、音量立即生效；切换声线会重新加载本课音频。</p><details class="help-disclosure" id="voice-settings"><summary>AI生成场景的浏览器朗读</summary><p>没有内置录音的场景改用浏览器自带合成音，质量因系统而异，与上面选定的声线无关。</p><div class="field"><label for="voice-select">浏览器声线</label><select id="voice-select">${voices.length?voices.map(v=>`<option value="${esc(v.voiceURI)}" ${selectedVoice()?.voiceURI===v.voiceURI?'selected':''}>${esc(v.name+' · '+v.lang)}</option>`).join(''):'<option value="">此浏览器没有英文合成声线</option>'}</select></div>${button('preview-voice','试听','small')}${button('refresh-voices','重新检查','ghost small')}</details></section>
       <section class="settings-card"><h2>账号与同步</h2><p>${account?'已登录 '+esc(account.username):'未登录，当前使用访客记录。'}</p><p id="sync-status" class="helper-copy" role="status">${esc(syncMessage)}</p><p class="helper-copy">${accountCloud?'记录同步到此服务的账号；不同设备须访问同一服务。':'当前为本机服务器：账号数据存储在这台电脑，不能自动跨设备。跨设备需另行部署有持久存储的安全服务器。'}</p><div class="settings-actions">${account?`${button('sync-now','立即同步','small')}${syncBlocked?button('sync-conflict','处理同步冲突','danger small'):''}${button('account-logout','退出登录','ghost small')}`:`${button('account-register','创建账号','small')}${button('account-login','登录','small')}`}</div><p class="helper-copy">密码无法找回，请妥善保管。共享设备请退出登录并清理浏览器账号副本。</p></section>
       <section class="settings-card"><h2>学习备份</h2><p>建议定期导出；登录账号不代替备份。</p><div class="settings-actions">${button('export','导出备份 '+icon('download'),'')}${button('import','导入备份','')}${originalRaw&&storageBlocked?button('export-raw','导出原始记录',''):''}</div><input type="file" id="backup-file" accept="application/json,.json" hidden><details class="help-disclosure" id="backup-scope"><summary>备份内容</summary><p>练习、表达、生词、使用记录、草稿、偏好和AI材料。不含密码、API密钥、录音与自选音频。</p></details><div class="setting-row"><div><h3>重置当前记录</h3><p class="helper-copy">需再次确认；登录时重置会同步到账号。</p></div>${button('reset','重置','danger small')}</div></section>
       <section class="settings-card ai-settings"><div class="section-heading"><h2>AI辅助</h2><span class="tag neutral">${liveUsed?'本次调用成功':health.configured?'已配置，待调用':'未连接'}</span></div><p>生成新场景、解释语境、生词辨析、短写反馈和角色对话。每次调用前都需确认内容和可能的费用。</p><p class="helper-copy">${esc(health.detail)} 密钥仅保存在当前服务进程内存中，重启或退出登录后需重填；不进入备份或GitHub。</p><form id="ai-config-form"><div class="field"><label for="ai-url">兼容 Chat Completions 的 API 根地址</label><input id="ai-url" name="base_url" type="url" required maxlength="500" value="${esc(health.base_url||'https://api.openai.com/v1')}" placeholder="https://服务地址/v1"></div><div class="field"><label for="ai-model">模型名称</label><input id="ai-model" name="model" required maxlength="160" value="${esc(health.model||'')}" placeholder="由服务商提供"></div><div class="field"><label for="ai-key">API 密钥${health.configured?'（留空保留现有密钥）':''}</label><input id="ai-key" name="api_key" type="password" autocomplete="off" maxlength="4000" ${health.configured?'':'required'}></div><div class="field"><label for="ai-token-param">生成长度参数</label><select id="ai-token-param" name="token_param"><option value="max_completion_tokens" ${health.token_param==='max_completion_tokens'?'selected':''}>max_completion_tokens</option><option value="max_tokens" ${health.token_param==='max_tokens'?'selected':''}>max_tokens</option><option value="none" ${health.token_param==='none'?'selected':''}>不发送</option></select></div><div class="settings-actions"><button type="submit" class="btn primary">保存配置</button>${button('clear-ai','清除配置','ghost small')}${health.configured?button('test-ai','试一次AI解释','small'):''}</div></form><p class="helper-copy">只发送公开或虚构内容；不要发送公司内部信息、成本、客户信息或密钥。模型可能出错，不是能力测评。</p></section></div>`;
@@ -423,6 +444,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     return '';
   }
   function render(options={}) {
+    hideSelToolbar();clearTimeout(selTimer);
     const active=document.activeElement,selector=focusSelector(active),selection=active?.selectionStart;
     document.body.classList.toggle('large-text',state.preferences.textSize==='large');
     document.body.classList.toggle('small-text',state.preferences.textSize==='small');
@@ -431,10 +453,16 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     const opened=options.focusMain?[]:[...document.querySelectorAll('#app details[open][id]')].map(el=>el.id);
     const pages={home:homePage,library:libraryPage,lesson:lessonPage,review:reviewPage,journal:journalPage,settings:settingsPage};
     app.innerHTML=shell((pages[page]||homePage)());
+    if(account&&syncBlocked){
+      if(!syncConflict){document.querySelector('[data-action="sync-conflict"]')?.remove();document.querySelector('[data-action="account-logout"]')?.insertAdjacentHTML('beforebegin',button('account-login','重新登录','small'));}
+      const sync=document.querySelector('[data-action="sync-now"]');if(sync){sync.disabled=true;sync.title='先重新登录或处理同步冲突，再继续同步。';}
+    }
     if(page==='library'){
       const all=[...lessons,...state.generated];
       const categories=[['all','全部'],...Object.entries(THEMES).filter(([key])=>all.some(l=>l.theme===key))];
-      document.querySelector('.toolbar')?.insertAdjacentHTML('beforebegin',`<nav class="category-navigation" aria-label="按主题浏览">${categories.map(([key,label])=>`<button type="button" class="category-chip ${filterTheme===key?'active':''}" data-action="category-filter" data-theme="${esc(key)}" aria-pressed="${filterTheme===key}">${esc(label)} <span>${key==='all'?all.length:all.filter(l=>l.theme===key).length}</span></button>`).join('')}</nav>`);
+      const count=key=>key==='all'?all.length:all.filter(l=>l.theme===key).length;
+      document.querySelector('.toolbar')?.insertAdjacentHTML('beforebegin',`<nav class="category-navigation" aria-label="按主题浏览">${categories.map(([key,label])=>`<button type="button" class="category-chip ${filterTheme===key?'active':''}" data-action="category-filter" data-theme="${esc(key)}" aria-pressed="${filterTheme===key}">${esc(label)} <span>${count(key)}</span></button>`).join('')}</nav>`);
+      document.getElementById('level-filter')?.closest('label').insertAdjacentHTML('beforebegin',`<label class="filter-field category-picker" for="theme-filter"><span>主题</span><select id="theme-filter">${categories.map(([key,label])=>`<option value="${esc(key)}" ${filterTheme===key?'selected':''}>${esc(label)} · ${count(key)}</option>`).join('')}</select></label>`);
     }
     document.getElementById('main')?.insertAdjacentHTML('afterbegin','<section id="continued-player" class="continued-player" aria-label="当前音频" hidden></section>');
     for(const id of opened){const el=document.getElementById(id);if(el)el.open=true;}
@@ -488,6 +516,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     } catch { /* Unsupported media-session fields must not interrupt audio. */ }
   }
   function resumeCurrentAudio() {
+    stopPreview();
     const audio=bundledPlayer;if(!audio||audio.ended)return;
     playerError='';audio.play().catch(()=>{if(audio!==bundledPlayer)return;playerError='未能继续播放，请回到听力页重试。';paintPlayer();toast(playerError);});
   }
@@ -495,7 +524,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     if(!('mediaSession' in navigator))return;
     const handlers={
       play:()=>{if(bundledPlayer)resumeCurrentAudio();else if(utterance){window.speechSynthesis?.resume();speechPaused=false;paintPlayer();}},
-      pause:()=>{if(bundledPlayer)bundledPlayer.pause();else if(utterance){window.speechSynthesis?.pause();speechPaused=true;paintPlayer();}},
+      pause:()=>{hiddenWhilePlaying=false;clearTimeout(nextLessonTimer);nextLessonTimer=null;stopPreview();if(bundledPlayer)bundledPlayer.pause();else if(utterance){window.speechSynthesis?.pause();speechPaused=true;paintPlayer();}},
       stop:()=>stopSound(),
       seekto:details=>{const audio=bundledPlayer;if(!audio||!Number.isFinite(audio.duration)||!Number.isFinite(details.seekTime))return;recordPlayed(audio,true);lastAudioTime=null;playerSeeking=true;audio.currentTime=Math.max(0,Math.min(audio.duration,details.seekTime));}
     };
@@ -510,7 +539,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
   function persistPlayer(force=false) {
     const audio=bundledPlayer;if(!audio||!audioId)return;
     const p=progress(audioId,true);
-    if(audioSource==='bundled'){p.audioRevision=AUDIO_REVISION;p.audioPosition=Math.min(7200,Math.max(0,audio.currentTime||0));p.audioRanges=playerRanges.map(r=>[...r]);}
+    if(audioSource==='bundled'){p.audioRevision=audioRevision();p.audioPosition=Math.min(7200,Math.max(0,audio.currentTime||0));p.audioRanges=playerRanges.map(r=>[...r]);}
     if(fullyHeard(playerRanges,audio.duration)&&!p.heard){p.heard=true;force=true;}
     if(force||Date.now()-lastMediaSave>2000){lastMediaSave=Date.now();save();}
   }
@@ -524,12 +553,15 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     lastAudioTime=current;lastAudioWall=now;persistPlayer(force);paintPlayer();
   }
   function stopSound() {
+    clearTimeout(nextLessonTimer);nextLessonTimer=null;hiddenWhilePlaying=false;
+    stopPreview();
     if(shadowOn)stopShadow(true);
     clearTimeout(audioTimer);audioTimer=null;
     if(bundledPlayer){recordPlayed(bundledPlayer,true);bundledPlayer.pause();persistPlayer(true);}
     const old=utterance;utterance=null;if(old)window.speechSynthesis?.cancel();speechPlaying=false;speechPaused=false;lastAudioTime=null;paintPlayer();
   }
   function resetPlayer() {
+    clearTimeout(nextLessonTimer);nextLessonTimer=null;
     clearTimeout(audioTimer);audioTimer=null;stopLoopWatch();
     const audio=bundledPlayer;bundledPlayer=null;
     if(audio){for(const name of ['onloadedmetadata','onplaying','onpause','ontimeupdate','onseeking','onseeked','onended','onerror','onwaiting'])audio[name]=null;audio.pause();audio.removeAttribute?.('src');audio.load?.();audio.remove?.();}
@@ -542,7 +574,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     const url=custom?customAudio.url:bundledAudioUrl(l);
     if(bundledPlayer&&audioId===l.id&&audioSource===source&&bundledPlayer.getAttribute?.('src')===url)return bundledPlayer;
     if(bundledPlayer){stopSound();resetPlayer();}
-    const p=progress(l.id),matchingRevision=p.audioRevision===AUDIO_REVISION,audio=new Audio();audio.preload='auto';audio.src=url;audio.playbackRate=state.preferences.rate;audio.volume=state.preferences.volume;audioHost().appendChild(audio);
+    const p=progress(l.id),matchingRevision=p.audioRevision===audioRevision(),audio=new Audio();audio.preload='auto';audio.src=url;audio.playbackRate=state.preferences.rate;audio.volume=state.preferences.volume;audioHost().appendChild(audio);
     bundledPlayer=audio;audioId=l.id;audioSource=source;playerRanges=source==='bundled'&&matchingRevision?p.audioRanges.map(r=>[...r]):[];playerError='';
     let counted=false;
     audio.onloadedmetadata=()=>{if(audio!==bundledPlayer)return;if(source==='bundled'&&matchingRevision&&p.audioPosition>0&&Number.isFinite(audio.duration))audio.currentTime=Math.min(p.audioPosition,audio.duration);paintPlayer();};
@@ -551,13 +583,13 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     audio.onpause=()=>{if(audio!==bundledPlayer)return;recordPlayed(audio,true);speechPlaying=false;speechPaused=audio.currentTime>0&&!audio.ended;lastAudioTime=null;stopLoopWatch();paintPlayer();};
     audio.onseeking=()=>{if(audio!==bundledPlayer)return;playerSeeking=true;lastAudioTime=null;};
     audio.onseeked=()=>{if(audio!==bundledPlayer)return;playerSeeking=false;lastAudioTime=audio.currentTime;lastAudioWall=Date.now();persistPlayer(true);paintPlayer();};
-    audio.onended=()=>{if(audio!==bundledPlayer)return;recordPlayed(audio,true);clearTimeout(audioTimer);audioTimer=null;speechPlaying=false;speechPaused=false;lastAudioTime=null;loopTurn=-1;persistPlayer(true);paintPlayer();toast(fullyHeard(playerRanges,audio.duration)?'整段音频已听完。检查意思后继续阅读。':'播放结束；尚有未听过的区间，可回听补齐或只练阅读。');if(state.preferences.autoNext)setTimeout(()=>{if(audio===bundledPlayer||!bundledPlayer)playNextLesson();},1400);};
+    audio.onended=()=>{if(audio!==bundledPlayer)return;recordPlayed(audio,true);clearTimeout(audioTimer);audioTimer=null;speechPlaying=false;speechPaused=false;lastAudioTime=null;loopTurn=-1;persistPlayer(true);paintPlayer();toast(fullyHeard(playerRanges,audio.duration)?'整段音频已听完。检查意思后继续阅读。':'播放结束；尚有未听过的区间，可回听补齐或只练阅读。');if(state.preferences.autoNext)nextLessonTimer=setTimeout(()=>{nextLessonTimer=null;if(state.preferences.autoNext&&audio===bundledPlayer&&audio.ended&&!previewAudio&&!previewUtterance)playNextLesson();},1400);};
     audio.onerror=()=>{if(audio!==bundledPlayer)return;clearTimeout(audioTimer);audioTimer=null;audio.pause();speechPlaying=false;speechPaused=false;
-      if(source==='bundled'&&state.preferences.voicePack!=='a'&&!packFallbackUsed){packFallbackUsed=true;state.preferences.voicePack='a';save();resetPlayer();toast('这套声线缺少本课录音，已切回默认声线。');render();playSpeech(true);return;}
-      playerError=source==='custom'?'这个文件无法播放。可重选浏览器支持的音频，或还原默认音频。':(health.host?'这段音频读取失败，可重试或先练阅读。':'本地服务未连接，音频无法播放。请先运行「启动.ps1」再刷新本页；也可以先练阅读。');paintPlayer();};
+      playerError=source==='custom'?'这个文件无法播放。可重选浏览器支持的音频，或还原默认音频。':'音频读取或解码失败。请重试、在设置试听另一套声线，或先练阅读。';paintPlayer();};
     return audio;
   }
   function playSpeech(fromStart=false) {
+    stopPreview();
     if(document.hidden){toast('先回到产品页面，再播放音频。');return;}
     const l=getLesson();if(!l)return;
     if(playerError){resetPlayer();}
@@ -581,6 +613,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     u.onerror=failed;paintPlayer();try{window.speechSynthesis.speak(u);}catch{failed();}
   }
   function openModal(title,body) {
+    hideSelToolbar();clearTimeout(selTimer);
     if(!modal.open)modalReturnSelector=focusSelector(document.activeElement);
     modal.innerHTML=`<div class="modal-heading"><h2 id="modal-title">${title}</h2><button type="button" class="modal-close" data-action="close-modal" aria-label="关闭">${icon('close')}</button></div><div class="modal-body">${body}</div>`;
     if(!modal.open)modal.showModal();
@@ -666,6 +699,10 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
   }
   function stopRecording(){recordRequest++;recordPending=false;if(recorder?.state==='recording')recorder.stop();recordStream?.getTracks().forEach(t=>t.stop());clearInterval(recordTick);clearTimeout(recordTimeout);}
   function clearVolatileMedia(){
+    stopPreview();hideSelToolbar();clearTimeout(selTimer);lastSelection={text:'',context:'',lessonId:''};
+    dialogueHistory=[];dialogueLesson='';reviewDrafts={};reviewKey='';reviewRevealed.clear();undoReview=null;
+    hiddenWhilePlaying=false;
+    if(shadowOn)stopShadow(true);
     const old=utterance;utterance=null;if(old)window.speechSynthesis?.cancel();resetPlayer();stopRecording();recorder=null;recordStream=null;
     if(recordURL)URL.revokeObjectURL(recordURL);recordURL='';recordLesson='';if(customAudio)URL.revokeObjectURL(customAudio.url);customAudio=null;
   }
@@ -689,7 +726,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
   // ---- 逐句精听：点原文任意一句单独重听或循环，播放时同步高亮 ----------------
   // Turn boundaries come from audio/<pack>/timings.json, measured off the rendered
   // file, so a lesson whose timings are absent simply keeps whole-file playback.
-  let timingsCache={},timingsLoading='',activeTurn=-1,loopTurn=-1,packFallbackUsed=false,hiddenWhilePlaying=false,loopRaf=null;
+  let timingsCache={},timingsLoading='',activeTurn=-1,loopTurn=-1,hiddenWhilePlaying=false,loopRaf=null;
   function audioHost(){
     let host=document.getElementById('audio-host');
     if(!host){host=document.createElement('div');host.id='audio-host';host.setAttribute('aria-hidden','true');document.body.appendChild(host);}
@@ -744,6 +781,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     else{lastAudioTime=seconds;lastAudioWall=Date.now();}
   }
   function playTurn(index){
+    stopPreview();
     const t=lessonTimings();
     if(!t||!t.timing[index]){toast('这一课还没有逐句时间轴，请整段播放。');return;}
     const audio=ensurePlayer();
@@ -783,6 +821,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     if(!quiet)toast('已退出跟读。');
   }
   function startShadow(){
+    stopPreview();stopSpeechOnly();
     const t=lessonTimings();
     if(!t||!t.timing.length){toast('这一课还没有逐句时间轴，暂时无法跟读。');return;}
     const audio=ensurePlayer();
@@ -913,8 +952,8 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
   }
 
   // ---- 划词：选中英文即出现释义 / 收藏 / 朗读 ----------------------------
-  const SELECTABLE='.reading-text,.transcript,.turn,.turn-text,.script-text,.hint-content,.phrase,.optional-body,.reading-card';
-  let selToolbar=null,previewAudio=null,previewResume=false,lastSelection={text:'',context:''},suppressTurnUntil=0;
+  const SELECTABLE='.reading-text,.transcript,.turn,.turn-text,.script-text,.hint-content,.phrase,.optional-body,.reading-card,.recall-session [lang="en"],.saved-row [lang="en"],.review-reveal';
+  let selToolbar=null,previewAudio=null,previewResume=null,previewUtterance=null,previewTimer=null,lastSelection={text:'',context:'',lessonId:''},suppressTurnUntil=0,selectionLimitNotice='';
   function dictLookup(raw){
     const clean=String(raw||'').trim().toLowerCase().replace(/\u2019/g,"'").replace(/^[\u201c("'[]+|[\u201d"'\].!?;,]+$/g,'');
     if(!clean||clean.length>80)return null;
@@ -924,6 +963,8 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
       if(clean.endsWith(suffix)&&clean.length-suffix.length>=3){
         const stem=clean.slice(0,-suffix.length)+replace;
         if(DICT[stem])return {term:stem,senses:DICT[stem],inflected:clean};
+        // Double consonants in running / stopped belong to the inflection.
+        if(['ing','ed'].includes(suffix)&&replace===''&&/([b-df-hj-np-tv-z])\1$/.test(stem)&&DICT[stem.slice(0,-1)])return {term:stem.slice(0,-1),senses:DICT[stem.slice(0,-1)],inflected:clean};
       }
     }
     if(clean.includes('-')){
@@ -944,24 +985,38 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     return (block?.textContent||'').replace(/\s+/g,' ').trim().slice(0,600);
   }
   function hideSelToolbar(){if(selToolbar){selToolbar.remove();selToolbar=null;}}
+  function selectionLesson(el){
+    const row=el?.closest?.('.saved-row,.recall-session');
+    const key=row?.querySelector('[data-action="review-now"],#recall-draft,[data-action="reveal-word"]')?.dataset.key;
+    return key?queueItem(key)?.lesson?.id||state.vocabulary.find(w=>'word:'+w.id===key)?.lessonId||lessonId:lessonId;
+  }
+  function positionSelToolbar(){
+    const sel=window.getSelection();if(!selToolbar||!sel?.rangeCount)return;
+    const rect=sel.getRangeAt(0).getBoundingClientRect(),v=window.visualViewport;
+    const left=v?.offsetLeft||0,top=v?.offsetTop||0,width=v?.width||innerWidth,height=v?.height||innerHeight;
+    const nav=document.querySelector('.sidebar'),navRect=nav?.getBoundingClientRect();
+    const bottom=nav&&getComputedStyle(nav).position==='fixed'&&navRect.top>0?Math.min(top+height,navRect.top):top+height;
+    const w=selToolbar.offsetWidth,h=selToolbar.offsetHeight;
+    selToolbar.style.left=Math.max(left+8,Math.min(left+width-w-8,rect.left+rect.width/2-w/2))+'px';
+    selToolbar.style.top=Math.max(top+8,Math.min(bottom-h-8,rect.top-h-10>=top+8?rect.top-h-10:rect.bottom+10))+'px';
+  }
   function showSelToolbar(){
+    if(modal.open||selToolbar?.contains(document.activeElement))return;
     const sel=window.getSelection();
     const text=String(sel&&sel.rangeCount?sel.toString():'').trim();
     const node=sel?.anchorNode;
     const el=node&&(node.nodeType===1?node:node.parentElement);
+    const end=sel?.focusNode?.nodeType===1?sel.focusNode:sel?.focusNode?.parentElement;
     const inField=el?.closest?.('input,textarea,select,.sel-toolbar');
-    if(!text||text.length>200||inField||!el?.closest?.(SELECTABLE)||!/[A-Za-z]{2}/.test(text)){hideSelToolbar();return;}
-    lastSelection={text:text.slice(0,80),context:sentenceOf(el)};
+    if(!text||inField||!el?.closest?.(SELECTABLE)||!end?.closest?.(SELECTABLE)||!/[A-Za-z]{2}/.test(text)||selectionLesson(el)!==selectionLesson(end)){hideSelToolbar();return;}
+    if(text.length>80){hideSelToolbar();if(selectionLimitNotice!==text){selectionLimitNotice=text;toast('一次可收藏最多80个字符，请选中一个词或短语。');}return;}
+    selectionLimitNotice='';
+    lastSelection={text,context:sentenceOf(el),lessonId:selectionLesson(el)};
     hideSelToolbar();
     const bar=document.createElement('div');
-    bar.className='sel-toolbar';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','选中内容操作');
+    bar.className='sel-toolbar';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','选中内容操作，Alt+Enter进入');
     bar.innerHTML=`<button type="button" class="btn small primary" data-sel="meaning">释义</button><button type="button" class="btn small" data-sel="save">收藏生词</button><button type="button" class="btn small ghost" data-sel="speak">朗读</button>`;
-    document.body.appendChild(bar);
-    const rect=sel.getRangeAt(0).getBoundingClientRect();
-    const width=bar.offsetWidth,height=bar.offsetHeight;
-    bar.style.left=Math.max(8,Math.min(window.innerWidth-width-8,rect.left+rect.width/2-width/2))+'px';
-    bar.style.top=Math.max(8,rect.top-height-10)+(rect.top-height-10<8?height+20:0)+'px';
-    selToolbar=bar;
+    document.body.appendChild(bar);selToolbar=bar;positionSelToolbar();
   }
   function meaningModal(){
     const {text,context}=lastSelection;
@@ -970,59 +1025,74 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     const head=found?`<h2 class="word-term" lang="en">${esc(found.term)}</h2>${found.inflected&&found.inflected!==found.term?`<p class="helper-copy">原形（你选中的是 ${esc(found.inflected)}）</p>`:''}`:`<h2 class="word-term" lang="en">${esc(text)}</h2>`;
     const offline=found?`<ul class="word-senses">${senses}</ul>`:`<p class="note">内置词典没有收录这个词。可连接AI获取解释，或直接收藏后自己填写。</p>`;
     const ai=health.configured?button('word-ai-selection','让AI解释这个词','small'):button('go-settings','连接AI后可深入解释','ghost small');
-    openModal('划词释义',`<div class="word-card">${head}${offline}${context?`<p class="word-context" lang="en">${esc(context)}</p>`:''}<div class="settings-actions">${ai}${button('word-save-selection','收藏到生词库','')}</div><p class="helper-copy">内置释义离线可用，覆盖本课全部词汇；AI可补充例句与辨析。</p></div>`);
+    openModal('划词释义',`<div class="word-card">${head}${offline}${context?`<p class="word-context" lang="en">${esc(context)}</p>`:''}<div class="settings-actions">${ai}${button('word-save-selection','收藏到生词库','')}</div><p class="helper-copy">内置释义可离线查阅；缺词、例句与语境辨析可按需交给AI。</p></div>`);
   }
   function saveSelectionWord(silent=false){
     const {text,context}=lastSelection;
     if(!text)return false;
-    const term=text.slice(0,80);
+    const term=text;
+    if(term.length>80){toast('选中内容超过80个字符，请重新选择一个词或短语。');return false;}
     if(state.vocabulary.some(w=>w.term.toLowerCase()===term.toLowerCase())){if(!silent)toast('这个词已在生词库。');return false;}
     if(state.vocabulary.length>=3000){toast('生词已达3000条，请先导出和整理。');return false;}
     const found=dictLookup(term);
     const meaning=found?found.senses.join('；').slice(0,500):'';
-    state.vocabulary.push({id:'w'+Date.now().toString(36)+Math.random().toString(36).slice(2,7),term,context:context.slice(0,1500),meaning,lessonId:idPattern.test(lessonId)?lessonId:'L01',due:day(),seen:0,streak:0});
+    state.vocabulary.push({id:'w'+Date.now().toString(36)+Math.random().toString(36).slice(2,7),term,context:context.slice(0,1500),meaning,lessonId:idPattern.test(lastSelection.lessonId)?lastSelection.lessonId:'L01',due:day(),seen:0,streak:0});
     const saved=save();
     if(!silent){closeModal();toast(saved?'已收藏到生词库，可在「复习与生词」查看。':'已收藏，但未能保存，请导出备份。');}
     return saved;
   }
+  function beginAuxiliary(){
+    clearTimeout(nextLessonTimer);nextLessonTimer=null;
+    stopPreview(true);
+    if(shadowOn)stopShadow(true);
+    stopSpeechOnly();
+    if(bundledPlayer&&!bundledPlayer.paused&&!bundledPlayer.ended){previewResume=bundledPlayer;bundledPlayer.pause();}
+  }
+  function finishAuxiliary(active){
+    if(active!==previewAudio&&active!==previewUtterance)return;
+    const resume=previewResume;stopPreview();
+    if(resume&&resume===bundledPlayer&&!resume.ended)resumeCurrentAudio();
+  }
+  function speakAuxiliary(text,voice){
+    if(!text||!voice||!window.speechSynthesis){toast('未选择可用的浏览器英文声线；内置对话不受影响。');return;}
+    beginAuxiliary();
+    const u=new SpeechSynthesisUtterance(text);previewUtterance=u;u.voice=voice;u.lang=voice.lang;u.rate=state.preferences.rate;u.volume=state.preferences.volume;
+    u.onend=()=>finishAuxiliary(u);u.onerror=()=>{if(previewUtterance!==u)return;finishAuxiliary(u);toast('浏览器朗读失败，正课已恢复。');};
+    previewTimer=setTimeout(()=>{if(previewUtterance!==u)return;finishAuxiliary(u);toast('朗读等待超时。');},20000);
+    try{window.speechSynthesis.speak(u);}catch{finishAuxiliary(u);toast('浏览器无法启动朗读。');}
+  }
   function speakSelection(){
-    const text=lastSelection.text;
-    if(!text||!window.speechSynthesis){toast('当前浏览器不支持朗读选中内容。');return;}
-    const v=selectedVoice();
-    if(!v){toast('此浏览器没有英文合成声线，无法朗读选中内容。');return;}
-    window.speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);u.voice=v;u.lang=v.lang;u.rate=state.preferences.rate;u.volume=state.preferences.volume;
-    window.speechSynthesis.speak(u);
+    // Explicit opt-in: selecting a word does not silently choose a low-quality voice.
+    if(!selectedVoice()){toast('选词朗读需要在设置中选择并试听浏览器声线；内置对话声线不受影响。');return;}
+    speakAuxiliary(lastSelection.text,selectedVoice());
   }
   function previewPack(pack){
     if(!['a','b'].includes(pack))return;
-    stopPreview();
-    // Auditioning a voice must not talk over the lesson the learner paused.
-    if(bundledPlayer&&!bundledPlayer.paused&&!bundledPlayer.ended){bundledPlayer.pause();previewResume=true;}
+    beginAuxiliary();
     const a=new Audio(`/audio/${pack}/_preview.wav`);
     a.volume=state.preferences.volume;a.playbackRate=state.preferences.rate;
     previewAudio=a;audioHost().appendChild(a);
-    const finish=()=>{if(previewAudio!==a)return;previewAudio=null;a.remove();
-      if(previewResume){previewResume=false;resumeCurrentAudio();}};
-    a.onended=finish;
-    a.onerror=()=>{if(previewAudio!==a)return;finish();toast(health.host?'这套声线的试听样本缺失。':'本地服务未连接，无法试听。请先运行「启动.ps1」。');};
-    a.play().then(()=>toast('正在试听这套声线。')).catch(()=>{finish();toast('浏览器阻止了播放，请再点一次试听。');});
+    a.onended=()=>finishAuxiliary(a);
+    a.onerror=()=>{if(previewAudio!==a)return;finishAuxiliary(a);toast('试听读取失败。请检查本地服务后重试，或试听另一套声线。');};
+    previewTimer=setTimeout(()=>{if(previewAudio!==a)return;finishAuxiliary(a);toast('试听等待超时，正课已恢复。');},20000);
+    a.play().then(()=>{if(previewAudio===a)toast('正在试听'+(pack==='a'?'美音':'英音')+'；结束后恢复正课。');}).catch(()=>{if(previewAudio!==a)return;finishAuxiliary(a);toast('试听未启动，请重试。');});
   }
-  function stopPreview(){
-    if(!previewAudio)return;
-    const a=previewAudio;previewAudio=null;previewResume=false;
-    try{a.pause();a.remove();}catch{}
+  function stopPreview(preserveResume=false){
+    clearTimeout(previewTimer);previewTimer=null;
+    const a=previewAudio,u=previewUtterance;previewAudio=null;previewUtterance=null;
+    if(!preserveResume)previewResume=null;
+    if(a){a.onended=null;a.onerror=null;a.pause();a.removeAttribute('src');a.load();a.remove();}
+    if(u){u.onend=null;u.onerror=null;window.speechSynthesis?.cancel();}
   }
   function switchVoicePack(pack){
     const next=['a','b'].includes(pack)?pack:'a';
     if(next===state.preferences.voicePack)return;
-    state.preferences.voicePack=next;
-    packFallbackUsed=false;activeTurn=-1;loopTurn=-1;
-    const wasPlaying=!!bundledPlayer&&!bundledPlayer.paused&&!bundledPlayer.ended;
-    const target=audioId||lessonId;
-    stopSound();resetPlayer();save();render();
-    if(wasPlaying&&page==='lesson'){lessonId=target;playSpeech(true);}
-    toast('已切换声线。');
+    const target=audioId||lessonId,wasPlaying=!!bundledPlayer&&(!bundledPlayer.paused&&!bundledPlayer.ended||previewResume===bundledPlayer);
+    // Save the old pack's ranges before changing the revision identity.
+    stopSound();resetPlayer();state.preferences.voicePack=next;
+    activeTurn=-1;loopTurn=-1;save();render();
+    if(wasPlaying){lessonId=target;playSpeech(true);}
+    toast('已切换声线，从本课开头播放；已有完成记录保留。');
   }
   function dialogueForm(){
     if(!health.configured){aiSetupNotice();return;}
@@ -1087,7 +1157,7 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     if(a==='sync-conflict'){accountConflict();return;}
     if(a==='sync-load'||a==='sync-overwrite'){await resolveConflict(a==='sync-overwrite');return;}
     if(a==='clear-ai'){await accountRequest('/api/ai/config',{clear:true});await checkHealth();render();toast('已清除当前进程中的AI配置。');return;}
-    if(a==='preview-voice'){const voice=selectedVoice();if(!voice||!window.speechSynthesis){toast('此浏览器没有英文合成声线；内置场景音频不受影响。');return;}stopSound();stopPreview();const sample=new SpeechSynthesisUtterance('A little practice makes room for new ideas.');sample.voice=voice;sample.lang=voice.lang;sample.rate=state.preferences.rate;sample.volume=state.preferences.volume;sample.onend=()=>toast('试听结束。');sample.onerror=()=>toast('试听失败：浏览器拒绝了合成朗读。');window.speechSynthesis.speak(sample);toast('正在试听浏览器声线。');return;}
+    if(a==='preview-voice'){speakAuxiliary('A little practice makes room for new ideas.',selectedVoice());return;}
     if(a==='preview-pack'){previewPack(el.dataset.pack);return;}
     if(a==='play-turn'){
       // A click on a sentence still plays it, but a drag that selected a word
@@ -1163,12 +1233,13 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
     const t=e.target;
     if(t.matches('[data-question]')){const index=Number(t.dataset.question),p=progress(lessonId,true);if(index>=0&&index<4&&!(index<2?p.listenChecked:p.readingChecked)){p.answers[index]=Number(t.value);save();}}
     if(t.id==='level-filter'){filterLevel=t.value;render();}
+    if(t.id==='theme-filter'){filterTheme=Object.hasOwn(THEMES,t.value)?t.value:'all';render();}
     if(t.id==='play-rate'||t.id==='default-rate'){state.preferences.rate=Number(t.value);if(bundledPlayer){recordPlayed(bundledPlayer,true);bundledPlayer.playbackRate=state.preferences.rate;lastAudioTime=bundledPlayer.currentTime;lastAudioWall=Date.now();}save();if(utterance)toast('合成朗读将在下次播放使用新速度；内置音频可即时调速。');}
     if(t.id==='voice-select'){if(utterance)stopSound();state.preferences.voice=t.value;save();render();}
     if(t.id==='text-size-select'){state.preferences.textSize=['small','standard','large'].includes(t.value)?t.value:'standard';save();render();}
     if(t.id==='theme-select'){state.preferences.theme=['auto','light','dark'].includes(t.value)?t.value:'auto';save();render();}
     if(t.name==='voice-pack'&&t.checked){switchVoicePack(t.value);}
-    if(t.id==='auto-next'){state.preferences.autoNext=t.checked;save();toast(t.checked?'听完整段后会自动播放下一课。':'已关闭自动连播。');}
+    if(t.id==='auto-next'){state.preferences.autoNext=t.checked;if(!t.checked){clearTimeout(nextLessonTimer);nextLessonTimer=null;}save();toast(t.checked?'音频播放结束后会自动播放下一课。':'已关闭自动连播。');}
     if(t.id==='speaking-done'||t.id==='writing-done'){progress(lessonId,true)[t.id==='speaking-done'?'speakingDone':'writingDone']=t.checked;save();}
     if(t.id==='audio-file'&&t.files[0]){
       const f=t.files[0];if(f.size>50*1024*1024||!f.size||(!f.type.startsWith('audio/')&&!/\.(wav|mp3|m4a|aac|ogg|opus|flac|webm)$/i.test(f.name))){toast('请选择不超过50MB、格式受浏览器支持的音频。');t.value='';return;}
@@ -1229,22 +1300,26 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
   document.addEventListener('selectionchange',()=>{clearTimeout(selTimer);selTimer=setTimeout(showSelToolbar,180);});
   // Selecting text inside a sentence is a drag, not a click on the sentence:
   // remember that so the trailing click does not restart playback.
-  document.addEventListener('mousedown',e=>{if(selToolbar&&!selToolbar.contains(e.target))hideSelToolbar();});
-  document.addEventListener('mouseup',e=>{
+  document.addEventListener('pointerdown',e=>{if(selToolbar&&!selToolbar.contains(e.target))hideSelToolbar();});
+  document.addEventListener('pointerup',e=>{
     const sel=window.getSelection();
     if(sel&&!sel.isCollapsed&&String(sel).trim()&&e.target.closest?.('.turn'))suppressTurnUntil=Date.now()+700;
   });
+  window.addEventListener('resize',positionSelToolbar);
+  window.visualViewport?.addEventListener('resize',positionSelToolbar);
+  window.visualViewport?.addEventListener('scroll',positionSelToolbar);
+  document.addEventListener('scroll',positionSelToolbar,true);
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){hideSelToolbar();if(shadowOn)stopShadow();}
+    if(e.altKey&&e.key==='Enter'&&selToolbar&&!modal.open){e.preventDefault();selToolbar.querySelector('button')?.focus();return;}
     // Shortcuts only act on the listening stage and never while typing.
     const tag=(e.target?.tagName||'').toLowerCase();
     if(e.defaultPrevented||e.ctrlKey||e.metaKey||e.altKey)return;
-    if(tag==='input'||tag==='textarea'||tag==='select'||e.target?.isContentEditable)return;
-    if(modal.open)return;
-    if(page!=='lesson')return;
     const turnKey=e.target?.closest?.('.turn');
-    if(turnKey&&(e.key==='Enter'||e.key===' ')){e.preventDefault();playTurn(Number(turnKey.dataset.index));return;}
-    if(e.key===' '&&stage===0){e.preventDefault();playSpeech();return;}
+    if(turnKey&&!modal.open&&page==='lesson'&&stage===0&&(e.key==='Enter'||e.key===' ')){e.preventDefault();playTurn(Number(turnKey.dataset.index));return;}
+    if(tag==='input'||tag==='textarea'||tag==='select'||tag==='button'||e.target?.closest?.('a,summary,[role="button"],.sel-toolbar')||e.target?.isContentEditable)return;
+    if(modal.open||page!=='lesson'||stage!==0)return;
+    if(e.key===' '){e.preventDefault();playSpeech();return;}
     if((e.key==='ArrowLeft'||e.key==='ArrowRight')&&bundledPlayer){e.preventDefault();seekBy(e.key==='ArrowLeft'?-5:5);return;}
     if((e.key==='j'||e.key==='k')&&stage===0){e.preventDefault();stepTurn(e.key==='j'?1:-1);return;}
   });
@@ -1267,27 +1342,32 @@ const AUDIO_REVISION = 'kokoro-fp32-v9-20261118';
   async function init(){
     readStorage();
     const control=new AbortController(),timeout=setTimeout(()=>control.abort(),5000);
+    const services=Promise.allSettled([checkHealth(),accountRequest('/api/account/status',undefined,4000)]);
+    let usedFallback=false;
     try {
-      await checkHealth();
-      const responses=await Promise.all(['lessons.json','catalog.json'].map(path=>fetch(path,{signal:control.signal})));
-      if(responses.some(response=>!response.ok))throw new Error();const groups=await Promise.all(responses.map(response=>response.json()));if(groups.some(items=>!Array.isArray(items)))throw new Error();const items=groups.flat();if(!items.length)throw new Error();lessons=items.map(lessonValid);
-      if(new Set(lessons.map(l=>l.id)).size!==lessons.length)throw new Error();
-      await refreshAccount();await checkHealth();
+      try{
+        const responses=await Promise.all(['lessons.json','catalog.json'].map(path=>fetch(path,{signal:control.signal})));
+        if(responses.some(response=>!response.ok))throw new Error();
+        const groups=await Promise.all(responses.map(response=>response.json()));
+        if(groups.some(items=>!Array.isArray(items)))throw new Error();
+        lessons=groups.flat().map(lessonValid);
+        if(!lessons.length||new Set(lessons.map(l=>l.id)).size!==lessons.length)throw new Error();
+      }catch{
+        if(!Array.isArray(window.UnfoldContent)||!window.UnfoldContent.length)throw new Error();
+        lessons=window.UnfoldContent.map(lessonValid);usedFallback=true;
+        if(new Set(lessons.map(l=>l.id)).size!==lessons.length)throw new Error();
+      }
+      clearTimeout(timeout);
+      const checks=await services;
+      if(checks[1].status==='fulfilled')await refreshAccount(checks[1].value);
+      else syncStatus('账号服务暂时不可用；本浏览器副本保留，可在设置重试登录。');
+      offlineText=window.location.protocol==='file:';
       lessonId=getLesson(state.lastLesson)?state.lastLesson:lessons[0].id;
       refreshVoices();if(window.location.hash&&window.location.hash!=='#main')fromRoute();else render();
+      if(usedFallback)toast(offlineText?'已加载内置文本。音频与账号需通过启动脚本打开。':'已改用内置文本副本；音频与账号连接独立检查。');
     }catch{
-      if(Array.isArray(window.UnfoldContent)&&window.UnfoldContent.length){
-        try{
-          lessons=window.UnfoldContent.map(lessonValid);
-          if(new Set(lessons.map(l=>l.id)).size===lessons.length){
-            offlineText=true;health={configured:false,host:'',model:'',detail:'本地服务未连接：已加载内置文本，音频与账号同步不可用。',csrf_token:''};
-            lessonId=getLesson(state.lastLesson)?state.lastLesson:lessons[0].id;
-            refreshVoices();render();toast('未连接本地服务：文本可练习，音频与同步不可用。');return;
-          }
-        }catch{}
-      }
-      app.innerHTML=`<main class="boot" id="main" tabindex="-1"><span class="boot-mark">U</span><h1>练习材料未加载</h1><p>通过产品目录的 <strong>启动.ps1</strong> 启动本地服务，再刷新页面。不要直接双击HTML。</p><a class="btn primary" href="">重新加载</a></main>`;}
-    finally{clearTimeout(timeout);}
+      app.innerHTML=`<main class="boot" id="main" tabindex="-1"><span class="boot-mark">U</span><h1>练习材料未加载</h1><p>通过产品目录的 <strong>启动.ps1</strong> 启动本地服务，再刷新页面。不要直接双击HTML。</p><a class="btn primary" href="">重新加载</a></main>`;
+    }finally{clearTimeout(timeout);}
   }
   init();
 })();

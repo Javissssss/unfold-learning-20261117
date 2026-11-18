@@ -13,6 +13,7 @@ import threading
 import time
 from pathlib import Path
 from contextlib import contextmanager
+from learning_state import validate_learning
 
 MAX_STATE = 2 * 1024 * 1024
 USERNAME = re.compile(r"[A-Za-z0-9_-]{3,40}\Z")
@@ -23,7 +24,8 @@ class AccountError(ValueError):
         self.status = status
 
 class Accounts:
-    def __init__(self, directory=None):
+    def __init__(self, directory=None, lesson_validator=None):
+        self.lesson_validator = lesson_validator
         default = Path(os.environ.get('LOCALAPPDATA', Path.home() / '.local' / 'share')) / 'Unfold'
         self.directory = Path(directory or os.environ.get('UNFOLD_DATA_DIR', default)).resolve()
         self.directory.mkdir(parents=True, exist_ok=True)
@@ -123,15 +125,11 @@ class Accounts:
         state, revision = body.get('state'), body.get('revision')
         if type(revision) is not int or revision<0 or not isinstance(state,dict) or state.get('version')!=1:
             raise AccountError('同步数据结构或版本无效。')
-        required={'progress':dict,'reviews':list,'journals':list,'drafts':dict,'generated':list,'preferences':dict}
-        if any(not isinstance(state.get(k),v) for k,v in required.items()):
-            raise AccountError('同步数据缺少学习内容。')
-        allowed=set(required)|{'version','lastLesson','vocabulary','aiHistory'}
-        if set(state)-allowed:
-            raise AccountError('同步数据包含非学习字段，拒绝保存。')
-        if len(state['progress'])>500 or len(state['reviews'])>1000 or len(state['journals'])>1000 or len(state['generated'])>200 or len(state.get('vocabulary',[]))>3000 or len(state.get('aiHistory',[]))>200:
-            raise AccountError('学习数据条目数超过限制。')
-        raw=json.dumps(state,ensure_ascii=False,separators=(',',':'))
+        try:
+            validate_learning(state, self.lesson_validator)
+            raw=json.dumps(state,ensure_ascii=False,separators=(',',':'),allow_nan=False)
+        except (ValueError, TypeError, KeyError, OverflowError):
+            raise AccountError('学习记录格式不合法，未保存；原账号记录保留。') from None
         if len(raw.encode())>MAX_STATE:
             raise AccountError('学习记录超过2MB，请先导出和整理。',413)
         # Parameters only; every read/write is scoped to the authenticated user.

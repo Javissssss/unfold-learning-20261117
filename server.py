@@ -404,7 +404,7 @@ class UnfoldServer(ThreadingHTTPServer):
         self.public_url=os.environ.get('UNFOLD_PUBLIC_URL','').rstrip('/')
         if self.public_url and not re.fullmatch(r'https://[A-Za-z0-9.-]+(?::\d+)?',self.public_url):
             raise ValidationError('UNFOLD_PUBLIC_URL必须是HTTPS域名根地址。')
-        self.accounts=Accounts()
+        self.accounts=Accounts(lesson_validator=validate_lesson)
         self.session_configs={}
         self.local_config=None
         self.lessons={}
