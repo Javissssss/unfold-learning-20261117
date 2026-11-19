@@ -37,6 +37,10 @@ STATIC_FILES = {
     "/catalog.json": ("catalog.json", "application/json; charset=utf-8"),
     "/content.js": ("content.js", "text/javascript; charset=utf-8"),
     "/dict.js": ("dict.js", "text/javascript; charset=utf-8"),
+    "/word-engine.js": ("word-engine.js", "text/javascript; charset=utf-8"),
+    "/words.js": ("words.js", "text/javascript; charset=utf-8"),
+    "/word-ui.js": ("word-ui.js", "text/javascript; charset=utf-8"),
+    "/words.css": ("words.css", "text/css; charset=utf-8"),
     **{f"/audio/{pack}/L{number:02}.wav": (f"audio/{pack}/L{number:02}.wav", "audio/wav")
        for pack in VOICE_PACKS for number in range(1, LESSON_COUNT + 1)},
     **{f"/audio/{pack}/_preview.wav": (f"audio/{pack}/_preview.wav", "audio/wav") for pack in VOICE_PACKS},
@@ -629,26 +633,42 @@ class UnfoldHandler(BaseHTTPRequestHandler):
         else:
             self.send_data(200, data, content_type)
 
+    def reject_post(self, status: int, message: str) -> None:
+        # Drain only a bounded body before closing. Closing with unread POST bytes
+        # can reset the socket on Windows and hide a legitimate 403 response.
+        self.close_connection = True
+        try:
+            length = int(self.headers.get('Content-Length', '0'))
+        except ValueError:
+            length = 0
+        if 0 < length <= MAX_STATE + 32768:
+            try:
+                self.connection.settimeout(1)
+                self.rfile.read(length)
+            except (OSError, TimeoutError):
+                pass
+        self.send_json(status, {'error': message})
+
     def do_POST(self) -> None:
         if not self.valid_host():
-            self.send_json(403, {"error": "本地服务不接受该Host。"})
+            self.reject_post(403, '本地服务不接受该Host。')
             return
         origin = self.headers.get("Origin")
         allowed = {f"http://127.0.0.1:{self.server.server_port}", f"http://localhost:{self.server.server_port}"}
         if self.server.public_url: allowed.add(self.server.public_url)
         if origin and origin not in allowed:
-            self.send_json(403, {"error": "拒绝跨站请求。"})
+            self.reject_post(403, '拒绝跨站请求。')
             return
         token = self.headers.get("X-Unfold-Token", "")
         if not secrets.compare_digest(token, self.server.csrf_token):
-            self.send_json(403, {"error": "请求令牌无效。请刷新本地网页。"})
+            self.reject_post(403, '请求令牌无效。请刷新本地网页。')
             return
         path=urllib.parse.urlsplit(self.path).path
         if path not in {'/api/ai','/api/ai/config','/api/sync','/api/account/login','/api/account/register','/api/account/logout','/api/account/password'}:
-            self.send_json(404, {"error": "接口不存在。"})
+            self.reject_post(404, '接口不存在。')
             return
         if not self.headers.get("Content-Type", "").lower().startswith("application/json"):
-            self.send_json(415, {"error": "仅接受JSON请求。"})
+            self.reject_post(415, '仅接受JSON请求。')
             return
         try:
             length = int(self.headers.get("Content-Length", "0"))

@@ -6,7 +6,9 @@ const ORIGIN=process.env.UNFOLD_QA_ORIGIN||'http://127.0.0.1:8792';
 let c;
 (async()=>{
   c=await CDP.connect(Number(process.env.UNFOLD_QA_CDP||9252));await c.size(1440,900);await c.call('Network.enable');await c.call('Network.clearBrowserCookies');
-  await c.navigate(`${ORIGIN}/?audio=${Date.now()}#settings`);await c.until('!!document.querySelector(".nav-button")');await c.eval('localStorage.clear()');await c.call('Page.reload');await c.until('!!document.querySelector("#default-rate")');
+  await c.navigate(`${ORIGIN}/?audio=${Date.now()}#settings`);await c.until('!!document.querySelector("#default-rate")');await c.eval('localStorage.clear()');
+  // A unique document URL prevents a fast readiness check from accepting the old page during reload.
+  await c.navigate(`${ORIGIN}/?audio-reset=${Date.now()}#settings`);await c.until('!!document.querySelector("#default-rate")');
   await c.eval('(()=>{const e=document.querySelector("#default-rate");e.value="1.3";e.dispatchEvent(new Event("change",{bubbles:true}))})()');
   const rows=[];
   for(const pack of ['a','b']){

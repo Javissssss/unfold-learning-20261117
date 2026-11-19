@@ -13,6 +13,8 @@ async function reload(hash){await c.navigate(`${origin}/?media=${++serial}#${has
 async function toggle(enabled){await c.eval(`(()=>{const e=document.getElementById('auto-next');e.checked=${enabled};e.dispatchEvent(new Event('change',{bubbles:true}));})()`);}
 async function prepare(enabled=true){
   await c.call('Network.clearBrowserCookies');await reload('settings');await c.eval('localStorage.clear()');await reload('settings');await toggle(enabled);await route('lesson/L01/0');await c.until('UnfoldPlayback?.lessonId==="L01"&&UnfoldPlayback.duration>0');
+  // Real use starts with a user click; a synthetic ended event cannot grant autoplay permission.
+  await c.click('[data-action=play]');await c.until('!UnfoldPlayback.paused&&UnfoldPlayback.currentTime>.1');
 }
 async function ended(){await c.eval(`(()=>{const a=document.querySelector('#audio-host audio');a.pause();Object.defineProperty(a,'ended',{value:true,configurable:true});a.dispatchEvent(new Event('ended'));})()`);}
 async function flush(){await c.eval('window.flushNextLesson()');await wait(200);}

@@ -1,5 +1,7 @@
-"""Validate durable learning records before committing; no secrets or media belong here."""
+"""Validate durable learning records before committing; media is limited to safe coding thumbnails."""
 from __future__ import annotations
+import base64
+import binascii
 import math
 import re
 from datetime import date, datetime
@@ -43,10 +45,57 @@ def answers(value):
     return isinstance(value, list) and len(value) == 4 and all(x is None or integer(x, 0, 2) for x in value)
 
 
+def valid_thumbnail(value):
+    if value == '':
+        return True
+    if not isinstance(value, str) or len(value) > 16430:
+        return False
+    match = re.fullmatch(r'data:image/(png|jpeg|webp);base64,([A-Za-z0-9+/]+={0,2})', value)
+    if not match:
+        return False
+    try:
+        raw = base64.b64decode(match[2], validate=True)
+    except (ValueError, binascii.Error):
+        return False
+    if len(raw) < 12:
+        return False
+    if match[1] == 'png':
+        return raw.startswith(b'\x89PNG\r\n\x1a\n')
+    if match[1] == 'jpeg':
+        return raw.startswith(b'\xff\xd8\xff')
+    return raw.startswith(b'RIFF') and raw[8:12] == b'WEBP'
+
+
+def validate_word_workbench(state):
+    study, codes = state.get('wordStudy', {}), state.get('wordCodes', [])
+    require(isinstance(study, dict) and len(study) <= 6000, '刷词记录格式或数量不合法。')
+    for key, directions in study.items():
+        require(identifier(key) and isinstance(directions, dict) and 0 < len(directions) <= 2 and not set(directions) - {'en', 'zh'})
+        for schedule in directions.values():
+            require(isinstance(schedule, dict) and not set(schedule) - {'due', 'seen', 'streak', 'last', 'grade', 'hinted'})
+            require(valid_date(schedule.get('due')) and valid_date(schedule.get('last')) and integer(schedule.get('seen')) and integer(schedule.get('streak'), 0, 5))
+            require(schedule.get('grade') in ('again', 'hard', 'good') and type(schedule.get('hinted')) is bool)
+    require(isinstance(codes, list) and len(codes) <= 500, '编码库格式或数量不合法。')
+    ids, pairs, image_size = set(), set(), 0
+    for code in codes:
+        require(isinstance(code, dict) and not set(code) - {'id', 'fragment', 'title', 'note', 'kind', 'rootMeaning', 'match', 'enabled', 'imageData', 'created', 'updated'})
+        require(identifier(code.get('id')) and code['id'] not in ids)
+        require(text(code.get('fragment'), 20, True) and bool(re.fullmatch(r'[a-z]{2,20}', code['fragment'])))
+        require(text(code.get('title'), 60, True) and text(code.get('note'), 500) and text(code.get('rootMeaning'), 100))
+        require(code.get('kind') in ('fragment', 'root') and code.get('match') in ('any', 'start', 'end') and type(code.get('enabled')) is bool)
+        require(valid_date(code.get('created')) and valid_date(code.get('updated')) and valid_thumbnail(code.get('imageData')))
+        pair = (code['fragment'], code['match'])
+        require(pair not in pairs, '同一片段和匹配位置已有编码。')
+        ids.add(code['id'])
+        pairs.add(pair)
+        image_size += len(code['imageData'])
+    require(image_size <= 786432, '编码缩略图超过768KB（编码后）。')
+
+
 def validate_learning(state, lesson_validator=None):
     require(isinstance(state, dict) and type(state.get('version')) is int and state['version'] == 1)
     required = {'progress': dict, 'reviews': list, 'journals': list, 'drafts': dict, 'generated': list, 'preferences': dict}
-    require(not set(state) - (set(required) | {'version', 'lastLesson', 'vocabulary', 'aiHistory'}), '同步数据包含非学习字段，拒绝保存。')
+    require(not set(state) - (set(required) | {'version', 'lastLesson', 'vocabulary', 'aiHistory', 'wordStudy', 'wordCodes'}), '同步数据包含非学习字段，拒绝保存。')
     for key, kind in required.items():
         require(isinstance(state.get(key), kind), f'{key}格式不合法。')
     for key, limit in {'progress': 500, 'reviews': 1000, 'journals': 1000, 'drafts': 300, 'generated': 200, 'vocabulary': 3000, 'aiHistory': 200}.items():
@@ -120,6 +169,7 @@ def validate_learning(state, lesson_validator=None):
             else:
                 require(valid_date(entry.get('date')) and entry.get('scenario') in THEMES and integer(entry.get('rating'), 1, 5) and text(entry.get('note'), 280))
     require(all(identifier(key) and text(value, 1800) for key, value in state['drafts'].items()))
+    validate_word_workbench(state)
     pref = state['preferences']
     require(finite(pref.get('rate'), 0.75, 1.3) and pref['rate'] in (0.75, 0.9, 1, 1.15, 1.3))
     require('voice' not in pref or text(pref['voice'], 500))
@@ -127,6 +177,8 @@ def validate_learning(state, lesson_validator=None):
     for key, choices in {'voicePack': ('a', 'b'), 'textSize': ('small', 'standard', 'large'), 'theme': ('auto', 'light', 'dark')}.items():
         require(key not in pref or pref[key] in choices)
     require('autoNext' not in pref or type(pref['autoNext']) is bool)
+    require('wordDirection' not in pref or pref['wordDirection'] in ('en', 'zh'))
+    require('wordTopic' not in pref or pref['wordTopic'] in ('all', 'saved', 'daily', 'business', 'accounting', 'tech', 'finance', 'toeic'))
     # Legacy AI history is accepted only as bounded text records, never API configuration.
     for entry in state.get('aiHistory', []):
         require(isinstance(entry, dict) and not set(entry) - {'role', 'text'} and entry.get('role') in ('learner', 'partner') and text(entry.get('text'), 3500))
