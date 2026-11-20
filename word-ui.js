@@ -52,11 +52,19 @@
       return `<section class="wc-setup"><div class="wc-setup-lead"><h2>先回想，再翻卡</h2><p>${dir==='zh'?'看中文和挖空例句，试着想起英文。':'看英文，试着想起意思和用法。'}全程不需要听、说。</p></div><div class="wc-filter-grid"><label for="wc-topic">词汇主题<select id="wc-topic">${[['all','全部'],...Object.entries(E.TOPICS),['saved','我的生词']].map(([k,t])=>`<option value="${k}" ${topic===k?'selected':''}>${esc(t)}</option>`).join('')}</select></label><label for="wc-direction">回想方向<select id="wc-direction"><option value="en" ${dir==='en'?'selected':''}>英文 → 中文</option><option value="zh" ${dir==='zh'?'selected':''}>中文 → 英文</option></select></label><label for="wc-mode">本批内容<select id="wc-mode">${[['mix','到期优先 + 新词'],['due','只练到期'],['new','只练新词'],['all','全部（可提前练）']].map(([k,t])=>`<option value="${k}" ${mode===k?'selected':''}>${t}</option>`).join('')}</select></label></div><div class="wc-setup-foot"><div class="wc-counts"><span>到期 <strong>${counts.due}</strong></span><span>未练 <strong>${counts.fresh}</strong></span><span>今日已练 <strong>${counts.done}</strong></span></div>${btn('wc-start','开始这批 '+b.icon('arrow'),'primary')}</div><p class="helper-copy wc-rule-short">当前方向分别计词数；每批最多20词，新词最多10词。</p>${excluded?`<p class="helper-copy">${excluded} 个自选词缺少释义，暂不入队。到「复习 → 生词」补充即可。</p>`:''}</section>`;
     }
     function current(){return session?find(session.ids[session.index]):null;}
+    function nextQueue(){
+      if(!session||session.topic==='single')return [];
+      const topic=session.topic,dir=session.direction;
+      const rows=filtered(topic,true),records=Object.fromEntries(rows.map(w=>[w.id,record(w,dir)]));
+      const queue=E.queue(rows,records,mode,today());
+      return mode==='all'?queue.filter(w=>!session.ids.includes(w.id)):queue;
+    }
     function recallHTML(){
       if(!session)return setupHTML();
       if(session.index>=session.ids.length){
         const answers=session.answers,good=answers.filter(a=>a.grade==='good').length,hard=answers.filter(a=>a.grade==='hard').length,again=answers.filter(a=>a.grade==='again').length;
-        return `<section class="wc-finish"><span class="wc-eyebrow">这一批完成了</span><h2>回想了 ${answers.length} 个词</h2><p>${directionLabel(session.direction)} · ${topicLabel(session.topic)}</p><div class="wc-counts wc-finish-counts"><span>想起来 <strong>${good}</strong></span><span>模糊 / 用提示 <strong>${hard}</strong></span><span>没想起 <strong>${again}</strong></span></div><p class="helper-copy">${session.skipped?`跳过 ${session.skipped} 个，不计已学。`:'每次评分已保存；翻卡本身不计已学。'} 两个方向的进度独立，不是能力测评。</p><div class="wc-word-actions">${btn('wc-next-batch','继续一批','primary')}${btn('wc-end','回到选择','ghost')}</div></section>`;
+        const more=nextQueue().length;
+        return `<section class="wc-finish"><span class="wc-eyebrow">这一批完成了</span><h2>回想了 ${answers.length} 个词</h2><p>${directionLabel(session.direction)} · ${topicLabel(session.topic)}</p><div class="wc-counts wc-finish-counts"><span>想起来 <strong>${good}</strong></span><span>模糊 / 用提示 <strong>${hard}</strong></span><span>没想起 <strong>${again}</strong></span></div><p class="helper-copy">${session.skipped?`跳过 ${session.skipped} 个，不计已学。`:'每次评分已保存；翻卡本身不计已学。'} 两个方向的进度独立，不是能力测评。</p>${more?`<div class="wc-word-actions">${btn('wc-next-batch','继续下一批','primary')}${btn('wc-end','回到选择','ghost')}</div>`:`<div class="wc-finish-empty"><p>本方向暂无更多可练词。</p><div class="wc-word-actions">${btn('wc-end','回到选择','primary')}</div></div>`}</section>`;
       }
       const w=current();if(!w)return `<section class="wc-finish"><h2>这个词已不在当前词库</h2>${btn('wc-skip','跳到下一个','primary')}${btn('wc-end','结束这批','ghost')}</section>`;
       const matched=hints(w.term),dir=session.direction,show=session.revealed;
@@ -65,14 +73,20 @@
       const answerMeaning=dir==='en'||w.meaning!==meaning?`<p class="wc-short-meaning">${dir==='zh'?'参考释义：':''}${esc(w.meaning)}</p>`:'';
       return `<section class="wc-session" data-word-id="${esc(w.id)}"><div class="wc-session-header"><p>第 ${session.index+1} / ${session.ids.length} 词 · ${directionLabel(dir)}</p>${btn('wc-end','结束这批','ghost small')}</div><progress class="wc-progress" max="${session.ids.length}" value="${session.index}" aria-label="本批已处理词数"></progress><div class="wc-recall-face"><span class="wc-eyebrow">${show?'对照答案':'先在心里回想'}</span>${prompt}${!show?`<label class="wc-draft-label" for="wc-draft">想法或答案（选填，不上传）</label><input id="wc-draft" type="text" maxlength="200" autocomplete="off" spellcheck="false" value="${esc(session.draft)}" placeholder="先想一想，也可以直接翻卡">`:''}${matched.length&&!show?`<div class="wc-hint-control">${btn('wc-hint',session.hintsOpen?'收起图像提示':`图像提示 · ${matched.length}`,'ghost small',`aria-expanded="${session.hintsOpen}" aria-controls="wc-session-hints"`)}</div>${session.hintsOpen?`<div id="wc-session-hints">${codesHTML(matched)}<p class="helper-copy">提示只按字母片段匹配，不代表词源。看过提示会按「模糊」安排复习。</p></div>`:''}`:''}${!show?btn('wc-reveal','翻卡看答案','primary',`data-id="${esc(w.id)}"`):`<div class="wc-answer" id="wc-answer" tabindex="-1">${dir==='zh'?`<h3 class="wc-term" lang="en" data-wc-term="${esc(w.term)}">${esc(w.term)}</h3>`:''}${answerMeaning}${wordActions(w)}${examplesHTML(w,dir==='en')}</div><div class="wc-grade-actions" aria-label="本次回想自评">${btn('wc-grade','没想起','',`data-id="${esc(w.id)}" data-grade="again"`)}${btn('wc-grade','有点模糊','',`data-id="${esc(w.id)}" data-grade="hard"`)}${btn('wc-grade',session.hinted?'用了提示':'想起来了','primary',`data-id="${esc(w.id)}" data-grade="good"`)}</div><p class="helper-copy">${session.hinted?'这次看过图像或答案提示；评分最高按「模糊」记录。':'没想起或模糊：明天再练；连续想起：逐步拉长间隔。'}</p>`}</div><div class="wc-session-footer"><span>${topicLabel(session.topic)} · 不会自动朗读</span>${btn('wc-skip','跳过，不记已学','ghost small',`data-id="${esc(w.id)}"`)}</div></section>`;
     }
-    function libraryHTML(){
+    function libraryRowsHTML(){
       const term=search.trim().toLowerCase(),rows=filtered(libraryTopic).filter(w=>!term||(w.term+' '+w.meaning+' '+w.topics.map(topicLabel).join(' ')).toLowerCase().includes(term));
       const pages=Math.max(1,Math.ceil(rows.length/24));libraryPage=Math.min(libraryPage,pages-1);const chunk=rows.slice(libraryPage*24,libraryPage*24+24);
-      return `<div class="wc-library-toolbar"><label class="search"><span class="visually-hidden">搜索词汇或中文释义</span>${b.icon('search')}<input id="wc-search" type="text" maxlength="100" placeholder="搜索英文 / 中文" value="${esc(search)}"></label><label class="filter-field" for="wc-library-topic"><span>主题</span><select id="wc-library-topic">${[['all','全部'],...Object.entries(E.TOPICS),['saved','我的生词']].map(([k,t])=>`<option value="${k}" ${libraryTopic===k?'selected':''}>${esc(t)}</option>`).join('')}</select></label></div><p class="result-count" role="status">${rows.length} 个词 · 第 ${libraryPage+1} / ${pages} 页</p>${chunk.length?`<div class="wc-library-grid">${chunk.map(w=>`<article class="wc-library-row"><div><h2 lang="en">${esc(w.term)}</h2><p>${esc(w.meaning||'尚未填写解释')}</p><span class="helper-copy">${w.custom?'我的生词':w.topics.map(topicLabel).join(' · ')}${w.saved?' · 已收藏':''}</span></div>${btn('wc-view-word','释义与例句','small',`data-id="${esc(w.id)}" aria-label="查看${esc(w.term)}的释义与例句"`)}</article>`).join('')}</div>`:`<div class="empty"><h2>没有找到这个词</h2><p>换个关键词或主题。自选词在「复习 → 生词」添加。</p>${btn('wc-library-reset','显示全部词','primary')}</div>`}<nav class="wc-pagination" aria-label="词库分页">${btn('wc-library-prev','上一页','',libraryPage===0?'disabled':'')}<span>${libraryPage+1} / ${pages}</span>${btn('wc-library-next','下一页','',libraryPage>=pages-1?'disabled':'')}</nav>`;
+      return `<p class="result-count" role="status">${rows.length} 个词 · 第 ${libraryPage+1} / ${pages} 页</p>${chunk.length?`<div class="wc-library-grid">${chunk.map(w=>`<article class="wc-library-row"><div><h2 lang="en">${esc(w.term)}</h2><p>${esc(w.meaning||'尚未填写解释')}</p><span class="helper-copy">${w.custom?'我的生词':w.topics.map(topicLabel).join(' · ')}${w.saved?' · 已收藏':''}</span></div>${btn('wc-view-word','释义与例句','small',`data-id="${esc(w.id)}" aria-label="查看${esc(w.term)}的释义与例句"`)}</article>`).join('')}</div>`:`<div class="empty"><h2>没有找到这个词</h2><p>换个关键词或主题。自选词在「复习 → 生词」添加。</p>${btn('wc-library-reset','显示全部词','primary')}</div>`}<nav class="wc-pagination" aria-label="词库分页">${btn('wc-library-prev','上一页','',libraryPage===0?'disabled':'')}<span>${libraryPage+1} / ${pages}</span>${btn('wc-library-next','下一页','',libraryPage>=pages-1?'disabled':'')}</nav>`;
+    }
+    function libraryHTML(){
+      return `<div class="wc-library-toolbar"><label class="search"><span class="visually-hidden">搜索词汇或中文释义</span>${b.icon('search')}<input id="wc-search" type="text" maxlength="100" placeholder="搜索英文 / 中文" value="${esc(search)}" autocomplete="off"></label><label class="filter-field" for="wc-library-topic"><span>主题</span><select id="wc-library-topic">${[['all','全部'],...Object.entries(E.TOPICS),['saved','我的生词']].map(([k,t])=>`<option value="${k}" ${libraryTopic===k?'selected':''}>${esc(t)}</option>`).join('')}</select></label></div><div id="wc-library-live">${libraryRowsHTML()}</div>`;
+    }
+    function codeRowsHTML(){
+      const q=codeSearch.trim().toLowerCase(),codes=(S().wordCodes||[]).filter(c=>!q||(c.fragment+' '+c.title+' '+c.note+' '+c.rootMeaning).toLowerCase().includes(q)).slice().sort((a,b)=>a.fragment.localeCompare(b.fragment));
+      return `<p class="result-count" role="status">${codes.length} 个编码 · 图片可选，文字联想也能使用</p>${codes.length?codesHTML(codes,true):`<div class="empty"><h2>${q?'没有匹配的编码':'把你的记忆图像存下来'}</h2><p>例如 cons → 康熙。保存后，遇到 consider、consistent 等匹配词，可手动看提示。</p>${btn(q?'wc-code-search-reset':'wc-code-new',q?'清除搜索':'建立第一个编码','primary')}</div>`}`;
     }
     function codeLibraryHTML(){
-      const q=codeSearch.trim().toLowerCase(),codes=(S().wordCodes||[]).filter(c=>!q||(c.fragment+' '+c.title+' '+c.note+' '+c.rootMeaning).toLowerCase().includes(q)).slice().sort((a,b)=>a.fragment.localeCompare(b.fragment));
-      return `<div class="wc-library-toolbar"><label class="search"><span class="visually-hidden">搜索编码片段或联想</span>${b.icon('search')}<input id="wc-code-search" type="text" maxlength="100" placeholder="搜索片段 / 图像联想" value="${esc(codeSearch)}"></label>${btn('wc-code-new','新建编码 '+b.icon('plus'),'primary')}</div><p class="result-count" role="status">${codes.length} 个编码 · 图片可选，文字联想也能使用</p>${codes.length?codesHTML(codes,true):`<div class="empty"><h2>${q?'没有匹配的编码':'把你的记忆图像存下来'}</h2><p>例如 cons → 康熙。保存后，遇到 consider、consistent 等匹配词，可手动看提示。</p>${btn(q?'wc-code-search-reset':'wc-code-new',q?'清除搜索':'建立第一个编码','primary')}</div>`}<details class="help-disclosure"><summary>个人片段、词根与匹配规则</summary><p>默认是个人拼写片段，不是词源分析。可另标为「用户标注词根」并填写意义，但需自行核验。匹配只看字母，可限定开头或结尾，容易误匹配时可关闭提示。提示不会自动展开。</p><p>最多500条编码；单张缩略图约12KiB，图片总额度768KiB（base64编码后）。全账号学习记录仍受2MiB上限约束。图片随学习备份与账号状态保存，不传入AI，也不上传到源码仓库。</p></details>`;
+      return `<div class="wc-library-toolbar"><label class="search"><span class="visually-hidden">搜索编码片段或联想</span>${b.icon('search')}<input id="wc-code-search" type="text" maxlength="100" placeholder="搜索片段 / 图像联想" value="${esc(codeSearch)}" autocomplete="off"></label>${btn('wc-code-new','新建编码 '+b.icon('plus'),'primary')}</div><div id="wc-code-live">${codeRowsHTML()}</div><details class="help-disclosure"><summary>个人片段、词根与匹配规则</summary><p>默认是个人拼写片段，不是词源分析。可另标为「用户标注词根」并填写意义，但需自行核验。匹配只看字母，可限定开头或结尾，容易误匹配时可关闭提示。提示不会自动展开。</p><p>最多500条编码；单张缩略图约12KiB，图片总额度768KiB（base64编码后）。全账号学习记录仍受2MiB上限约束。图片随学习备份与账号状态保存，不传入AI，也不上传到源码仓库。</p></details>`;
     }
     function page(){
       if(failure)return `<div class="empty"><h1>刷词材料未通过检查</h1><p>${esc(failure)}</p><p>请重新加载。现有场景和学习记录不受影响。</p></div>`;
@@ -202,15 +216,16 @@
         if(a==='wc-grade'){const w=current();if(!session||!w||!session.revealed||session.key!==b.getAccountKey()||el.dataset.id!==w.id)return;const result=gradeRecord(w,session.direction,el.dataset.grade,session.hinted);if(!result){b.toast('评分未保存，留在这张卡。请先处理保存问题。');return;}session.answers.push({id:w.id,grade:result.grade,hinted:result.hinted});next();return;}
         if(a==='wc-skip'){if(session){if(el.dataset.id&&el.dataset.id!==current()?.id)return;session.skipped++;next();}return;}
         if(a==='wc-end'){session=null;b.render({focusTarget:'#wc-topic'});return;}
-        if(a==='wc-next-batch'){session=null;start();return;}
+        if(a==='wc-next-batch'){session=null;if(!start()){b.render({focusTarget:'#wc-topic'});}return;}
         if(a==='wc-view-word'){openWord(el.dataset.id);return;}
         if(a==='wc-practice-one'){const id=el.dataset.id;b.closeModal();if(b.goToWords)b.goToWords();start([id]);return;}
         if(a==='wc-save-word'){saveWord(find(el.dataset.id));return;}
         if(a==='wc-ai'){const w=find(el.dataset.id);if(w&&b.ai)b.ai(w.term,w.saved?.context||w.examples[0]?.en||'');return;}
         if(a==='wc-word-hints'){openHints(el.dataset.term);return;}
-        if(a==='wc-library-prev'||a==='wc-library-next'){libraryPage=Math.max(0,libraryPage+(a==='wc-library-next'?1:-1));b.render({focusTarget:'#wc-search'});return;}
-        if(a==='wc-library-reset'){libraryTopic='all';search='';libraryPage=0;b.render({focusTarget:'#wc-search'});return;}
-        if(a==='wc-code-search-reset'){codeSearch='';b.render({focusTarget:'#wc-code-search'});return;}
+        if(a==='wc-library-back'){view='study';b.render({focusMain:true});return;}
+        if(a==='wc-library-prev'||a==='wc-library-next'){libraryPage=Math.max(0,libraryPage+(a==='wc-library-next'?1:-1));const live=document.getElementById('wc-library-live');if(live){live.innerHTML=libraryRowsHTML();document.getElementById('wc-search')?.focus({preventScroll:true});}else b.render({focusTarget:'#wc-search'});return;}
+        if(a==='wc-library-reset'){libraryTopic='all';search='';libraryPage=0;const select=document.getElementById('wc-library-topic');if(select)select.value='all';const input=document.getElementById('wc-search');if(input)input.value='';const live=document.getElementById('wc-library-live');if(live){live.innerHTML=libraryRowsHTML();input?.focus({preventScroll:true});}else b.render({focusTarget:'#wc-search'});return;}
+        if(a==='wc-code-search-reset'){codeSearch='';const input=document.getElementById('wc-code-search');if(input)input.value='';const live=document.getElementById('wc-code-live');if(live){live.innerHTML=codeRowsHTML();input?.focus({preventScroll:true});}else b.render({focusTarget:'#wc-code-search'});return;}
         if(a==='wc-code-new'||a==='wc-code-edit'){openEditor(el.dataset.term||'',el.dataset.fragment||'',el.dataset.id||'');return;}
         if(a==='wc-code-image-remove'){if(editor&&!editor.busy){editor.imageData='';editorPicture();editorError('');document.getElementById('wc-code-image-status').textContent='保存后移除旧小图；文字联想保留。';}return;}
         const c=(S().wordCodes||[]).find(c=>c.id===el.dataset.id);if(!c)return;
@@ -221,8 +236,16 @@
       }catch(e){b.toast(e.message||'操作未完成，记录未覆盖。');}
     }
     function input(t){
-      if(t.id==='wc-search'){search=t.value;libraryPage=0;b.render();return true;}
-      if(t.id==='wc-code-search'){codeSearch=t.value;b.render();return true;}
+      if(t.id==='wc-search'){
+        search=t.value;libraryPage=0;
+        const live=document.getElementById('wc-library-live');if(live)live.innerHTML=libraryRowsHTML();
+        return true;
+      }
+      if(t.id==='wc-code-search'){
+        codeSearch=t.value;
+        const live=document.getElementById('wc-code-live');if(live)live.innerHTML=codeRowsHTML();
+        return true;
+      }
       if(t.id==='wc-draft'){if(session)session.draft=t.value.slice(0,200);return true;}
       if(t.id==='wc-code-fragment'){previewFragment();editorError('');return true;}
       return false;
@@ -231,7 +254,7 @@
       if(t.id==='wc-code-image'){if(t.files[0])imageFile(t.files[0]);return true;}
       if(t.id==='wc-code-match'){previewFragment();return true;}
       if(t.id==='wc-mode'){mode=['mix','due','new','all'].includes(t.value)?t.value:'mix';return true;}
-      if(t.id==='wc-library-topic'){libraryTopic=t.value;libraryPage=0;b.render();return true;}
+      if(t.id==='wc-library-topic'){libraryTopic=t.value;libraryPage=0;const live=document.getElementById('wc-library-live');if(live){live.innerHTML=libraryRowsHTML();}else b.render();return true;}
       if(t.id==='wc-topic'||t.id==='wc-direction'){
         const key=t.id==='wc-topic'?'wordTopic':'wordDirection',prior=S().preferences[key]|| (key==='wordTopic'?'all':'en');
         try{if(save({preferences:{...S().preferences,[key]:t.value}}))b.render();else t.value=prior;}catch(e){t.value=prior;b.toast(e.message);}return true;

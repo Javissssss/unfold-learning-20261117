@@ -5,6 +5,8 @@ server memory. Default loopback; public deployments require HTTPS and a volume.
 from __future__ import annotations
 
 import argparse
+import gzip
+import hashlib
 import json
 import os
 import re
@@ -472,16 +474,18 @@ class UnfoldHandler(BaseHTTPRequestHandler):
         # Avoid echoing request paths, query strings, provider responses, or headers.
         pass
 
-    def security_headers(self) -> None:
-        self.send_header("Cache-Control", "no-store")
+    def security_headers(self, cache: str = "no-store") -> None:
+        # APIs, accounts, sync and health must never be cached. Static teaching
+        # assets may be revalidated so a normal refresh can use a cheap 304.
+        self.send_header("Cache-Control", cache)
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Referrer-Policy", "no-referrer")
         self.send_header("X-Frame-Options", "DENY")
         self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
 
-    def send_data(self, status: int, data: bytes, content_type: str, extra_headers: dict[str, str] | None = None) -> None:
+    def send_data(self, status: int, data: bytes, content_type: str, extra_headers: dict[str, str] | None = None, cache: str = "no-store") -> None:
         self.send_response(status)
-        self.security_headers()
+        self.security_headers(cache)
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(data)))
         for name, value in (extra_headers or {}).items():
@@ -489,6 +493,35 @@ class UnfoldHandler(BaseHTTPRequestHandler):
         self.end_headers()
         if self.command != "HEAD":
             self.wfile.write(data)
+
+    def send_static(self, data: bytes, content_type: str, etag: str) -> None:
+        """Revalidate text assets with ETag and gzip the large ones.
+
+        Text payloads dominate first paint. Transparent gzip keeps ETag/304
+        semantics and only benefits clients that advertise support, so older
+        clients still receive the exact same bytes.
+        """
+        accepts_gzip = "gzip" in self.headers.get("Accept-Encoding", "").lower()
+        body = gzip.compress(data, compresslevel=6) if accepts_gzip and len(data) >= 1024 else data
+        headers = {"ETag": etag, "Vary": "Accept-Encoding"}
+        if accepts_gzip and len(data) >= 1024:
+            headers["Content-Encoding"] = "gzip"
+        if self.headers.get("If-None-Match", "").strip() == etag:
+            self.send_response(304)
+            self.security_headers("no-cache")
+            self.send_header("ETag", etag)
+            self.send_header("Vary", "Accept-Encoding")
+            self.end_headers()
+            return
+        self.send_response(200)
+        self.security_headers("no-cache")
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(body)))
+        for name, value in headers.items():
+            self.send_header(name, value)
+        self.end_headers()
+        if self.command != "HEAD":
+            self.wfile.write(body)
 
     def send_audio(self, data: bytes, content_type: str) -> None:
         # Native media seeking requires byte ranges, even for these small local WAV files.
@@ -631,7 +664,8 @@ class UnfoldHandler(BaseHTTPRequestHandler):
         if content_type == "audio/wav":
             self.send_audio(data, content_type)
         else:
-            self.send_data(200, data, content_type)
+            digest = hashlib.sha256(data).hexdigest()[:32]
+            self.send_static(data, content_type, f'"{digest}"')
 
     def reject_post(self, status: int, message: str) -> None:
         # Drain only a bounded body before closing. Closing with unread POST bytes

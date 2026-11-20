@@ -1,6 +1,7 @@
 """Vocabulary/encoding state tests. Temporary accounts only, never personal records."""
 import base64
 import copy
+import gzip
 import json
 import os
 from pathlib import Path
@@ -167,7 +168,30 @@ class WordAssetTests(unittest.TestCase):
                 self.assertEqual(response.status, 200)
                 self.assertGreater(len(response.read()), 100)
                 self.assertEqual(response.headers['X-Content-Type-Options'], 'nosniff')
-                self.assertEqual(response.headers['Cache-Control'], 'no-store')
+                self.assertEqual(response.headers['Cache-Control'], 'no-cache')
+                self.assertTrue(response.headers['ETag'])
+
+    def test_static_assets_revalidate_with_304_but_api_stays_no_store(self):
+        request = urllib.request.Request(self.origin + '/app.js')
+        with self.opener.open(request, timeout=5) as response:
+            first = response.read()
+            etag = response.headers['ETag']
+        self.assertGreater(len(first), 1000)
+        self.assertTrue(etag.startswith('"') and etag.endswith('"'))
+        revalidated = urllib.request.Request(self.origin + '/app.js', headers={'If-None-Match': etag})
+        with self.assertRaises(urllib.error.HTTPError) as error:
+            self.opener.open(revalidated, timeout=5)
+        self.assertEqual(error.exception.code, 304)
+        self.assertEqual(error.exception.headers['Cache-Control'], 'no-cache')
+        error.exception.close()
+        with self.opener.open(self.origin + '/api/health', timeout=5) as response:
+            self.assertEqual(response.headers['Cache-Control'], 'no-store')
+        compressed = urllib.request.Request(self.origin + '/app.js', headers={'Accept-Encoding': 'gzip'})
+        with self.opener.open(compressed, timeout=5) as response:
+            self.assertEqual(response.headers['Content-Encoding'], 'gzip')
+            self.assertEqual(response.headers['Vary'], 'Accept-Encoding')
+            payload = gzip.decompress(response.read()).decode('utf-8')
+        self.assertIn('UnfoldPlayback', payload)
 
     def test_small_rejected_post_returns_visible_403(self):
         request = urllib.request.Request(self.origin + '/api/account/register', data=b'{}',

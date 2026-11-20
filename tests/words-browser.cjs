@@ -91,6 +91,11 @@ async function shot(file){const full=path.join(OUT,file);await c.capture(full);s
     check('topic filter '+topic,names.length>0&&names.every(t=>D.words.find(w=>w.term===t)?.topics.includes(topic)),names);
   }
   await value('#wc-library-topic','all','change');await value('#wc-search','发票');check('Chinese search finds invoice',await c.eval('document.querySelector(".wc-library-row h2").textContent==="invoice"'));
+  await view('library');await value('#wc-search','');
+  const focusProbe=await c.eval(`(async()=>{const i=document.querySelector('#wc-search');i.focus();i.dataset.qaNode='keep';const out=[];for(const v of ['c','co','con','cons','consi']){i.value=v;i.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true,data:v}));i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true,data:v}));await new Promise(r=>requestAnimationFrame(r));out.push({v,focus:document.activeElement===i,same:i.dataset.qaNode==='keep',rows:document.querySelectorAll('.wc-library-row').length});}return out})()`);
+  check('search keeps focus and the same input node through IME composition',focusProbe.every(x=>x.focus&&x.same)&&focusProbe.at(-1).rows>0,focusProbe);
+  check('search results update without a full page rebuild',await c.eval('!!document.querySelector("#wc-search")&&document.querySelector("#wc-library-live .result-count").textContent.includes("个词")'));
+  await value('#wc-search','');
   await detail();await c.click('[data-action=wc-ai]');check('word AI action has real configuration or consent flow, not a fake answer',await c.eval('document.querySelector("#modal").open&&(!!document.querySelector("[data-action=go-settings]")||!!document.querySelector("#privacy-ok"))'));await close();
   await detail();await c.click('[data-action=wc-code-new]');await value('#wc-code-fragment','cons');await value('#wc-code-title','康熙');await value('#wc-code-note','虚构联想：康熙拿着奏折，认真考虑。');
   check('cons defaults to personal fragment and shows literal spelling preview',await c.eval('document.querySelector("#wc-code-kind").value==="fragment"&&document.querySelector("#wc-code-preview mark").textContent==="cons"'));

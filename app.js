@@ -13,6 +13,28 @@
   const hasBundledAudio = l => !!l && !l.generated && /^L(?:0[1-9]|[12][0-9]|3[0-6])$/.test(l.id);
   const bundledAudioUrl = l => `/audio/${state.preferences.voicePack}/${l.id}.wav`;
   const DICT = window.UnfoldDict || {};
+  // The offline dictionary and the full text fallback are not needed for a
+  // normal first paint. Load them only when a feature actually asks for them.
+  const loaderCache = new Map();
+  function loadScript(src){
+    if(loaderCache.has(src))return loaderCache.get(src);
+    const promise=new Promise((resolve,reject)=>{
+      const el=document.createElement('script');el.src=src;el.async=true;
+      el.onload=()=>resolve();el.onerror=()=>{loaderCache.delete(src);reject(new Error('资源加载失败：'+src));};
+      document.head.appendChild(el);
+    });
+    loaderCache.set(src,promise);return promise;
+  }
+  let dictLoading=null;
+  function ensureDict(){
+    if(window.UnfoldDict)return Promise.resolve(window.UnfoldDict);
+    if(!dictLoading)dictLoading=loadScript('dict.js').then(()=>window.UnfoldDict||{});
+    return dictLoading;
+  }
+  function ensureContent(){
+    if(Array.isArray(window.UnfoldContent))return Promise.resolve(window.UnfoldContent);
+    return loadScript('content.js').then(()=>Array.isArray(window.UnfoldContent)?window.UnfoldContent:[]);
+  }
   const RATINGS = ['大多没跟上','较依赖中文辅助','能抓住大意','基本顺畅','能理解关键细节'];
   const CONTEXTS = ['unrecorded','independent','supported','not-listened'];
   const validAnswers = a => Array.isArray(a) && a.length===4 && a.every(v=>v===null || (Number.isInteger(v)&&v>=0&&v<=2));
@@ -542,8 +564,19 @@
   }
   function resumeCurrentAudio() {
     stopPreview();
-    const audio=bundledPlayer;if(!audio||audio.ended)return;
-    playerError='';audio.play().catch(()=>{if(audio!==bundledPlayer)return;playerError='未能继续播放，请回到听力页重试。';paintPlayer();toast(playerError);});
+    const audio=bundledPlayer;if(!audio)return;
+    // Some mobile browsers pause and report ended when a hidden tab is frozen.
+    // Media is not actually over, so rewind a beat and continue from the saved
+    // position instead of leaving a dead player on screen.
+    if(audio.ended){
+      const stop=Number.isFinite(audio.duration)?audio.duration:(progress(audioId).audioPosition||0);
+      const saved=Math.max(0,Math.min(stop,progress(audioId).audioPosition||lastAudioTime||audio.currentTime||0));
+      // A real end is only at the tail. A background tab can emit ended early,
+      // so keep the saved position unless we are within the last second.
+      const resume=saved>=stop-1?Math.max(0,stop-0.6):saved;
+      playerSeeking=true;audio.currentTime=resume;lastAudioTime=resume;lastAudioWall=Date.now();
+    }
+    playerError='';audio.play().then(()=>{if(audio!==bundledPlayer)return;playerSeeking=false;paintPlayer();}).catch(()=>{if(audio!==bundledPlayer)return;playerSeeking=false;playerError='未能继续播放，请回到听力页重试。';paintPlayer();toast(playerError);});
   }
   function configureMediaSession() {
     if(!('mediaSession' in navigator))return;
@@ -608,7 +641,13 @@
     audio.onpause=()=>{if(audio!==bundledPlayer)return;recordPlayed(audio,true);speechPlaying=false;speechPaused=audio.currentTime>0&&!audio.ended;lastAudioTime=null;stopLoopWatch();paintPlayer();};
     audio.onseeking=()=>{if(audio!==bundledPlayer)return;playerSeeking=true;lastAudioTime=null;};
     audio.onseeked=()=>{if(audio!==bundledPlayer)return;playerSeeking=false;lastAudioTime=audio.currentTime;lastAudioWall=Date.now();persistPlayer(true);paintPlayer();};
-    audio.onended=()=>{if(audio!==bundledPlayer)return;recordPlayed(audio,true);clearTimeout(audioTimer);audioTimer=null;speechPlaying=false;speechPaused=false;lastAudioTime=null;loopTurn=-1;persistPlayer(true);paintPlayer();toast(fullyHeard(playerRanges,audio.duration)?'整段音频已听完。检查意思后继续阅读。':'播放结束；尚有未听过的区间，可回听补齐或只练阅读。');if(state.preferences.autoNext)nextLessonTimer=setTimeout(()=>{nextLessonTimer=null;if(state.preferences.autoNext&&audio===bundledPlayer&&audio.ended&&!previewAudio&&!previewUtterance)playNextLesson();},1400);};
+    audio.onended=()=>{
+      if(audio!==bundledPlayer)return;
+      // A frozen background tab may report ended before the tail. Treat that as
+      // a suspension, not a finished listen, so returning to the page resumes.
+      if(document.hidden&&Number.isFinite(audio.duration)&&audio.currentTime<audio.duration-1){hiddenWhilePlaying=true;speechPlaying=false;speechPaused=true;lastAudioTime=null;stopLoopWatch();persistPlayer(true);paintPlayer();return;}
+      recordPlayed(audio,true);clearTimeout(audioTimer);audioTimer=null;speechPlaying=false;speechPaused=false;lastAudioTime=null;loopTurn=-1;persistPlayer(true);paintPlayer();toast(fullyHeard(playerRanges,audio.duration)?'整段音频已听完。检查意思后继续阅读。':'播放结束；尚有未听过的区间，可回听补齐或只练阅读。');if(state.preferences.autoNext)nextLessonTimer=setTimeout(()=>{nextLessonTimer=null;if(state.preferences.autoNext&&audio===bundledPlayer&&audio.ended&&!previewAudio&&!previewUtterance)playNextLesson();},1400);
+    };
     audio.onerror=()=>{if(audio!==bundledPlayer)return;clearTimeout(audioTimer);audioTimer=null;audio.pause();speechPlaying=false;speechPaused=false;
       playerError=source==='custom'?'这个文件无法播放。可重选浏览器支持的音频，或还原默认音频。':'音频读取或解码失败。请重试、在设置试听另一套声线，或先练阅读。';paintPlayer();};
     return audio;
@@ -751,9 +790,10 @@
     const scheduled=state.wordStudy[builtin?.id||id]?.zh;
     return {id,term,context,meaning,lessonId:current?.lessonId||source,due:scheduled?.due||(same?current.due:null)||day(),seen:scheduled?.seen??(same?current.seen:0)??0,streak:scheduled?.streak??(same?current.streak:0)??0};
   }
-  function wordForm(id=''){
+  async function wordForm(id=''){
     const existing=state.vocabulary.find(w=>w.id===id),sel=window.getSelection(),selected=!existing&&page==='lesson'?String(sel||'').trim().slice(0,80):'';
     const node=sel?.anchorNode?.parentElement,context=!existing&&selected&&node?.closest('.reading-text')?(node.closest('p')?.textContent||'').slice(0,1500):'';
+    await ensureDict().catch(()=>{});
     const dict=existing?dictLookup(existing.term):dictLookup(selected);
     const dictHint=dict&&dict.senses.length?`<p class="helper-copy">内置释义：${esc(dict.senses.join('；').slice(0,200))}</p>`:'';
     openModal(existing?'编辑生词':'收藏生词',`${dictHint}<form id="word-form" data-id="${esc(id)}"><div class="field"><label for="word-term">单词或短语</label><input id="word-term" name="term" maxlength="80" required value="${esc(existing?.term||selected)}"></div><div class="field"><label for="word-context">原句或语境（选填）</label><textarea id="word-context" name="context" maxlength="1500">${esc(existing?.context||context)}</textarea></div><div class="field"><label for="word-meaning">自己的解释（选填）</label><textarea id="word-meaning" name="meaning" maxlength="500">${esc(existing?.meaning||'')}</textarea></div><p class="helper-copy">保留语境有助于回想；AI辨析是可选功能，调用前会单独确认。</p><button type="submit" class="btn primary">保存生词</button></form>`);
@@ -990,22 +1030,22 @@
   // ---- 划词：选中英文即出现释义 / 收藏 / 朗读 ----------------------------
   const SELECTABLE='.reading-text,.transcript,.turn,.turn-text,.script-text,.hint-content,.phrase,.optional-body,.reading-card,.recall-session [lang="en"],.saved-row [lang="en"],.review-reveal,.wc-workspace [lang="en"]';
   let selToolbar=null,previewAudio=null,previewResume=null,previewUtterance=null,previewTimer=null,lastSelection={text:'',context:'',lessonId:'',sourceTerm:''},suppressTurnUntil=0,selectionLimitNotice='';
-  function dictLookup(raw){
+  function dictLookup(raw, dict=DICT){
     const clean=String(raw||'').trim().toLowerCase().replace(/\u2019/g,"'").replace(/^[\u201c("'[]+|[\u201d"'\].!?;,]+$/g,'');
     if(!clean||clean.length>80)return null;
-    if(DICT[clean])return {term:clean,senses:DICT[clean]};
+    if(dict[clean])return {term:clean,senses:dict[clean]};
     const rules=[['ies','y'],['ied','y'],['ves','f'],['ing',''],['ing','e'],['ed',''],['ed','e'],['es',''],['s',''],['er',''],['est',''],['ly',''],['ment',''],['ness',''],['tion','te'],['ation','e']];
     for(const [suffix,replace] of rules){
       if(clean.endsWith(suffix)&&clean.length-suffix.length>=3){
         const stem=clean.slice(0,-suffix.length)+replace;
-        if(DICT[stem])return {term:stem,senses:DICT[stem],inflected:clean};
+        if(dict[stem])return {term:stem,senses:dict[stem],inflected:clean};
         // Double consonants in running / stopped belong to the inflection.
-        if(['ing','ed'].includes(suffix)&&replace===''&&/([b-df-hj-np-tv-z])\1$/.test(stem)&&DICT[stem.slice(0,-1)])return {term:stem.slice(0,-1),senses:DICT[stem.slice(0,-1)],inflected:clean};
+        if(['ing','ed'].includes(suffix)&&replace===''&&/([b-df-hj-np-tv-z])\1$/.test(stem)&&dict[stem.slice(0,-1)])return {term:stem.slice(0,-1),senses:dict[stem.slice(0,-1)],inflected:clean};
       }
     }
     if(clean.includes('-')){
-      const parts=clean.split('-').filter(Boolean).map(p=>DICT[p]?p:null);
-      if(parts.some(Boolean))return {term:clean,senses:[parts.map((p,i)=>p?`${clean.split('-')[i]} → ${DICT[p][0]}`:'').filter(Boolean).join('；')],compound:true};
+      const parts=clean.split('-').filter(Boolean).map(p=>dict[p]?p:null);
+      if(parts.some(Boolean))return {term:clean,senses:[parts.map((p,i)=>p?`${clean.split('-')[i]} → ${dict[p][0]}`:'').filter(Boolean).join('；')],compound:true};
     }
     return null;
   }
@@ -1050,6 +1090,7 @@
     if(!text||inField||!el?.closest?.(SELECTABLE)||!end?.closest?.(SELECTABLE)||!/[A-Za-z]{2}/.test(text)||selectionLesson(el)!==selectionLesson(end)){hideSelToolbar();return;}
     if(text.length>80){hideSelToolbar();if(selectionLimitNotice!==text){selectionLimitNotice=text;toast('一次可收藏最多80个字符，请选中一个词或短语。');}return;}
     selectionLimitNotice='';
+    ensureDict().catch(()=>{});
     let sourceTerm=text;
     const range=sel.getRangeAt(0);
     if(range.startContainer===range.endContainer&&range.startContainer.nodeType===3&&/^[A-Za-z]+$/.test(text)){
@@ -1063,9 +1104,10 @@
     bar.innerHTML=`<button type="button" class="btn small primary" data-sel="meaning">释义</button><button type="button" class="btn small" data-sel="save" aria-label="收藏生词">收藏</button>${wordUI?'<button type="button" class="btn small ghost" data-sel="code">编码</button>':''}${page!=='words'?'<button type="button" class="btn small ghost" data-sel="speak">朗读</button>':''}`;
     document.body.appendChild(bar);selToolbar=bar;positionSelToolbar();
   }
-  function meaningModal(){
+  async function meaningModal(){
     const {text,context}=lastSelection;
-    const found=dictLookup(text);
+    await ensureDict().catch(()=>{});
+    const found=dictLookup(text,window.UnfoldDict||{});
     const senses=found?found.senses.map(s=>`<li>${esc(s)}</li>`).join(''):'';
     const head=found?`<h2 class="word-term" lang="en">${esc(found.term)}</h2>${found.inflected&&found.inflected!==found.term?`<p class="helper-copy">原形（你选中的是 ${esc(found.inflected)}）</p>`:''}`:`<h2 class="word-term" lang="en">${esc(text)}</h2>`;
     const offline=found?`<ul class="word-senses">${senses}</ul>`:`<p class="note">内置词典没有收录这个词。可连接AI获取解释，或直接收藏后自己填写。</p>`;
@@ -1073,14 +1115,15 @@
     const encoding=wordUI?`${button('word-code-selection','编辑图像编码','ghost small')}${wordUI.hints(text).length?button('word-code-hints','查看我的图像提示','ghost small'):''}`:'';
     openModal('划词释义',`<div class="word-card">${head}${offline}${context?`<p class="word-context" lang="en">${esc(context)}</p>`:''}<div class="settings-actions">${ai}${button('word-save-selection','收藏到生词库','')}${encoding}</div><p class="helper-copy">内置释义可离线查阅；个人编码只按字母片段匹配，不是自动词源分析。</p></div>`);
   }
-  function saveSelectionWord(silent=false){
+  async function saveSelectionWord(silent=false){
     const {text,context}=lastSelection;
     if(!text)return false;
     const term=text;
     if(term.length>80){toast('选中内容超过80个字符，请重新选择一个词或短语。');return false;}
     if(state.vocabulary.some(w=>WORD_ENGINE.termKey(w.term)===WORD_ENGINE.termKey(term))){toast('这个词已在生词库。');return false;}
     if(state.vocabulary.length>=3000){toast('生词已达3000条，请先导出和整理。');return false;}
-    const found=dictLookup(term),builtin=WORD_DATA.words.find(w=>WORD_ENGINE.termKey(w.term)===WORD_ENGINE.termKey(term));
+    await ensureDict().catch(()=>{});
+    const found=dictLookup(term,window.UnfoldDict||{}),builtin=WORD_DATA.words.find(w=>WORD_ENGINE.termKey(w.term)===WORD_ENGINE.termKey(term));
     const meaning=builtin?.meaning||(found?found.senses.join('；').slice(0,500):'');
     const item=vocabularyEntry(term,context.slice(0,1500),meaning,null,idPattern.test(lastSelection.lessonId)?lastSelection.lessonId:'L01');
     try{
@@ -1200,7 +1243,7 @@
     if(a==='delete-word'){openModal('删除这条生词？',`<p class="modal-copy">只从生词收藏中移除；已保存的刷词进度和图像编码保留。</p>${button('delete-word-confirm','确认删除','danger',`data-id="${esc(el.dataset.id)}"`)}`);return;}
     if(a==='delete-word-confirm'){const vocabulary=state.vocabulary.filter(w=>w.id!==el.dataset.id);if(!commitWorkbench({...state,vocabulary})){toast('删除没有保存，生词仍保留。');return;}closeModal();render();toast('已从生词收藏移除；刷词进度和编码保留。');return;}
     if(a==='word-ai-selection'){const w=lastSelection;if(!w.text){toast('请先选中一个单词。');return;}if(!w.context.trim()){toast('没有取到语境，请先在课文里选中单词。');return;}confirmSpecialAI('vocabulary',{term:w.text,context:w.context});return;}
-    if(a==='word-save-selection'){if(saveSelectionWord(true)){closeModal();render();toast('已收藏到生词库。');}return;}
+    if(a==='word-save-selection'){if(await saveSelectionWord(true)){closeModal();render();toast('已收藏到生词库。');}return;}
     if(a==='word-ai'){const w=state.vocabulary.find(x=>x.id===el.dataset.id);if(!w)return;if(!w.context.trim()){toast('请先编辑生词，填写一段公开或虚构的语境。');return;}confirmSpecialAI('vocabulary',{term:w.term,context:w.context});return;}
     if(a==='dialogue'){dialogueForm();return;}
     if(a==='account-register'||a==='account-login'){accountForm(a==='account-register');return;}
@@ -1356,7 +1399,11 @@
     } else {
       // A backgrounded tab can be suspended by the browser; put it back exactly
       // where the learner left off instead of leaving the player silently stuck.
-      const resume=hiddenWhilePlaying&&bundledPlayer&&bundledPlayer.paused&&!bundledPlayer.ended;
+      // Some engines also raise a spurious ended event while hidden, so a
+      // player that stopped short of the tail resumes at its saved position.
+      const audio=bundledPlayer;
+      const stoppedEarly=!!audio&&audio.ended&&Number.isFinite(audio.duration)&&progress(audioId).audioPosition<audio.duration-1;
+      const resume=hiddenWhilePlaying&&audio&&(audio.paused&&!audio.ended||stoppedEarly);
       hiddenWhilePlaying=false;
       if(resume)resumeCurrentAudio();
       paintPlayer();
@@ -1394,7 +1441,7 @@
     e.preventDefault();e.stopPropagation();
     const kind=btn.dataset.sel;
     if(kind==='meaning')meaningModal();
-    else if(kind==='save'){saveSelectionWord();hideSelToolbar();render();}
+    else if(kind==='save')saveSelectionWord().then(ok=>{if(ok){hideSelToolbar();render();}});
     else if(kind==='code')wordUI?.openEditor(lastSelection.sourceTerm||lastSelection.text,/^[A-Za-z]{2,20}$/.test(lastSelection.text)?lastSelection.text.toLowerCase():'');
     else if(kind==='speak')speakSelection();
   },true);
@@ -1420,8 +1467,9 @@
         lessons=groups.flat().map(lessonValid);
         if(!lessons.length||new Set(lessons.map(l=>l.id)).size!==lessons.length)throw new Error();
       }catch{
-        if(!Array.isArray(window.UnfoldContent)||!window.UnfoldContent.length)throw new Error();
-        lessons=window.UnfoldContent.map(lessonValid);usedFallback=true;
+        const fallback=await ensureContent().catch(()=>[]);
+        if(!Array.isArray(fallback)||!fallback.length)throw new Error();
+        lessons=fallback.map(lessonValid);usedFallback=true;
         if(new Set(lessons.map(l=>l.id)).size!==lessons.length)throw new Error();
       }
       clearTimeout(timeout);
